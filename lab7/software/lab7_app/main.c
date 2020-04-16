@@ -16,14 +16,14 @@ int main()
 	while ( (1+1) != 3) //infinite loop
 	{
 		// Reset button: Key[2]
-		if ((*KEY_PIO & 0x4)!=0 && Reset_pressed==0){
+		if ((*KEY_PIO & 0x1)!=0 && Reset_pressed==0){
 			Accumulate = 0; 			// Reset the value
 			*LED_PIO = 0; 				// clear all LEDs
 			Reset_pressed = 1; 			// set the reset button as pressed
 		}
 
 		// Accumulate button: Key[3]
-		if ((*KEY_PIO & 0x8)!=0 && Accumulate_pressed==0){
+		if ((*KEY_PIO & 0x2)!=0 && Accumulate_pressed==0){
 			Accumulate += *SW_PIO; 		// update the value
 			if (Accumulate >= 256){
 				Accumulate -= 256; 		// loop the accumulate value
@@ -34,10 +34,10 @@ int main()
 
 		*LED_PIO = Accumulate; 			//set LSB
 
-		if ((*KEY_PIO & 0x4)==0){
+		if ((*KEY_PIO & 0x1)==0){
 			Reset_pressed = 0;			// release reset button
 		}
-		if ((*KEY_PIO & 0x8)==0){
+		if ((*KEY_PIO & 0x2)==0){
 			Accumulate_pressed = 0; 	// release accumulate button
 		}
 	}
