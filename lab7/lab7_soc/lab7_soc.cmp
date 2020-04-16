@@ -9,9 +9,9 @@
 			sdram_wire_ba     : out   std_logic_vector(1 downto 0);                     -- ba
 			sdram_wire_cas_n  : out   std_logic;                                        -- cas_n
 			sdram_wire_cke    : out   std_logic;                                        -- cke
-			sdram_wire_cs_n   : out   std_logic_vector(1 downto 0);                     -- cs_n
-			sdram_wire_dq     : inout std_logic_vector(15 downto 0) := (others => 'X'); -- dq
-			sdram_wire_dqm    : out   std_logic_vector(1 downto 0);                     -- dqm
+			sdram_wire_cs_n   : out   std_logic;                                        -- cs_n
+			sdram_wire_dq     : inout std_logic_vector(31 downto 0) := (others => 'X'); -- dq
+			sdram_wire_dqm    : out   std_logic_vector(3 downto 0);                     -- dqm
 			sdram_wire_ras_n  : out   std_logic;                                        -- ras_n
 			sdram_wire_we_n   : out   std_logic;                                        -- we_n
 			sw_export_export  : in    std_logic_vector(7 downto 0)  := (others => 'X')  -- export

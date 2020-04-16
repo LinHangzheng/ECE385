@@ -96,15 +96,15 @@ refer to the applicable agreement for further details.
 	(port
 		(pt 0 296)
 		(output)
-		(text "sdram_wire_cs_n[1..0]" (rect 0 0 92 12)(font "Arial" (font_size 8)))
-		(text "sdram_wire_cs_n[1..0]" (rect 4 285 130 296)(font "Arial" (font_size 8)))
-		(line (pt 0 296)(pt 128 296)(line_width 3))
+		(text "sdram_wire_cs_n" (rect 0 0 73 12)(font "Arial" (font_size 8)))
+		(text "sdram_wire_cs_n" (rect 4 285 94 296)(font "Arial" (font_size 8)))
+		(line (pt 0 296)(pt 128 296)(line_width 1))
 	)
 	(port
 		(pt 0 328)
 		(output)
-		(text "sdram_wire_dqm[1..0]" (rect 0 0 89 12)(font "Arial" (font_size 8)))
-		(text "sdram_wire_dqm[1..0]" (rect 4 317 124 328)(font "Arial" (font_size 8)))
+		(text "sdram_wire_dqm[3..0]" (rect 0 0 90 12)(font "Arial" (font_size 8)))
+		(text "sdram_wire_dqm[3..0]" (rect 4 317 124 328)(font "Arial" (font_size 8)))
 		(line (pt 0 328)(pt 128 328)(line_width 3))
 	)
 	(port
@@ -124,8 +124,8 @@ refer to the applicable agreement for further details.
 	(port
 		(pt 0 312)
 		(bidir)
-		(text "sdram_wire_dq[15..0]" (rect 0 0 86 12)(font "Arial" (font_size 8)))
-		(text "sdram_wire_dq[15..0]" (rect 4 301 124 312)(font "Arial" (font_size 8)))
+		(text "sdram_wire_dq[31..0]" (rect 0 0 86 12)(font "Arial" (font_size 8)))
+		(text "sdram_wire_dq[31..0]" (rect 4 301 124 312)(font "Arial" (font_size 8)))
 		(line (pt 0 312)(pt 128 312)(line_width 3))
 	)
 	(drawing
