@@ -17,7 +17,7 @@ module lab7_soc (
 	sw_export_export);	
 
 	input		clk_clk;
-	input	[3:0]	key_export_export;
+	input	[1:0]	key_export_export;
 	output	[7:0]	led_wire_export;
 	input		reset_reset_n;
 	output		sdram_clk_clk;

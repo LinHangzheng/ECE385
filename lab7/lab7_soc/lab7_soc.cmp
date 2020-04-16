@@ -1,7 +1,7 @@
 	component lab7_soc is
 		port (
 			clk_clk           : in    std_logic                     := 'X';             -- clk
-			key_export_export : in    std_logic_vector(3 downto 0)  := (others => 'X'); -- export
+			key_export_export : in    std_logic_vector(1 downto 0)  := (others => 'X'); -- export
 			led_wire_export   : out   std_logic_vector(7 downto 0);                     -- export
 			reset_reset_n     : in    std_logic                     := 'X';             -- reset_n
 			sdram_clk_clk     : out   std_logic;                                        -- clk

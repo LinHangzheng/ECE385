@@ -5,7 +5,7 @@
 `timescale 1 ps / 1 ps
 module lab7_soc (
 		input  wire        clk_clk,           //        clk.clk
-		input  wire [3:0]  key_export_export, // key_export.export
+		input  wire [1:0]  key_export_export, // key_export.export
 		output wire [7:0]  led_wire_export,   //   led_wire.export
 		input  wire        reset_reset_n,     //      reset.reset_n
 		output wire        sdram_clk_clk,     //  sdram_clk.clk

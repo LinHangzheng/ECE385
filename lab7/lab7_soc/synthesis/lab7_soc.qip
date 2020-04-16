@@ -2,7 +2,7 @@ set_global_assignment -entity "lab7_soc" -library "lab7_soc" -name IP_TOOL_NAME 
 set_global_assignment -entity "lab7_soc" -library "lab7_soc" -name IP_TOOL_VERSION "18.1"
 set_global_assignment -entity "lab7_soc" -library "lab7_soc" -name IP_TOOL_ENV "Qsys"
 set_global_assignment -library "lab7_soc" -name SOPCINFO_FILE [file join $::quartus(qip_path) "../../lab7_soc.sopcinfo"]
-set_global_assignment -entity "lab7_soc" -library "lab7_soc" -name SLD_INFO "QSYS_NAME lab7_soc HAS_SOPCINFO 1 GENERATION_ID 1587025667"
+set_global_assignment -entity "lab7_soc" -library "lab7_soc" -name SLD_INFO "QSYS_NAME lab7_soc HAS_SOPCINFO 1 GENERATION_ID 1587039272"
 set_global_assignment -library "lab7_soc" -name MISC_FILE [file join $::quartus(qip_path) "../lab7_soc.cmp"]
 set_global_assignment -library "lab7_soc" -name SLD_FILE [file join $::quartus(qip_path) "lab7_soc.regmap"]
 set_global_assignment -library "lab7_soc" -name SLD_FILE [file join $::quartus(qip_path) "lab7_soc.debuginfo"]
@@ -16,7 +16,7 @@ set_global_assignment -entity "lab7_soc" -library "lab7_soc" -name IP_COMPONENT_
 set_global_assignment -entity "lab7_soc" -library "lab7_soc" -name IP_COMPONENT_REPORT_HIERARCHY "On"
 set_global_assignment -entity "lab7_soc" -library "lab7_soc" -name IP_COMPONENT_INTERNAL "Off"
 set_global_assignment -entity "lab7_soc" -library "lab7_soc" -name IP_COMPONENT_VERSION "MS4w"
-set_global_assignment -entity "lab7_soc" -library "lab7_soc" -name IP_COMPONENT_PARAMETER "QVVUT19HRU5FUkFUSU9OX0lE::MTU4NzAyNTY2Nw==::QXV0byBHRU5FUkFUSU9OX0lE"
+set_global_assignment -entity "lab7_soc" -library "lab7_soc" -name IP_COMPONENT_PARAMETER "QVVUT19HRU5FUkFUSU9OX0lE::MTU4NzAzOTI3Mg==::QXV0byBHRU5FUkFUSU9OX0lE"
 set_global_assignment -entity "lab7_soc" -library "lab7_soc" -name IP_COMPONENT_PARAMETER "QVVUT19ERVZJQ0VfRkFNSUxZ::Q3ljbG9uZSBJViBF::QXV0byBERVZJQ0VfRkFNSUxZ"
 set_global_assignment -entity "lab7_soc" -library "lab7_soc" -name IP_COMPONENT_PARAMETER "QVVUT19ERVZJQ0U=::RVA0Q0UxMTVGMjlDNw==::QXV0byBERVZJQ0U="
 set_global_assignment -entity "lab7_soc" -library "lab7_soc" -name IP_COMPONENT_PARAMETER "QVVUT19ERVZJQ0VfU1BFRURHUkFERQ==::Nw==::QXV0byBERVZJQ0VfU1BFRURHUkFERQ=="
@@ -1030,7 +1030,7 @@ set_global_assignment -entity "lab7_soc_key" -library "lab7_soc" -name IP_COMPON
 set_global_assignment -entity "lab7_soc_key" -library "lab7_soc" -name IP_COMPONENT_PARAMETER "ZGlyZWN0aW9u::SW5wdXQ=::RGlyZWN0aW9u"
 set_global_assignment -entity "lab7_soc_key" -library "lab7_soc" -name IP_COMPONENT_PARAMETER "Z2VuZXJhdGVJUlE=::ZmFsc2U=::R2VuZXJhdGUgSVJR"
 set_global_assignment -entity "lab7_soc_key" -library "lab7_soc" -name IP_COMPONENT_PARAMETER "c2ltRG9UZXN0QmVuY2hXaXJpbmc=::ZmFsc2U=::SGFyZHdpcmUgUElPIGlucHV0cyBpbiB0ZXN0IGJlbmNo"
-set_global_assignment -entity "lab7_soc_key" -library "lab7_soc" -name IP_COMPONENT_PARAMETER "d2lkdGg=::NA==::V2lkdGggKDEtMzIgYml0cyk="
+set_global_assignment -entity "lab7_soc_key" -library "lab7_soc" -name IP_COMPONENT_PARAMETER "d2lkdGg=::Mg==::V2lkdGggKDEtMzIgYml0cyk="
 set_global_assignment -entity "lab7_soc_key" -library "lab7_soc" -name IP_COMPONENT_PARAMETER "Y2xvY2tSYXRl::NTAwMDAwMDA=::Y2xvY2tSYXRl"
 set_global_assignment -entity "lab7_soc_key" -library "lab7_soc" -name IP_COMPONENT_PARAMETER "ZGVyaXZlZF9oYXNfdHJp::ZmFsc2U=::ZGVyaXZlZF9oYXNfdHJp"
 set_global_assignment -entity "lab7_soc_key" -library "lab7_soc" -name IP_COMPONENT_PARAMETER "ZGVyaXZlZF9oYXNfb3V0::ZmFsc2U=::ZGVyaXZlZF9oYXNfb3V0"
