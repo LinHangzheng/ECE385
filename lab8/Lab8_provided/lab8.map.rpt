@@ -1,5 +1,5 @@
 Analysis & Synthesis report for lab8
-Wed Apr 22 15:12:23 2020
+Wed Apr 22 20:55:48 2020
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -330,7 +330,7 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Wed Apr 22 15:12:23 2020       ;
+; Analysis & Synthesis Status        ; Successful - Wed Apr 22 20:55:48 2020       ;
 ; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                      ; lab8                                        ;
 ; Top-level Entity Name              ; lab8                                        ;
@@ -7911,7 +7911,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Wed Apr 22 15:11:33 2020
+    Info: Processing started: Wed Apr 22 20:54:58 2020
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off lab8 -c lab8
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
@@ -8330,7 +8330,7 @@ Info (12128): Elaborating entity "ball" for hierarchy "ball:ball_instance" File:
 Info (12128): Elaborating entity "color_mapper" for hierarchy "color_mapper:color_instance" File: E:/JuniorYearSpring/ECE385/lab/lab8/Lab8_provided/lab8.sv Line: 138
 Info (12128): Elaborating entity "HexDriver" for hierarchy "HexDriver:hex_inst_0" File: E:/JuniorYearSpring/ECE385/lab/lab8/Lab8_provided/lab8.sv Line: 141
 Info (11170): Starting IP generation for the debug fabric: alt_sld_fab.
-Info (11172): 2020.04.22.15:11:59 Progress: Loading sld2dead247/alt_sld_fab_wrapper_hw.tcl
+Info (11172): 2020.04.22.20:55:22 Progress: Loading sld2dead247/alt_sld_fab_wrapper_hw.tcl
 Info (11172): Alt_sld_fab.alt_sld_fab: SLD fabric agents which did not specify prefer_host were connected to JTAG
 Info (11172): Alt_sld_fab: Generating alt_sld_fab "alt_sld_fab" for QUARTUS_SYNTH
 Info (11172): Alt_sld_fab: "alt_sld_fab" instantiated alt_sld_fab "alt_sld_fab"
@@ -8430,10 +8430,10 @@ Info (21057): Implemented 4087 device resources after synthesis - the final reso
     Info (21065): Implemented 2 PLLs
     Info (21062): Implemented 4 DSP elements
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 49 warnings
-    Info: Peak virtual memory: 4958 megabytes
-    Info: Processing ended: Wed Apr 22 15:12:23 2020
+    Info: Peak virtual memory: 4954 megabytes
+    Info: Processing ended: Wed Apr 22 20:55:48 2020
     Info: Elapsed time: 00:00:50
-    Info: Total CPU time (on all processors): 00:01:07
+    Info: Total CPU time (on all processors): 00:01:11
 
 
 +------------------------------------------+
