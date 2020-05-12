@@ -88,7 +88,7 @@ void AddRoundKey(unsigned char* state, unsigned long* w){
 	int col = 0;
 	for (; row<4;row++){
 		for (;col<4;col++){
-			state[row*4+col] = state[row*4+col] ^ (w[col]>>((3-row)*8));
+			state[row*4+col] = state[row*4+col] ^ ((w[col]>>((3-row)*8))&(0xFF));
 		}
 	}
 }
@@ -119,6 +119,32 @@ void SubBytes(unsigned char* state)
 	}
 }
 
+void ShiftLeft (unsigned char* byte, int n)
+{
+	int i;
+	unsigned char temp;
+	for (i=0;i<n;i++){
+		temp = byte[0];
+		byte[0] = byte[1];
+		byte[1] = byte[2];
+		byte[2] = byte[3];
+		byte[3] = temp;
+	}
+}
+
+void ShiftRight (unsigned char* byte, int n)
+{
+	int i;
+	unsigned char temp;
+	for (i=0;i<n;i++){
+		temp = byte[0];
+		byte[0] = byte[3];
+		byte[1] = temp;
+		byte[2] = byte[1];
+		byte[3] = byte[2];
+	}
+}
+
 /** ShiftRows
  *  Each row in the updating State is shifted by some offsets
  *
@@ -127,33 +153,53 @@ void SubBytes(unsigned char* state)
  */
 void ShiftRows(unsigned char* state)
 {
-	unsigned char temp1;
-	unsigned char temp2;
-
-	// Second row
-	temp1 = state[4];
-	state[4] = state[5];
-	state[5] = state[6];
-	state[6] = state[7];
-	state[7] = temp1;
-
-	// Third row
-	temp1 = state[8];
-	temp2 = state[9];
-	state[8] = state[10];
-	state[9] = state[11];
-	state[10] = temp1;
-	state[11] = temp2;
-
-	// Fourth row
-	temp1 = state[12];
-	state[12] = state[15];
-	state[13] = temp1;
-	state[14] = state[13];
-	state[15] = state[14];
+	int row;
+	for (row=0;row<4;row++){
+		ShiftLeft(state+row,row);
+	}
 }
 
+void InvShiftRows(unsigned char* state)
+{
+	int row;
+	for (row=0;row<4;row++){
+		ShiftRight(state+row,row);
+	}
+}
 
+unsigned char xtime(unsigned char in)
+{
+	// bit-wise left shift then a conditional bit-wise
+	// XOR with {1b} if the 8th bit before the shift is 1
+	return (in & 0x80)? ((in<<1) ^ 0x1b): (in<<1);
+}
+
+void MixColumns(unsigned char* state)
+{
+	int i;
+	int j;
+	unsigned char b[4];
+	unsigned char a[4];
+	for (i=0;i<4;i++){
+		// assign a1 to a4
+		for (j=0;j<4;j++){
+			a[j] = state[i+4*j];
+		}
+
+		b[0] = xtime(a[0]) ^ (xtime(a[1]) ^ a[1]) ^ a[2] ^ a[3];
+		b[1] = a[0] ^ xtime(a[1]) ^ (xtime(a[2]) ^ a[2]) ^ a[3];
+		b[2] = a[0] ^ a[1] ^ xtime(a[2]) ^ (xtime(a[3]) ^ a[3]);
+		b[3] = (xtime(a[0]) ^ a[0]) ^ a[1] ^ a[2] ^ xtime(a[3]);
+		for (j=0;j<4;j++){
+			state[4*j+i] = b[j];
+		}
+	}
+}
+
+void InvMixColumns(unsigned char* state)
+{
+
+}
 /** encrypt
  *  Perform AES encryption in software.
  *
