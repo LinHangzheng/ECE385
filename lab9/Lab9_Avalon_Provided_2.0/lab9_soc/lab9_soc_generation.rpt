@@ -60,12 +60,12 @@ Info: Inserting clock-crossing logic between rsp_demux_005.src0 and rsp_mux.sink
 Info: Inserting clock-crossing logic between rsp_demux_005.src1 and rsp_mux_001.sink3
 Info: AES: "lab9_soc" instantiated AES_Decryption_Core "AES"
 Info: jtag_uart_0: Starting RTL generation for module 'lab9_soc_jtag_uart_0'
-Info: jtag_uart_0:   Generation command is [exec C:/intelfpga_lite/18.1/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga_lite/18.1/quartus/bin64/perl/lib -I C:/intelfpga_lite/18.1/quartus/sopc_builder/bin/europa -I C:/intelfpga_lite/18.1/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga_lite/18.1/quartus/sopc_builder/bin -I C:/intelfpga_lite/18.1/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga_lite/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart -- C:/intelfpga_lite/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart/generate_rtl.pl --name=lab9_soc_jtag_uart_0 --dir=C:/Users/cc/AppData/Local/Temp/alt8393_1756274364810019066.dir/0003_jtag_uart_0_gen/ --quartus_dir=C:/intelfpga_lite/18.1/quartus --verilog --config=C:/Users/cc/AppData/Local/Temp/alt8393_1756274364810019066.dir/0003_jtag_uart_0_gen//lab9_soc_jtag_uart_0_component_configuration.pl  --do_build_sim=0  ]
+Info: jtag_uart_0:   Generation command is [exec C:/intelfpga_lite/18.1/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga_lite/18.1/quartus/bin64/perl/lib -I C:/intelfpga_lite/18.1/quartus/sopc_builder/bin/europa -I C:/intelfpga_lite/18.1/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga_lite/18.1/quartus/sopc_builder/bin -I C:/intelfpga_lite/18.1/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga_lite/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart -- C:/intelfpga_lite/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart/generate_rtl.pl --name=lab9_soc_jtag_uart_0 --dir=C:/Users/cc/AppData/Local/Temp/alt8398_645663239553739034.dir/0003_jtag_uart_0_gen/ --quartus_dir=C:/intelfpga_lite/18.1/quartus --verilog --config=C:/Users/cc/AppData/Local/Temp/alt8398_645663239553739034.dir/0003_jtag_uart_0_gen//lab9_soc_jtag_uart_0_component_configuration.pl  --do_build_sim=0  ]
 Info: jtag_uart_0: Done RTL generation for module 'lab9_soc_jtag_uart_0'
 Info: jtag_uart_0: "lab9_soc" instantiated altera_avalon_jtag_uart "jtag_uart_0"
 Info: nios2_gen2_0: "lab9_soc" instantiated altera_nios2_gen2 "nios2_gen2_0"
 Info: sdram: Starting RTL generation for module 'lab9_soc_sdram'
-Info: sdram:   Generation command is [exec C:/intelfpga_lite/18.1/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga_lite/18.1/quartus/bin64/perl/lib -I C:/intelfpga_lite/18.1/quartus/sopc_builder/bin/europa -I C:/intelfpga_lite/18.1/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga_lite/18.1/quartus/sopc_builder/bin -I C:/intelfpga_lite/18.1/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga_lite/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_new_sdram_controller -- C:/intelfpga_lite/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_new_sdram_controller/generate_rtl.pl --name=lab9_soc_sdram --dir=C:/Users/cc/AppData/Local/Temp/alt8393_1756274364810019066.dir/0004_sdram_gen/ --quartus_dir=C:/intelfpga_lite/18.1/quartus --verilog --config=C:/Users/cc/AppData/Local/Temp/alt8393_1756274364810019066.dir/0004_sdram_gen//lab9_soc_sdram_component_configuration.pl  --do_build_sim=0  ]
+Info: sdram:   Generation command is [exec C:/intelfpga_lite/18.1/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga_lite/18.1/quartus/bin64/perl/lib -I C:/intelfpga_lite/18.1/quartus/sopc_builder/bin/europa -I C:/intelfpga_lite/18.1/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga_lite/18.1/quartus/sopc_builder/bin -I C:/intelfpga_lite/18.1/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga_lite/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_new_sdram_controller -- C:/intelfpga_lite/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_new_sdram_controller/generate_rtl.pl --name=lab9_soc_sdram --dir=C:/Users/cc/AppData/Local/Temp/alt8398_645663239553739034.dir/0004_sdram_gen/ --quartus_dir=C:/intelfpga_lite/18.1/quartus --verilog --config=C:/Users/cc/AppData/Local/Temp/alt8398_645663239553739034.dir/0004_sdram_gen//lab9_soc_sdram_component_configuration.pl  --do_build_sim=0  ]
 Info: sdram: Done RTL generation for module 'lab9_soc_sdram'
 Info: sdram: "lab9_soc" instantiated altera_avalon_new_sdram_controller "sdram"
 Info: sdram_pll: "lab9_soc" instantiated altpll "sdram_pll"
@@ -80,19 +80,19 @@ Info: mm_interconnect_0: "lab9_soc" instantiated altera_mm_interconnect "mm_inte
 Info: irq_mapper: "lab9_soc" instantiated altera_irq_mapper "irq_mapper"
 Info: rst_controller: "lab9_soc" instantiated altera_reset_controller "rst_controller"
 Info: cpu: Starting RTL generation for module 'lab9_soc_nios2_gen2_0_cpu'
-Info: cpu:   Generation command is [exec C:/intelFPGA_lite/18.1/quartus/bin64//eperlcmd.exe -I C:/intelFPGA_lite/18.1/quartus/bin64//perl/lib -I C:/intelfpga_lite/18.1/quartus/sopc_builder/bin/europa -I C:/intelfpga_lite/18.1/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga_lite/18.1/quartus/sopc_builder/bin -I C:/intelfpga_lite/18.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/cpu_lib -I C:/intelfpga_lite/18.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/nios_lib -I C:/intelfpga_lite/18.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2 -I C:/intelfpga_lite/18.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2 -- C:/intelfpga_lite/18.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/generate_rtl.epl --name=lab9_soc_nios2_gen2_0_cpu --dir=C:/Users/cc/AppData/Local/Temp/alt8393_1756274364810019066.dir/0010_cpu_gen/ --quartus_bindir=C:/intelFPGA_lite/18.1/quartus/bin64/ --verilog --config=C:/Users/cc/AppData/Local/Temp/alt8393_1756274364810019066.dir/0010_cpu_gen//lab9_soc_nios2_gen2_0_cpu_processor_configuration.pl  --do_build_sim=0  ]
-Info: cpu: # 2020.05.11 21:56:15 (*) Starting Nios II generation
-Info: cpu: # 2020.05.11 21:56:15 (*)   Checking for plaintext license.
-Info: cpu: # 2020.05.11 21:56:16 (*)   Couldn't query license setup in Quartus directory C:/intelFPGA_lite/18.1/quartus/bin64/
-Info: cpu: # 2020.05.11 21:56:16 (*)   Defaulting to contents of LM_LICENSE_FILE environment variable
-Info: cpu: # 2020.05.11 21:56:16 (*)   LM_LICENSE_FILE environment variable is empty
-Info: cpu: # 2020.05.11 21:56:16 (*)   Plaintext license not found.
-Info: cpu: # 2020.05.11 21:56:16 (*)   No license required to generate encrypted Nios II/e.
-Info: cpu: # 2020.05.11 21:56:16 (*)   Elaborating CPU configuration settings
-Info: cpu: # 2020.05.11 21:56:16 (*)   Creating all objects for CPU
-Info: cpu: # 2020.05.11 21:56:17 (*)   Generating RTL from CPU objects
-Info: cpu: # 2020.05.11 21:56:17 (*)   Creating plain-text RTL
-Info: cpu: # 2020.05.11 21:56:18 (*) Done Nios II generation
+Info: cpu:   Generation command is [exec C:/intelFPGA_lite/18.1/quartus/bin64//eperlcmd.exe -I C:/intelFPGA_lite/18.1/quartus/bin64//perl/lib -I C:/intelfpga_lite/18.1/quartus/sopc_builder/bin/europa -I C:/intelfpga_lite/18.1/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga_lite/18.1/quartus/sopc_builder/bin -I C:/intelfpga_lite/18.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/cpu_lib -I C:/intelfpga_lite/18.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/nios_lib -I C:/intelfpga_lite/18.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2 -I C:/intelfpga_lite/18.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2 -- C:/intelfpga_lite/18.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/generate_rtl.epl --name=lab9_soc_nios2_gen2_0_cpu --dir=C:/Users/cc/AppData/Local/Temp/alt8398_645663239553739034.dir/0010_cpu_gen/ --quartus_bindir=C:/intelFPGA_lite/18.1/quartus/bin64/ --verilog --config=C:/Users/cc/AppData/Local/Temp/alt8398_645663239553739034.dir/0010_cpu_gen//lab9_soc_nios2_gen2_0_cpu_processor_configuration.pl  --do_build_sim=0  ]
+Info: cpu: # 2020.05.16 14:21:15 (*) Starting Nios II generation
+Info: cpu: # 2020.05.16 14:21:15 (*)   Checking for plaintext license.
+Info: cpu: # 2020.05.16 14:21:16 (*)   Couldn't query license setup in Quartus directory C:/intelFPGA_lite/18.1/quartus/bin64/
+Info: cpu: # 2020.05.16 14:21:16 (*)   Defaulting to contents of LM_LICENSE_FILE environment variable
+Info: cpu: # 2020.05.16 14:21:16 (*)   LM_LICENSE_FILE environment variable is empty
+Info: cpu: # 2020.05.16 14:21:16 (*)   Plaintext license not found.
+Info: cpu: # 2020.05.16 14:21:16 (*)   No license required to generate encrypted Nios II/e.
+Info: cpu: # 2020.05.16 14:21:16 (*)   Elaborating CPU configuration settings
+Info: cpu: # 2020.05.16 14:21:16 (*)   Creating all objects for CPU
+Info: cpu: # 2020.05.16 14:21:17 (*)   Generating RTL from CPU objects
+Info: cpu: # 2020.05.16 14:21:17 (*)   Creating plain-text RTL
+Info: cpu: # 2020.05.16 14:21:18 (*) Done Nios II generation
 Info: cpu: Done RTL generation for module 'lab9_soc_nios2_gen2_0_cpu'
 Info: cpu: "nios2_gen2_0" instantiated altera_nios2_gen2_unit "cpu"
 Info: nios2_gen2_0_data_master_translator: "mm_interconnect_0" instantiated altera_merlin_master_translator "nios2_gen2_0_data_master_translator"

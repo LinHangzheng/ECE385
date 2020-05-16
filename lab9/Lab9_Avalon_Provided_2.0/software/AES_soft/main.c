@@ -70,17 +70,23 @@ void KeyExpansion(unsigned char* key, unsigned long* w, unsigned Nk){
 	int i = 0;
 	while (i < Nk){
 		w[i] = (unsigned long)((key[4*i]<<24)+ (key[4*i+1]<<16)+(key[4*i+2]<<8)+(key[4*i+3]));
-		i = i+1£»
+		i = i+1;
 	}
 	i = Nk;
 	while (i<4 * (10+1)){
 		temp = w[i-1];
-		if (i % Nk = 0){
+		if (i % Nk == 0){
 			temp = SubWord(RotWord(&temp)) ^ Rcon[i/Nk];
 		}
 		w[i] = w[i-Nk] ^ temp;
 		i = i+1;
 	}
+}
+
+void RotWord(unsigned long* word)
+{
+	unsigned char temp =  (*word)>>24;
+	*word = ((*word)<<24) & 0xFFF0 + temp;
 }
 
 void AddRoundKey(unsigned char* state, unsigned long* w){
@@ -115,7 +121,7 @@ void SubBytes(unsigned char* state)
 {
 	int i = 0;
 	for (;i<16;i++){
-		*(state+i) = aes_sbox[(int)state[i]];
+		state[i] = aes_sbox[(int)state[i]];
 	}
 }
 
@@ -132,18 +138,6 @@ void ShiftLeft (unsigned char* byte, int n)
 	}
 }
 
-void ShiftRight (unsigned char* byte, int n)
-{
-	int i;
-	unsigned char temp;
-	for (i=0;i<n;i++){
-		temp = byte[0];
-		byte[0] = byte[3];
-		byte[1] = temp;
-		byte[2] = byte[1];
-		byte[3] = byte[2];
-	}
-}
 
 /** ShiftRows
  *  Each row in the updating State is shifted by some offsets
@@ -155,17 +149,11 @@ void ShiftRows(unsigned char* state)
 {
 	int row;
 	for (row=0;row<4;row++){
-		ShiftLeft(state+row,row);
+		ShiftLeft(state+4*row,row);
 	}
 }
 
-void InvShiftRows(unsigned char* state)
-{
-	int row;
-	for (row=0;row<4;row++){
-		ShiftRight(state+row,row);
-	}
-}
+
 
 unsigned char xtime(unsigned char in)
 {
@@ -196,10 +184,6 @@ void MixColumns(unsigned char* state)
 	}
 }
 
-void InvMixColumns(unsigned char* state)
-{
-
-}
 /** encrypt
  *  Perform AES encryption in software.
  *
@@ -211,6 +195,38 @@ void InvMixColumns(unsigned char* state)
 void encrypt(unsigned char * msg_ascii, unsigned char * key_ascii, unsigned int * msg_enc, unsigned int * key)
 {
 	// Implement this function
+	int i,round;
+	unsigned char state[4*4];
+	unsigned char keyInit[4*4];
+	unsigned long w[4*(10+1)];
+	// assign the words for state and key
+	for (i=0;i<16;i++){
+		state[(i%4)*4 + i/4] = charsToHex(msg_ascii[2*i],msg_ascii[2*i+1]);
+		keyInit[(i%4)*4 + i/4] = charsToHex(key_ascii[2*i],key_ascii[2*i+1]);
+	}
+
+	// create words by KeyExpansion
+
+	KeyExpansion(keyInit,w,4);
+	AddRoundKey(state,w[0]);
+
+	for (round=1; round<10;round++){
+		SubBytes(state);
+		ShiftRows(state);
+		MixColumns(state);
+		AddRoundKey(state,w+round*4);
+	}
+
+	// last round
+	SubBytes(state);
+	ShiftRows(state);
+	AddRoundKey(state,w+10*4);
+
+	// assign output
+	for (i=0; i<4; i++){
+		msg_enc[i]= state[i]<<24 | state[i+4]<<16 | state[i+8]<<8 | state[i+12];
+		key [i] =keyInit[i]<<24 | keyInit[i+4]<<16 | keyInit[i+8]<<8 | keyInit[i+12];
+	}
 }
 
 /** decrypt
@@ -223,6 +239,29 @@ void encrypt(unsigned char * msg_ascii, unsigned char * key_ascii, unsigned int 
 void decrypt(unsigned int * msg_enc, unsigned int * msg_dec, unsigned int * key)
 {
 	// Implement this function
+	int i;
+
+	// set the AES_KEY and AES_MSG_EN
+	for (i=0; i<4; i++){
+		AES_PTR[i] = key[i];
+		AES_PTR[i+4] = msg_enc[i];
+	}
+
+	// set the AES_START to 1
+	AES_PTR[14] = 1;
+
+	// wait for AES_DONE, this process will be
+	// implemented by hardware in hdl.
+	while (AES_PTR[15] == 0){}
+
+	// set the AES_MSG_DE
+	for (i=0; i<4; i++){
+		msg_dec[i] = AES_PTR[i+8];
+	}
+
+	// set the AES_START to 0
+	AES_PTR[14] = 0;
+
 }
 
 /** main
@@ -294,3 +333,88 @@ int main()
 	}
 	return 0;
 }
+
+
+//void ShiftRight (unsigned char* byte, int n)
+//{
+//	int i;
+//	unsigned char temp;
+//	for (i=0;i<n;i++){
+//		temp = byte[0];
+//		byte[0] = byte[3];
+//		byte[1] = temp;
+//		byte[2] = byte[1];
+//		byte[3] = byte[2];
+//	}
+//}
+
+
+//void InvShiftRows(unsigned char* state)
+//{
+//	int row;
+//	for (row=0;row<4;row++){
+//		ShiftRight(state+4*row,row);
+//	}
+//}
+
+
+
+//
+//void InvMixColumns(unsigned char* state)
+//{
+//	// 0x02, 0x03, 0x09, 0x0b, 0x0d, 0x0e,
+//	//    0,    1,    2,    3,    4,    5
+//	int i;
+//	int j;
+//	unsigned char b[4];
+//	unsigned char a[4];
+//	for (i=0;i<4;i++){
+//		// assign a1 to a4
+//		for (j=0;j<4;j++){
+//			a[j] = state[i+4*j];
+//		}
+//
+//		b[0] = gf_mul[a[0]][5] ^ gf_mul[a[1]][3] ^ gf_mul[a[2]][4] ^ gf_mul[a[3]][2];
+//		b[1] = gf_mul[a[0]][2] ^ gf_mul[a[1]][5] ^ gf_mul[a[2]][3] ^ gf_mul[a[3]][4];
+//		b[2] = gf_mul[a[0]][4] ^ gf_mul[a[1]][2] ^ gf_mul[a[2]][5] ^ gf_mul[a[3]][3];
+//		b[3] = gf_mul[a[0]][3] ^ gf_mul[a[1]][4] ^ gf_mul[a[2]][2] ^ gf_mul[a[3]][5];
+//		for (j=0;j<4;j++){
+//			state[4*j+i] = b[j];
+//		}
+//	}
+//}
+//
+//void decrypt(unsigned int * msg_enc, unsigned int * msg_dec, unsigned int * key)
+//{
+//	// Implement this function
+//	int i,round;
+//	unsigned char state[4*4];
+//	unsigned char keyInit[4*4];
+//	unsigned long w[4*(10+1)];
+//	// assign the words for state and key
+//	for (i=0;i<4;i++){
+//		state[i + 0]  = (msg_enc[i] & 0xFF000000) >> 24;
+//		state[i + 4]  = (msg_enc[i] & 0x00FF0000) >> 16;
+//		state[i + 8]  = (msg_enc[i] & 0x0000FF00) >> 8;
+//		state[i + 12] = (msg_enc[i] & 0x000000FF) >> 0;
+//
+//		keyInit[i + 0]  = (key[i] & 0xFF000000) >> 24;
+//		keyInit[i + 4]  = (key[i] & 0x00FF0000) >> 16;
+//		keyInit[i + 8]  = (key[i] & 0x0000FF00) >> 8;
+//		keyInit[i + 12] = (key[i] & 0x000000FF) >> 0;
+//	}
+//	KeyExpansion(keyInit,w,4);
+//
+//	AddRoundKey(state,w+10*4);
+//	for (round = 9; round > 0; round--){
+//		InvShiftRows(state);
+//		InvSubBytes(state);
+//		AddRoundKey(state,w+round*4);
+//		InvMixColumns(state);
+//	}
+//	InvShiftRows(state);
+//	InvSubBytes(state);
+//	AddRoundKey(state,w);
+//
+//
+//}

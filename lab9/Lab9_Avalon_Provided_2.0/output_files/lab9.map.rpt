@@ -1,5 +1,5 @@
 Analysis & Synthesis report for lab9
-Mon May 11 21:57:26 2020
+Fri May 15 17:09:09 2020
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -217,10 +217,9 @@ Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 209. Port Connectivity Checks: "lab9_soc:lab9_qsystem|lab9_soc_jtag_uart_0:jtag_uart_0|alt_jtag_atlantic:lab9_soc_jtag_uart_0_alt_jtag_atlantic"
 210. Port Connectivity Checks: "lab9_soc:lab9_qsystem|lab9_soc_jtag_uart_0:jtag_uart_0"
 211. Post-Synthesis Netlist Statistics for Top Partition
-212. Post-Synthesis Netlist Statistics for Partition sld_hub:auto_hub
-213. Elapsed Time Per Partition
-214. Analysis & Synthesis Messages
-215. Analysis & Synthesis Suppressed Messages
+212. Elapsed Time Per Partition
+213. Analysis & Synthesis Messages
+214. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -246,7 +245,7 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Mon May 11 21:57:25 2020       ;
+; Analysis & Synthesis Status        ; Successful - Fri May 15 17:09:09 2020       ;
 ; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                      ; lab9                                        ;
 ; Top-level Entity Name              ; lab9_top                                    ;
@@ -362,8 +361,8 @@ refer to the applicable agreement for further details.
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   0.0%      ;
-;     Processor 3            ;   0.0%      ;
+;     Processor 2            ;   0.1%      ;
+;     Processor 3            ;   0.1%      ;
 ;     Processor 4            ;   0.0%      ;
 +----------------------------+-------------+
 
@@ -1527,14 +1526,6 @@ Encoding Type:  One-Hot
 ; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |lab9_top|lab9_soc:lab9_qsystem|lab9_soc_mm_interconnect_0:mm_interconnect_0|lab9_soc_mm_interconnect_0_router:router|src_channel[4]                                                                                                                                                                                                                                        ;
 ; 10:1               ; 2 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; No         ; |lab9_top|lab9_soc:lab9_qsystem|lab9_soc_sdram:sdram|Selector34                                                                                                                                                                                                                                                                                                             ;
 ; 16:1               ; 2 bits    ; 20 LEs        ; 8 LEs                ; 12 LEs                 ; No         ; |lab9_top|lab9_soc:lab9_qsystem|lab9_soc_sdram:sdram|Selector27                                                                                                                                                                                                                                                                                                             ;
-; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |lab9_top|sld_hub:auto_hub|alt_sld_fab_with_jtag_input:\instrumentation_fabric_with_node_gen:fabric_gen_new_way:with_jtag_input_gen:instrumentation_fabric|alt_sld_fab:instrumentation_fabric|alt_sld_fab_alt_sld_fab:alt_sld_fab|alt_sld_fab_alt_sld_fab_sldfabric:sldfabric|sld_jtag_hub:\jtag_hub_gen:real_sld_jtag_hub|irsr_reg[2]                                      ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |lab9_top|sld_hub:auto_hub|alt_sld_fab_with_jtag_input:\instrumentation_fabric_with_node_gen:fabric_gen_new_way:with_jtag_input_gen:instrumentation_fabric|alt_sld_fab:instrumentation_fabric|alt_sld_fab_alt_sld_fab:alt_sld_fab|alt_sld_fab_alt_sld_fab_sldfabric:sldfabric|sld_jtag_hub:\jtag_hub_gen:real_sld_jtag_hub|shadow_irf_reg[2][0]                             ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |lab9_top|sld_hub:auto_hub|alt_sld_fab_with_jtag_input:\instrumentation_fabric_with_node_gen:fabric_gen_new_way:with_jtag_input_gen:instrumentation_fabric|alt_sld_fab:instrumentation_fabric|alt_sld_fab_alt_sld_fab:alt_sld_fab|alt_sld_fab_alt_sld_fab_sldfabric:sldfabric|sld_jtag_hub:\jtag_hub_gen:real_sld_jtag_hub|hub_minor_ver_reg[0]                             ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |lab9_top|sld_hub:auto_hub|alt_sld_fab_with_jtag_input:\instrumentation_fabric_with_node_gen:fabric_gen_new_way:with_jtag_input_gen:instrumentation_fabric|alt_sld_fab:instrumentation_fabric|alt_sld_fab_alt_sld_fab:alt_sld_fab|alt_sld_fab_alt_sld_fab_sldfabric:sldfabric|sld_jtag_hub:\jtag_hub_gen:real_sld_jtag_hub|irf_reg[2][0]                                    ;
-; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |lab9_top|sld_hub:auto_hub|alt_sld_fab_with_jtag_input:\instrumentation_fabric_with_node_gen:fabric_gen_new_way:with_jtag_input_gen:instrumentation_fabric|alt_sld_fab:instrumentation_fabric|alt_sld_fab_alt_sld_fab:alt_sld_fab|alt_sld_fab_alt_sld_fab_sldfabric:sldfabric|sld_jtag_hub:\jtag_hub_gen:real_sld_jtag_hub|mixer_addr_reg_internal[2]                       ;
-; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |lab9_top|sld_hub:auto_hub|alt_sld_fab_with_jtag_input:\instrumentation_fabric_with_node_gen:fabric_gen_new_way:with_jtag_input_gen:instrumentation_fabric|alt_sld_fab:instrumentation_fabric|alt_sld_fab_alt_sld_fab:alt_sld_fab|alt_sld_fab_alt_sld_fab_sldfabric:sldfabric|sld_jtag_hub:\jtag_hub_gen:real_sld_jtag_hub|sld_rom_sr:hub_info_reg|word_counter[2]          ;
-; 34:1               ; 4 bits    ; 88 LEs        ; 56 LEs               ; 32 LEs                 ; Yes        ; |lab9_top|sld_hub:auto_hub|alt_sld_fab_with_jtag_input:\instrumentation_fabric_with_node_gen:fabric_gen_new_way:with_jtag_input_gen:instrumentation_fabric|alt_sld_fab:instrumentation_fabric|alt_sld_fab_alt_sld_fab:alt_sld_fab|alt_sld_fab_alt_sld_fab_sldfabric:sldfabric|sld_jtag_hub:\jtag_hub_gen:real_sld_jtag_hub|design_hash_reg[0]                               ;
-; 28:1               ; 4 bits    ; 72 LEs        ; 48 LEs               ; 24 LEs                 ; Yes        ; |lab9_top|sld_hub:auto_hub|alt_sld_fab_with_jtag_input:\instrumentation_fabric_with_node_gen:fabric_gen_new_way:with_jtag_input_gen:instrumentation_fabric|alt_sld_fab:instrumentation_fabric|alt_sld_fab_alt_sld_fab:alt_sld_fab|alt_sld_fab_alt_sld_fab_sldfabric:sldfabric|sld_jtag_hub:\jtag_hub_gen:real_sld_jtag_hub|sld_rom_sr:hub_info_reg|WORD_SR[0]               ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -5194,44 +5185,13 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 
 
-+------------------------------------------------------------------+
-; Post-Synthesis Netlist Statistics for Partition sld_hub:auto_hub ;
-+-----------------------+------------------------------------------+
-; Type                  ; Count                                    ;
-+-----------------------+------------------------------------------+
-; boundary_port         ; 141                                      ;
-; cycloneiii_ff         ; 85                                       ;
-;     CLR               ; 6                                        ;
-;     ENA               ; 16                                       ;
-;     ENA CLR           ; 24                                       ;
-;     ENA CLR SLD       ; 2                                        ;
-;     ENA SCLR          ; 5                                        ;
-;     ENA SLD           ; 9                                        ;
-;     SCLR              ; 7                                        ;
-;     plain             ; 16                                       ;
-; cycloneiii_lcell_comb ; 156                                      ;
-;     arith             ; 8                                        ;
-;         2 data inputs ; 8                                        ;
-;     normal            ; 148                                      ;
-;         0 data inputs ; 1                                        ;
-;         1 data inputs ; 6                                        ;
-;         2 data inputs ; 31                                       ;
-;         3 data inputs ; 36                                       ;
-;         4 data inputs ; 74                                       ;
-;                       ;                                          ;
-; Max LUT depth         ; 4.00                                     ;
-; Average LUT depth     ; 2.18                                     ;
-+-----------------------+------------------------------------------+
-
-
-+---------------------------------+
-; Elapsed Time Per Partition      ;
-+------------------+--------------+
-; Partition Name   ; Elapsed Time ;
-+------------------+--------------+
-; Top              ; 00:00:07     ;
-; sld_hub:auto_hub ; 00:00:00     ;
-+------------------+--------------+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:08     ;
++----------------+--------------+
 
 
 +-------------------------------+
@@ -5240,7 +5200,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Mon May 11 21:56:35 2020
+    Info: Processing started: Fri May 15 17:08:16 2020
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off lab9 -c lab9
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
@@ -5381,10 +5341,14 @@ Info (12021): Found 1 design units, including 1 entities, in source file avalon_
     Info (12023): Found entity 1: avalon_aes_interface File: E:/JuniorYearSpring/ECE385/lab/lab9/Lab9_Avalon_Provided_2.0/avalon_aes_interface.sv Line: 21
 Info (12021): Found 1 design units, including 1 entities, in source file aes.sv
     Info (12023): Found entity 1: AES File: E:/JuniorYearSpring/ECE385/lab/lab9/Lab9_Avalon_Provided_2.0/AES.sv Line: 10
+Info (12021): Found 1 design units, including 1 entities, in source file addroundkey.sv
+    Info (12023): Found entity 1: AddRoundKey File: E:/JuniorYearSpring/ECE385/lab/lab9/Lab9_Avalon_Provided_2.0/AddRoundKey.sv Line: 1
+Warning (10236): Verilog HDL Implicit Net warning at AES.sv(79): created implicit net for "cur_key" File: E:/JuniorYearSpring/ECE385/lab/lab9/Lab9_Avalon_Provided_2.0/AES.sv Line: 79
 Warning (10037): Verilog HDL or VHDL warning at lab9_soc_sdram.v(318): conditional expression evaluates to a constant File: E:/JuniorYearSpring/ECE385/lab/lab9/Lab9_Avalon_Provided_2.0/lab9_soc/synthesis/submodules/lab9_soc_sdram.v Line: 318
 Warning (10037): Verilog HDL or VHDL warning at lab9_soc_sdram.v(328): conditional expression evaluates to a constant File: E:/JuniorYearSpring/ECE385/lab/lab9/Lab9_Avalon_Provided_2.0/lab9_soc/synthesis/submodules/lab9_soc_sdram.v Line: 328
 Warning (10037): Verilog HDL or VHDL warning at lab9_soc_sdram.v(338): conditional expression evaluates to a constant File: E:/JuniorYearSpring/ECE385/lab/lab9/Lab9_Avalon_Provided_2.0/lab9_soc/synthesis/submodules/lab9_soc_sdram.v Line: 338
 Warning (10037): Verilog HDL or VHDL warning at lab9_soc_sdram.v(682): conditional expression evaluates to a constant File: E:/JuniorYearSpring/ECE385/lab/lab9/Lab9_Avalon_Provided_2.0/lab9_soc/synthesis/submodules/lab9_soc_sdram.v Line: 682
+Critical Warning (10846): Verilog HDL Instantiation warning at AES.sv(58): instance has no name File: E:/JuniorYearSpring/ECE385/lab/lab9/Lab9_Avalon_Provided_2.0/AES.sv Line: 58
 Info (12127): Elaborating entity "lab9_top" for the top level hierarchy
 Warning (10034): Output port "LEDG" at lab9_top.sv(14) has no driver File: E:/JuniorYearSpring/ECE385/lab/lab9/Lab9_Avalon_Provided_2.0/lab9_top.sv Line: 14
 Warning (10034): Output port "LEDR" at lab9_top.sv(15) has no driver File: E:/JuniorYearSpring/ECE385/lab/lab9/Lab9_Avalon_Provided_2.0/lab9_top.sv Line: 15
@@ -5571,7 +5535,7 @@ Info (12128): Elaborating entity "altera_reset_controller" for hierarchy "lab9_s
 Info (12128): Elaborating entity "altera_reset_controller" for hierarchy "lab9_soc:lab9_qsystem|altera_reset_controller:rst_controller_002" File: E:/JuniorYearSpring/ECE385/lab/lab9/Lab9_Avalon_Provided_2.0/lab9_soc/synthesis/lab9_soc.v Line: 442
 Info (12128): Elaborating entity "hexdriver" for hierarchy "hexdriver:hexdrv0" File: E:/JuniorYearSpring/ECE385/lab/lab9/Lab9_Avalon_Provided_2.0/lab9_top.sv Line: 60
 Info (11170): Starting IP generation for the debug fabric: alt_sld_fab.
-Info (11172): 2020.05.11.21:57:00 Progress: Loading sld2dead247/alt_sld_fab_wrapper_hw.tcl
+Info (11172): 2020.05.15.17:08:43 Progress: Loading sld2dead247/alt_sld_fab_wrapper_hw.tcl
 Info (11172): Alt_sld_fab.alt_sld_fab: SLD fabric agents which did not specify prefer_host were connected to JTAG
 Info (11172): Alt_sld_fab: Generating alt_sld_fab "alt_sld_fab" for QUARTUS_SYNTH
 Info (11172): Alt_sld_fab: "alt_sld_fab" instantiated alt_sld_fab "alt_sld_fab"
@@ -5629,9 +5593,6 @@ Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "DRAM_CKE" is stuck at VCC File: E:/JuniorYearSpring/ECE385/lab/lab9/Lab9_Avalon_Provided_2.0/lab9_top.sv Line: 27
 Info (286031): Timing-Driven Synthesis is running on partition "Top"
 Info (17049): 38 registers lost all their fanouts during netlist optimizations.
-Info (13000): Registers with preset signals will power-up high File: c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/sld_jtag_hub.vhd Line: 386
-Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
-Info (286031): Timing-Driven Synthesis is running on partition "sld_hub:auto_hub"
 Info (144001): Generated suppressed messages file E:/JuniorYearSpring/ECE385/lab/lab9/Lab9_Avalon_Provided_2.0/output_files/lab9.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 1 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
@@ -5644,11 +5605,11 @@ Info (21057): Implemented 4614 device resources after synthesis - the final reso
     Info (21061): Implemented 4354 logic cells
     Info (21064): Implemented 112 RAM segments
     Info (21065): Implemented 1 PLLs
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 38 warnings
-    Info: Peak virtual memory: 4923 megabytes
-    Info: Processing ended: Mon May 11 21:57:26 2020
-    Info: Elapsed time: 00:00:51
-    Info: Total CPU time (on all processors): 00:01:22
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 40 warnings
+    Info: Peak virtual memory: 4926 megabytes
+    Info: Processing ended: Fri May 15 17:09:09 2020
+    Info: Elapsed time: 00:00:53
+    Info: Total CPU time (on all processors): 00:01:20
 
 
 +------------------------------------------+
