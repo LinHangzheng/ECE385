@@ -58,6 +58,18 @@ char charsToHex(char c1, char c2)
 	return (hex1 << 4) + hex2;
 }
 
+/** RotWord
+ *  rotate the word
+ *  Bytes ABCD -> BCDA
+ *
+ *  Input: address of word
+ *  Output: the word after rotation
+ */
+unsigned long RotWord(unsigned long* word)
+{
+	return (((*word<<8) & 0xFFF0)|((*word>>24) & 0x000F));
+}
+
 /** KeyExpansion
  *  Takes the Cipher Key and performs a Key Expansion
  *  to generate a series of Round Keys (4-Word matrix) and
@@ -65,9 +77,9 @@ char charsToHex(char c1, char c2)
  *
  *  Input: unsigned char* key, unsigned long* w, unsigned Nk
  */
-void KeyExpansion(unsigned char* key, unsigned long* w, unsigned Nk){
+void KeyExpansion(unsigned char* key, unsigned long* w, unsigned int Nk){
 	unsigned long temp;
-	int i = 0;
+	unsigned int i = 0;
 	while (i < Nk){
 		w[i] = (unsigned long)((key[4*i]<<24)+ (key[4*i+1]<<16)+(key[4*i+2]<<8)+(key[4*i+3]));
 		i = i+1;
@@ -83,11 +95,7 @@ void KeyExpansion(unsigned char* key, unsigned long* w, unsigned Nk){
 	}
 }
 
-void RotWord(unsigned long* word)
-{
-	unsigned char temp =  (*word)>>24;
-	*word = ((*word)<<24) & 0xFFF0 + temp;
-}
+
 
 void AddRoundKey(unsigned char* state, unsigned long* w){
 	int row = 0;
@@ -123,6 +131,24 @@ void SubBytes(unsigned char* state)
 	for (;i<16;i++){
 		state[i] = aes_sbox[(int)state[i]];
 	}
+}
+
+
+/** SubWord
+ *  Convert 16 bytes into sbox form.
+ *
+ *  Input: pointer to state
+ *
+ */
+unsigned long SubWord(unsigned long word)
+{
+	unsigned char* temp = (unsigned char*)&word;
+	unsigned char out[4];
+	int i = 0;
+	for (;i<4;i++){
+		out[i] = aes_sbox[(int)temp[i]];
+	}
+	return (unsigned long)out;
 }
 
 void ShiftLeft (unsigned char* byte, int n)
@@ -208,7 +234,7 @@ void encrypt(unsigned char * msg_ascii, unsigned char * key_ascii, unsigned int 
 	// create words by KeyExpansion
 
 	KeyExpansion(keyInit,w,4);
-	AddRoundKey(state,w[0]);
+	AddRoundKey(state,w);
 
 	for (round=1; round<10;round++){
 		SubBytes(state);
