@@ -67,7 +67,7 @@ module avalon_aes_interface (
 			// Write
 			begin
 				case (AVL_BYTE_EN)
-				4'b1111: Reg_unit[AVL_ADDR] <= AVL_WRITEDATA;
+					4'b1111: Reg_unit[AVL_ADDR] <= AVL_WRITEDATA;
 					4'b1100:	Reg_unit[AVL_ADDR][31:16] <= AVL_WRITEDATA[31:16];
 					4'b0011: Reg_unit[AVL_ADDR][15:0]  <= AVL_WRITEDATA[15:0];
 					4'b1000: Reg_unit[AVL_ADDR][31:24] <= AVL_WRITEDATA[31:24];
