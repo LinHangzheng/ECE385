@@ -1,5 +1,5 @@
 EDA Netlist Writer report for lab9
-Thu May 21 01:05:45 2020
+Thu May 21 23:27:44 2020
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -36,9 +36,9 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------+
 ; EDA Netlist Writer Summary                                        ;
 +---------------------------+---------------------------------------+
-; EDA Netlist Writer Status ; Successful - Thu May 21 01:05:45 2020 ;
+; EDA Netlist Writer Status ; Successful - Thu May 21 23:27:44 2020 ;
 ; Revision Name             ; lab9                                  ;
-; Top-level Entity Name     ; AES                                   ;
+; Top-level Entity Name     ; lab9_top                              ;
 ; Family                    ; Cyclone IV E                          ;
 ; Simulation Files Creation ; Successful                            ;
 +---------------------------+---------------------------------------+
@@ -88,7 +88,7 @@ refer to the applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus Prime EDA Netlist Writer
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Thu May 21 01:05:42 2020
+    Info: Processing started: Thu May 21 23:27:38 2020
 Info: Command: quartus_eda --read_settings_files=off --write_settings_files=off lab9 -c lab9
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (204019): Generated file lab9_7_1200mv_85c_slow.svo in folder "E:/JuniorYearSpring/ECE385/lab/lab9/Lab9_Avalon_Provided_2.0/simulation/modelsim/" for EDA simulation tool
@@ -100,9 +100,9 @@ Info (204019): Generated file lab9_7_1200mv_0c_v_slow.sdo in folder "E:/JuniorYe
 Info (204019): Generated file lab9_min_1200mv_0c_v_fast.sdo in folder "E:/JuniorYearSpring/ECE385/lab/lab9/Lab9_Avalon_Provided_2.0/simulation/modelsim/" for EDA simulation tool
 Info (204019): Generated file lab9_v.sdo in folder "E:/JuniorYearSpring/ECE385/lab/lab9/Lab9_Avalon_Provided_2.0/simulation/modelsim/" for EDA simulation tool
 Info: Quartus Prime EDA Netlist Writer was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 4692 megabytes
-    Info: Processing ended: Thu May 21 01:05:45 2020
-    Info: Elapsed time: 00:00:03
-    Info: Total CPU time (on all processors): 00:00:04
+    Info: Peak virtual memory: 4716 megabytes
+    Info: Processing ended: Thu May 21 23:27:44 2020
+    Info: Elapsed time: 00:00:06
+    Info: Total CPU time (on all processors): 00:00:06
 
 

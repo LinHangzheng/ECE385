@@ -38,7 +38,7 @@ module avalon_aes_interface (
 	output logic [31:0] EXPORT_DATA		// Exported Conduit Signal to LEDs
 );
 
-	// create 15 32bit registers
+	// create 16 32bit registers
 	logic [15:0][31:0] Reg_unit;
 
 	assign EXPORT_DATA = {Reg_unit[4][31:16],Reg_unit[7][15:0]};
