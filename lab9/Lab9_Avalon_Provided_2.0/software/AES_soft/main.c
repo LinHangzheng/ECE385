@@ -15,7 +15,6 @@ University of Illinois ECE Department
 
 // Pointer to base address of AES module, make sure it matches Qsys
 volatile unsigned int * AES_PTR = (unsigned int *) 0x00000100;
-
 // Execution mode: 0 for testing, 1 for benchmarking
 int run_mode = 0;
 
@@ -67,8 +66,26 @@ char charsToHex(char c1, char c2)
  */
 unsigned long RotWord(unsigned long* word)
 {
-	return (((*word<<8) & 0xFFF0)|((*word>>24) & 0x000F));
+	return (((*word<<8) & 0xFFFFFFF0)|((*word>>24) & 0x000000FF));
 }
+
+/** SubWord
+ *  Convert 16 bytes into sbox form.
+ *
+ *  Input: pointer to state
+ *
+ */
+unsigned long SubWord(unsigned long word)
+{
+	unsigned char* temp = (unsigned char*)&word;
+	unsigned char out[4];
+	int i = 0;
+	for (;i<4;i++){
+		out[i] = aes_sbox[(int)temp[i]];
+	}
+	return *((unsigned long*)out);
+}
+
 
 /** KeyExpansion
  *  Takes the Cipher Key and performs a Key Expansion
@@ -80,8 +97,12 @@ unsigned long RotWord(unsigned long* word)
 void KeyExpansion(unsigned char* key, unsigned long* w, unsigned int Nk){
 	unsigned long temp;
 	unsigned int i = 0;
+//	while (i < Nk){
+//		w[i] = (unsigned long)((key[4*i]<<24)+ (key[4*i+1]<<16)+(key[4*i+2]<<8)+(key[4*i+3]));
+//		i = i+1;
+//	}
 	while (i < Nk){
-		w[i] = (unsigned long)((key[4*i]<<24)+ (key[4*i+1]<<16)+(key[4*i+2]<<8)+(key[4*i+3]));
+		w[i] = (unsigned long)((key[i]<<24)+ (key[i+4]<<16)+(key[i+8]<<8)+(key[i+12]));
 		i = i+1;
 	}
 	i = Nk;
@@ -98,11 +119,11 @@ void KeyExpansion(unsigned char* key, unsigned long* w, unsigned int Nk){
 
 
 void AddRoundKey(unsigned char* state, unsigned long* w){
-	int row = 0;
-	int col = 0;
-	for (; row<4;row++){
-		for (;col<4;col++){
-			state[row*4+col] = state[row*4+col] ^ ((w[col]>>((3-row)*8))&(0xFF));
+	int row;
+	int col;
+	for (row=0; row<4;row++){
+		for (col=0;col<4;col++){
+			state[row*4+col] = state[row*4+col] ^ ((w[col]>>((3-row)*8)) & 0xFF);
 		}
 	}
 }
@@ -134,22 +155,6 @@ void SubBytes(unsigned char* state)
 }
 
 
-/** SubWord
- *  Convert 16 bytes into sbox form.
- *
- *  Input: pointer to state
- *
- */
-unsigned long SubWord(unsigned long word)
-{
-	unsigned char* temp = (unsigned char*)&word;
-	unsigned char out[4];
-	int i = 0;
-	for (;i<4;i++){
-		out[i] = aes_sbox[(int)temp[i]];
-	}
-	return (unsigned long)out;
-}
 
 void ShiftLeft (unsigned char* byte, int n)
 {
@@ -221,7 +226,7 @@ void MixColumns(unsigned char* state)
 void encrypt(unsigned char * msg_ascii, unsigned char * key_ascii, unsigned int * msg_enc, unsigned int * key)
 {
 	// Implement this function
-	int i,round;
+	int i,j,round;
 	unsigned char state[4*4];
 	unsigned char keyInit[4*4];
 	unsigned long w[4*(10+1)];
@@ -232,8 +237,8 @@ void encrypt(unsigned char * msg_ascii, unsigned char * key_ascii, unsigned int 
 	}
 
 	// create words by KeyExpansion
-
 	KeyExpansion(keyInit,w,4);
+
 	AddRoundKey(state,w);
 
 	for (round=1; round<10;round++){
@@ -242,7 +247,6 @@ void encrypt(unsigned char * msg_ascii, unsigned char * key_ascii, unsigned int 
 		MixColumns(state);
 		AddRoundKey(state,w+round*4);
 	}
-
 	// last round
 	SubBytes(state);
 	ShiftRows(state);
