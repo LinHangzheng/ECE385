@@ -142,8 +142,10 @@ ACDS_VERSION := 18.1
 ELF := lab7_app.elf
 
 # Paths to C, C++, and assembly source files.
-C_SRCS := main.c
-CXX_SRCS :=
+C_SRCS += main.c
+C_SRCS += .metadata/.plugins/org.eclipse.cdt.make.core/specs.c
+C_SRCS += .metadata/.plugins/org.eclipse.cdt.managedbuilder.core/spec.c
+CXX_SRCS := .metadata/.plugins/org.eclipse.cdt.make.core/specs.cpp
 ASM_SRCS :=
 
 

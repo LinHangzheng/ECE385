@@ -45,41 +45,41 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
  13 .debug_frame  0000040c  00000000  00000000  00007fa4  2**2
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_str    00000ed1  00000000  00000000  000083b0  2**0
+ 14 .debug_str    00000f8f  00000000  00000000  000083b0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_loc    00000430  00000000  00000000  00009281  2**0
+ 15 .debug_loc    00000430  00000000  00000000  0000933f  2**0
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_alt_sim_info 00000010  00000000  00000000  000096b4  2**2
+ 16 .debug_alt_sim_info 00000010  00000000  00000000  00009770  2**2
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_ranges 00000080  00000000  00000000  000096c8  2**3
+ 17 .debug_ranges 00000080  00000000  00000000  00009780  2**3
                   CONTENTS, READONLY, DEBUGGING
- 18 .thread_model 00000003  00000000  00000000  0000a906  2**0
+ 18 .thread_model 00000003  00000000  00000000  0000a9fe  2**0
                   CONTENTS, READONLY
- 19 .cpu          0000000c  00000000  00000000  0000a909  2**0
+ 19 .cpu          0000000c  00000000  00000000  0000aa01  2**0
                   CONTENTS, READONLY
- 20 .qsys         00000001  00000000  00000000  0000a915  2**0
+ 20 .qsys         00000001  00000000  00000000  0000aa0d  2**0
                   CONTENTS, READONLY
- 21 .simulation_enabled 00000001  00000000  00000000  0000a916  2**0
+ 21 .simulation_enabled 00000001  00000000  00000000  0000aa0e  2**0
                   CONTENTS, READONLY
- 22 .sysid_hash   00000004  00000000  00000000  0000a917  2**0
+ 22 .sysid_hash   00000004  00000000  00000000  0000aa0f  2**0
                   CONTENTS, READONLY
- 23 .sysid_base   00000004  00000000  00000000  0000a91b  2**0
+ 23 .sysid_base   00000004  00000000  00000000  0000aa13  2**0
                   CONTENTS, READONLY
- 24 .sysid_time   00000004  00000000  00000000  0000a91f  2**0
+ 24 .sysid_time   00000004  00000000  00000000  0000aa17  2**0
                   CONTENTS, READONLY
- 25 .stderr_dev   00000004  00000000  00000000  0000a923  2**0
+ 25 .stderr_dev   00000004  00000000  00000000  0000aa1b  2**0
                   CONTENTS, READONLY
- 26 .stdin_dev    00000004  00000000  00000000  0000a927  2**0
+ 26 .stdin_dev    00000004  00000000  00000000  0000aa1f  2**0
                   CONTENTS, READONLY
- 27 .stdout_dev   00000004  00000000  00000000  0000a92b  2**0
+ 27 .stdout_dev   00000004  00000000  00000000  0000aa23  2**0
                   CONTENTS, READONLY
- 28 .sopc_system_name 00000008  00000000  00000000  0000a92f  2**0
+ 28 .sopc_system_name 00000008  00000000  00000000  0000aa27  2**0
                   CONTENTS, READONLY
- 29 .quartus_project_dir 00000023  00000000  00000000  0000a937  2**0
+ 29 .quartus_project_dir 00000023  00000000  00000000  0000aa2f  2**0
                   CONTENTS, READONLY
- 30 .jdi          00003db5  00000000  00000000  0000a95a  2**0
+ 30 .jdi          00003db5  00000000  00000000  0000aa52  2**0
                   CONTENTS, READONLY
- 31 .sopcinfo     00055c36  00000000  00000000  0000e70f  2**0
+ 31 .sopcinfo     00055c36  00000000  00000000  0000e807  2**0
                   CONTENTS, READONLY
 SYMBOL TABLE:
 10000000 l    d  .entry	00000000 .entry
@@ -102,7 +102,10 @@ SYMBOL TABLE:
 00000000 l    d  .debug_ranges	00000000 .debug_ranges
 00000000 l    df *ABS*	00000000 ../lab7_app_bsp//obj/HAL/src/crt0.o
 10000058 l       .text	00000000 alt_after_alt_main
+00000000 l    df *ABS*	00000000 specs.cpp
+00000000 l    df *ABS*	00000000 spec.c
 00000000 l    df *ABS*	00000000 main.c
+00000000 l    df *ABS*	00000000 specs.cpp
 00000000 l    df *ABS*	00000000 alt_load.c
 10000144 l     F .text	00000068 alt_load_section
 00000000 l    df *ABS*	00000000 alt_main.c
@@ -298,11 +301,11 @@ int main()
 	while ( (1+1) != 3) //infinite loop
 	{
 		// Reset button: Key[2]
-		if ((*KEY_PIO & 0x4)!=0 && Reset_pressed==0){
+		if ((*KEY_PIO & 0x1)==0 && Reset_pressed==0){
 10000094:	e0bffd17 	ldw	r2,-12(fp)
 10000098:	10800017 	ldw	r2,0(r2)
-1000009c:	1080010c 	andi	r2,r2,4
-100000a0:	10000726 	beq	r2,zero,100000c0 <main+0x64>
+1000009c:	1080004c 	andi	r2,r2,1
+100000a0:	1000071e 	bne	r2,zero,100000c0 <main+0x64>
 100000a4:	e0bffa17 	ldw	r2,-24(fp)
 100000a8:	1000051e 	bne	r2,zero,100000c0 <main+0x64>
 			Accumulate = 0; 			// Reset the value
@@ -316,11 +319,11 @@ int main()
 		}
 
 		// Accumulate button: Key[3]
-		if ((*KEY_PIO & 0x8)!=0 && Accumulate_pressed==0){
+		if ((*KEY_PIO & 0x2)==0 && Accumulate_pressed==0){
 100000c0:	e0bffd17 	ldw	r2,-12(fp)
 100000c4:	10800017 	ldw	r2,0(r2)
-100000c8:	1080020c 	andi	r2,r2,8
-100000cc:	10000f26 	beq	r2,zero,1000010c <main+0xb0>
+100000c8:	1080008c 	andi	r2,r2,2
+100000cc:	10000f1e 	bne	r2,zero,1000010c <main+0xb0>
 100000d0:	e0bffb17 	ldw	r2,-20(fp)
 100000d4:	10000d1e 	bne	r2,zero,1000010c <main+0xb0>
 			Accumulate += *SW_PIO; 		// update the value
@@ -349,19 +352,19 @@ int main()
 10000110:	e0fffc17 	ldw	r3,-16(fp)
 10000114:	10c00015 	stw	r3,0(r2)
 
-		if ((*KEY_PIO & 0x4)==0){
+		if ((*KEY_PIO & 0x1)!=0){
 10000118:	e0bffd17 	ldw	r2,-12(fp)
 1000011c:	10800017 	ldw	r2,0(r2)
-10000120:	1080010c 	andi	r2,r2,4
-10000124:	1000011e 	bne	r2,zero,1000012c <main+0xd0>
+10000120:	1080004c 	andi	r2,r2,1
+10000124:	10000126 	beq	r2,zero,1000012c <main+0xd0>
 			Reset_pressed = 0;			// release reset button
 10000128:	e03ffa15 	stw	zero,-24(fp)
 		}
-		if ((*KEY_PIO & 0x8)==0){
+		if ((*KEY_PIO & 0x2)!=0){
 1000012c:	e0bffd17 	ldw	r2,-12(fp)
 10000130:	10800017 	ldw	r2,0(r2)
-10000134:	1080020c 	andi	r2,r2,8
-10000138:	103fd61e 	bne	r2,zero,10000094 <__alt_data_end+0xf8000094>
+10000134:	1080008c 	andi	r2,r2,2
+10000138:	103fd626 	beq	r2,zero,10000094 <__alt_data_end+0xf8000094>
 			Accumulate_pressed = 0; 	// release accumulate button
 1000013c:	e03ffb15 	stw	zero,-20(fp)
 		}

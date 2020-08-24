@@ -203,8 +203,8 @@ $(MEM_1)_START := 0x10000000
 $(MEM_1)_END := 0x17ffffff
 $(MEM_1)_SPAN := 0x08000000
 $(MEM_1)_HIERARCHICAL_PATH := sdram
-$(MEM_1)_WIDTH := 16
-$(MEM_1)_HEX_DATA_WIDTH := 16
+$(MEM_1)_WIDTH := 32
+$(MEM_1)_HEX_DATA_WIDTH := 32
 $(MEM_1)_ENDIANNESS := --little-endian-mem
 $(MEM_1)_CREATE_LANES := 0
 
