@@ -39,13 +39,13 @@
 // ------------------------------------------
 // Generation parameters:
 //   output_name:         lab9_soc_mm_interconnect_0_rsp_mux
-//   NUM_INPUTS:          6
-//   ARBITRATION_SHARES:  1 1 1 1 1 1
+//   NUM_INPUTS:          7
+//   ARBITRATION_SHARES:  1 1 1 1 1 1 1
 //   ARBITRATION_SCHEME   "no-arb"
 //   PIPELINE_ARB:        0
 //   PKT_TRANS_LOCK:      69 (arbitration locking enabled)
 //   ST_DATA_W:           105
-//   ST_CHANNEL_W:        6
+//   ST_CHANNEL_W:        7
 // ------------------------------------------
 
 module lab9_soc_mm_interconnect_0_rsp_mux
@@ -55,45 +55,52 @@ module lab9_soc_mm_interconnect_0_rsp_mux
     // ----------------------
     input                       sink0_valid,
     input [105-1   : 0]  sink0_data,
-    input [6-1: 0]  sink0_channel,
+    input [7-1: 0]  sink0_channel,
     input                       sink0_startofpacket,
     input                       sink0_endofpacket,
     output                      sink0_ready,
 
     input                       sink1_valid,
     input [105-1   : 0]  sink1_data,
-    input [6-1: 0]  sink1_channel,
+    input [7-1: 0]  sink1_channel,
     input                       sink1_startofpacket,
     input                       sink1_endofpacket,
     output                      sink1_ready,
 
     input                       sink2_valid,
     input [105-1   : 0]  sink2_data,
-    input [6-1: 0]  sink2_channel,
+    input [7-1: 0]  sink2_channel,
     input                       sink2_startofpacket,
     input                       sink2_endofpacket,
     output                      sink2_ready,
 
     input                       sink3_valid,
     input [105-1   : 0]  sink3_data,
-    input [6-1: 0]  sink3_channel,
+    input [7-1: 0]  sink3_channel,
     input                       sink3_startofpacket,
     input                       sink3_endofpacket,
     output                      sink3_ready,
 
     input                       sink4_valid,
     input [105-1   : 0]  sink4_data,
-    input [6-1: 0]  sink4_channel,
+    input [7-1: 0]  sink4_channel,
     input                       sink4_startofpacket,
     input                       sink4_endofpacket,
     output                      sink4_ready,
 
     input                       sink5_valid,
     input [105-1   : 0]  sink5_data,
-    input [6-1: 0]  sink5_channel,
+    input [7-1: 0]  sink5_channel,
     input                       sink5_startofpacket,
     input                       sink5_endofpacket,
     output                      sink5_ready,
+
+    input                       sink6_valid,
+    input [105-1   : 0]  sink6_data,
+    input [7-1: 0]  sink6_channel,
+    input                       sink6_startofpacket,
+    input                       sink6_endofpacket,
+    output                      sink6_ready,
 
 
     // ----------------------
@@ -101,7 +108,7 @@ module lab9_soc_mm_interconnect_0_rsp_mux
     // ----------------------
     output                      src_valid,
     output [105-1    : 0] src_data,
-    output [6-1 : 0] src_channel,
+    output [7-1 : 0] src_channel,
     output                      src_startofpacket,
     output                      src_endofpacket,
     input                       src_ready,
@@ -112,12 +119,12 @@ module lab9_soc_mm_interconnect_0_rsp_mux
     input clk,
     input reset
 );
-    localparam PAYLOAD_W        = 105 + 6 + 2;
-    localparam NUM_INPUTS       = 6;
+    localparam PAYLOAD_W        = 105 + 7 + 2;
+    localparam NUM_INPUTS       = 7;
     localparam SHARE_COUNTER_W  = 1;
     localparam PIPELINE_ARB     = 0;
     localparam ST_DATA_W        = 105;
-    localparam ST_CHANNEL_W     = 6;
+    localparam ST_CHANNEL_W     = 7;
     localparam PKT_TRANS_LOCK   = 69;
 
     // ------------------------------------------
@@ -139,6 +146,7 @@ module lab9_soc_mm_interconnect_0_rsp_mux
     wire [PAYLOAD_W - 1 : 0] sink3_payload;
     wire [PAYLOAD_W - 1 : 0] sink4_payload;
     wire [PAYLOAD_W - 1 : 0] sink5_payload;
+    wire [PAYLOAD_W - 1 : 0] sink6_payload;
 
     assign valid[0] = sink0_valid;
     assign valid[1] = sink1_valid;
@@ -146,6 +154,7 @@ module lab9_soc_mm_interconnect_0_rsp_mux
     assign valid[3] = sink3_valid;
     assign valid[4] = sink4_valid;
     assign valid[5] = sink5_valid;
+    assign valid[6] = sink6_valid;
 
 
     // ------------------------------------------
@@ -161,6 +170,7 @@ module lab9_soc_mm_interconnect_0_rsp_mux
       lock[3] = sink3_data[69];
       lock[4] = sink4_data[69];
       lock[5] = sink5_data[69];
+      lock[6] = sink6_data[69];
     end
 
     assign last_cycle = src_valid & src_ready & src_endofpacket & ~(|(lock & grant));
@@ -197,12 +207,14 @@ module lab9_soc_mm_interconnect_0_rsp_mux
     // 3      |      1       |  0
     // 4      |      1       |  0
     // 5      |      1       |  0
+    // 6      |      1       |  0
      wire [SHARE_COUNTER_W - 1 : 0] share_0 = 1'd0;
      wire [SHARE_COUNTER_W - 1 : 0] share_1 = 1'd0;
      wire [SHARE_COUNTER_W - 1 : 0] share_2 = 1'd0;
      wire [SHARE_COUNTER_W - 1 : 0] share_3 = 1'd0;
      wire [SHARE_COUNTER_W - 1 : 0] share_4 = 1'd0;
      wire [SHARE_COUNTER_W - 1 : 0] share_5 = 1'd0;
+     wire [SHARE_COUNTER_W - 1 : 0] share_6 = 1'd0;
 
     // ------------------------------------------
     // Choose the share value corresponding to the grant.
@@ -215,7 +227,8 @@ module lab9_soc_mm_interconnect_0_rsp_mux
     share_2 & { SHARE_COUNTER_W {next_grant[2]} } |
     share_3 & { SHARE_COUNTER_W {next_grant[3]} } |
     share_4 & { SHARE_COUNTER_W {next_grant[4]} } |
-    share_5 & { SHARE_COUNTER_W {next_grant[5]} };
+    share_5 & { SHARE_COUNTER_W {next_grant[5]} } |
+    share_6 & { SHARE_COUNTER_W {next_grant[6]} };
     end
 
     // ------------------------------------------
@@ -289,11 +302,14 @@ module lab9_soc_mm_interconnect_0_rsp_mux
 
     wire final_packet_5 = 1'b1;
 
+    wire final_packet_6 = 1'b1;
+
 
     // ------------------------------------------
     // Concatenate all final_packet signals (wire or reg) into a handy vector.
     // ------------------------------------------
     wire [NUM_INPUTS - 1 : 0] final_packet = {
+    final_packet_6,
     final_packet_5,
     final_packet_4,
     final_packet_3,
@@ -389,6 +405,7 @@ module lab9_soc_mm_interconnect_0_rsp_mux
     assign sink3_ready = src_ready && grant[3];
     assign sink4_ready = src_ready && grant[4];
     assign sink5_ready = src_ready && grant[5];
+    assign sink6_ready = src_ready && grant[6];
 
     assign src_valid = |(grant & valid);
 
@@ -399,7 +416,8 @@ module lab9_soc_mm_interconnect_0_rsp_mux
       sink2_payload & {PAYLOAD_W {grant[2]} } |
       sink3_payload & {PAYLOAD_W {grant[3]} } |
       sink4_payload & {PAYLOAD_W {grant[4]} } |
-      sink5_payload & {PAYLOAD_W {grant[5]} };
+      sink5_payload & {PAYLOAD_W {grant[5]} } |
+      sink6_payload & {PAYLOAD_W {grant[6]} };
     end
 
     // ------------------------------------------
@@ -418,6 +436,8 @@ module lab9_soc_mm_interconnect_0_rsp_mux
     sink4_startofpacket,sink4_endofpacket};
     assign sink5_payload = {sink5_channel,sink5_data,
     sink5_startofpacket,sink5_endofpacket};
+    assign sink6_payload = {sink6_channel,sink6_data,
+    sink6_startofpacket,sink6_endofpacket};
 
     assign {src_channel,src_data,src_startofpacket,src_endofpacket} = src_payload;
 endmodule

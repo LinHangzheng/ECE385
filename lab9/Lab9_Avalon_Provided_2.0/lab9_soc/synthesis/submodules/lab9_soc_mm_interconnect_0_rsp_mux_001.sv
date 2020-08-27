@@ -45,7 +45,7 @@
 //   PIPELINE_ARB:        0
 //   PKT_TRANS_LOCK:      69 (arbitration locking enabled)
 //   ST_DATA_W:           105
-//   ST_CHANNEL_W:        6
+//   ST_CHANNEL_W:        7
 // ------------------------------------------
 
 module lab9_soc_mm_interconnect_0_rsp_mux_001
@@ -55,28 +55,28 @@ module lab9_soc_mm_interconnect_0_rsp_mux_001
     // ----------------------
     input                       sink0_valid,
     input [105-1   : 0]  sink0_data,
-    input [6-1: 0]  sink0_channel,
+    input [7-1: 0]  sink0_channel,
     input                       sink0_startofpacket,
     input                       sink0_endofpacket,
     output                      sink0_ready,
 
     input                       sink1_valid,
     input [105-1   : 0]  sink1_data,
-    input [6-1: 0]  sink1_channel,
+    input [7-1: 0]  sink1_channel,
     input                       sink1_startofpacket,
     input                       sink1_endofpacket,
     output                      sink1_ready,
 
     input                       sink2_valid,
     input [105-1   : 0]  sink2_data,
-    input [6-1: 0]  sink2_channel,
+    input [7-1: 0]  sink2_channel,
     input                       sink2_startofpacket,
     input                       sink2_endofpacket,
     output                      sink2_ready,
 
     input                       sink3_valid,
     input [105-1   : 0]  sink3_data,
-    input [6-1: 0]  sink3_channel,
+    input [7-1: 0]  sink3_channel,
     input                       sink3_startofpacket,
     input                       sink3_endofpacket,
     output                      sink3_ready,
@@ -87,7 +87,7 @@ module lab9_soc_mm_interconnect_0_rsp_mux_001
     // ----------------------
     output                      src_valid,
     output [105-1    : 0] src_data,
-    output [6-1 : 0] src_channel,
+    output [7-1 : 0] src_channel,
     output                      src_startofpacket,
     output                      src_endofpacket,
     input                       src_ready,
@@ -98,12 +98,12 @@ module lab9_soc_mm_interconnect_0_rsp_mux_001
     input clk,
     input reset
 );
-    localparam PAYLOAD_W        = 105 + 6 + 2;
+    localparam PAYLOAD_W        = 105 + 7 + 2;
     localparam NUM_INPUTS       = 4;
     localparam SHARE_COUNTER_W  = 1;
     localparam PIPELINE_ARB     = 0;
     localparam ST_DATA_W        = 105;
-    localparam ST_CHANNEL_W     = 6;
+    localparam ST_CHANNEL_W     = 7;
     localparam PKT_TRANS_LOCK   = 69;
 
     // ------------------------------------------

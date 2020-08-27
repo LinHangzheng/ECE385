@@ -1,5 +1,5 @@
 Flow report for lab9
-Mon Aug 24 15:52:17 2020
+Wed Aug 26 11:21:43 2020
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -40,22 +40,22 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Mon Aug 24 15:52:17 2020       ;
+; Flow Status                        ; Successful - Wed Aug 26 11:21:43 2020       ;
 ; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                      ; lab9                                        ;
-; Top-level Entity Name              ; AES                                         ;
+; Top-level Entity Name              ; lab9_top                                    ;
 ; Family                             ; Cyclone IV E                                ;
 ; Device                             ; EP4CE115F29C7                               ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 2,837 / 114,480 ( 2 % )                     ;
-;     Total combinational functions  ; 2,837 / 114,480 ( 2 % )                     ;
-;     Dedicated logic registers      ; 148 / 114,480 ( < 1 % )                     ;
-; Total registers                    ; 148                                         ;
-; Total pins                         ; 388 / 529 ( 73 % )                          ;
+; Total logic elements               ; 6,603 / 114,480 ( 6 % )                     ;
+;     Total combinational functions  ; 5,865 / 114,480 ( 5 % )                     ;
+;     Dedicated logic registers      ; 2,745 / 114,480 ( 2 % )                     ;
+; Total registers                    ; 2864                                        ;
+; Total pins                         ; 142 / 529 ( 27 % )                          ;
 ; Total virtual pins                 ; 0                                           ;
-; Total memory bits                  ; 114,688 / 3,981,312 ( 3 % )                 ;
+; Total memory bits                  ; 125,952 / 3,981,312 ( 3 % )                 ;
 ; Embedded Multiplier 9-bit elements ; 0 / 532 ( 0 % )                             ;
-; Total PLLs                         ; 0 / 4 ( 0 % )                               ;
+; Total PLLs                         ; 1 / 4 ( 25 % )                              ;
 +------------------------------------+---------------------------------------------+
 
 
@@ -64,7 +64,7 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 08/24/2020 15:50:26 ;
+; Start date & time ; 08/26/2020 11:19:04 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; lab9                ;
 +-------------------+---------------------+
@@ -75,7 +75,7 @@ refer to the applicable agreement for further details.
 +--------------------------------------+------------------------------------------------------------+---------------+-------------+----------------+
 ; Assignment Name                      ; Value                                                      ; Default Value ; Entity Name ; Section Id     ;
 +--------------------------------------+------------------------------------------------------------+---------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID                ; 1097926602789.159825542617908                              ; --            ; --          ; --             ;
+; COMPILER_SIGNATURE_ID                ; 174508023044989.159841194407448                            ; --            ; --          ; --             ;
 ; EDA_DESIGN_INSTANCE_NAME             ; NA                                                         ; --            ; --          ; testbench      ;
 ; EDA_NATIVELINK_SIMULATION_TEST_BENCH ; testbench                                                  ; --            ; --          ; eda_simulation ;
 ; EDA_OUTPUT_DATA_FORMAT               ; Systemverilog Hdl                                          ; --            ; --          ; eda_simulation ;
@@ -91,19 +91,19 @@ refer to the applicable agreement for further details.
 ; MISC_FILE                            ; lab9_soc/synthesis/../lab9_soc.cmp                         ; --            ; --          ; --             ;
 ; MISC_FILE                            ; lab9_soc/synthesis/../../lab9_soc.qsys                     ; --            ; --          ; --             ;
 ; NOMINAL_CORE_SUPPLY_VOLTAGE          ; 1.2V                                                       ; --            ; --          ; --             ;
-; PARTITION_COLOR                      ; -- (Not supported for targeted family)                     ; --            ; AES         ; Top            ;
-; PARTITION_FITTER_PRESERVATION_LEVEL  ; -- (Not supported for targeted family)                     ; --            ; AES         ; Top            ;
-; PARTITION_NETLIST_TYPE               ; -- (Not supported for targeted family)                     ; --            ; AES         ; Top            ;
+; PARTITION_COLOR                      ; -- (Not supported for targeted family)                     ; --            ; lab9_top    ; Top            ;
+; PARTITION_FITTER_PRESERVATION_LEVEL  ; -- (Not supported for targeted family)                     ; --            ; lab9_top    ; Top            ;
+; PARTITION_NETLIST_TYPE               ; -- (Not supported for targeted family)                     ; --            ; lab9_top    ; Top            ;
 ; POWER_BOARD_THERMAL_MODEL            ; None (CONSERVATIVE)                                        ; --            ; --          ; --             ;
 ; POWER_DEFAULT_INPUT_IO_TOGGLE_RATE   ; 12.5 %                                                     ; 12.5%         ; --          ; --             ;
 ; POWER_PRESET_COOLING_SOLUTION        ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW                      ; --            ; --          ; --             ;
 ; PROJECT_OUTPUT_DIRECTORY             ; output_files                                               ; --            ; --          ; --             ;
 ; SLD_FILE                             ; lab9_soc/synthesis/lab9_soc.regmap                         ; --            ; --          ; --             ;
 ; SLD_FILE                             ; lab9_soc/synthesis/lab9_soc.debuginfo                      ; --            ; --          ; --             ;
-; SLD_INFO                             ; QSYS_NAME lab9_soc HAS_SOPCINFO 1 GENERATION_ID 1590079070 ; --            ; lab9_soc    ; --             ;
+; SLD_INFO                             ; QSYS_NAME lab9_soc HAS_SOPCINFO 1 GENERATION_ID 1598411843 ; --            ; lab9_soc    ; --             ;
 ; SOPCINFO_FILE                        ; lab9_soc/synthesis/../../lab9_soc.sopcinfo                 ; --            ; --          ; --             ;
 ; SYNTHESIS_ONLY_QIP                   ; On                                                         ; --            ; --          ; --             ;
-; TOP_LEVEL_ENTITY                     ; AES                                                        ; lab9          ; --          ; --             ;
+; TOP_LEVEL_ENTITY                     ; lab9_top                                                   ; lab9          ; --          ; --             ;
 +--------------------------------------+------------------------------------------------------------+---------------+-------------+----------------+
 
 
@@ -112,13 +112,13 @@ refer to the applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:27     ; 1.0                     ; 4815 MB             ; 00:00:40                           ;
-; Fitter               ; 00:00:50     ; 1.0                     ; 5803 MB             ; 00:01:18                           ;
-; Assembler            ; 00:00:05     ; 1.0                     ; 4704 MB             ; 00:00:05                           ;
-; Power Analyzer       ; 00:00:11     ; 1.0                     ; 4910 MB             ; 00:00:12                           ;
-; Timing Analyzer      ; 00:00:04     ; 1.2                     ; 4878 MB             ; 00:00:05                           ;
-; EDA Netlist Writer   ; 00:00:04     ; 1.0                     ; 4696 MB             ; 00:00:04                           ;
-; Total                ; 00:01:41     ; --                      ; --                  ; 00:02:24                           ;
+; Analysis & Synthesis ; 00:00:59     ; 1.0                     ; 4958 MB             ; 00:01:17                           ;
+; Fitter               ; 00:00:57     ; 1.1                     ; 5872 MB             ; 00:01:40                           ;
+; Assembler            ; 00:00:05     ; 1.0                     ; 4717 MB             ; 00:00:04                           ;
+; Power Analyzer       ; 00:00:12     ; 1.1                     ; 4944 MB             ; 00:00:13                           ;
+; Timing Analyzer      ; 00:00:05     ; 1.5                     ; 4931 MB             ; 00:00:07                           ;
+; EDA Netlist Writer   ; 00:00:09     ; 1.0                     ; 4752 MB             ; 00:00:09                           ;
+; Total                ; 00:02:27     ; --                      ; --                  ; 00:03:30                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

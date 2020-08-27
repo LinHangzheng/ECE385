@@ -40,11 +40,13 @@ module avalon_aes_interface (
 
 	// create 16 32bit registers
 	logic [15:0][31:0] Reg_unit;
+	logic [3:0][31:0] MSG_DEC;
+	logic Done;
 
-	assign EXPORT_DATA = {Reg_unit[4][31:16],Reg_unit[7][15:0]};
+	assign EXPORT_DATA = {Reg_unit[7][31:16],Reg_unit[4][15:0]};
 	always_ff @ (posedge CLK)
 	begin
-		if (RESET && AVL_CS)				// if reset is active, clear all registers
+		if (RESET)				// if reset is active, clear all registers
 			begin
 				Reg_unit[0]  <= 32'h0;
 				Reg_unit[1]  <= 32'h0;
@@ -77,6 +79,11 @@ module avalon_aes_interface (
 					default: Reg_unit[AVL_ADDR] <= 32'b0;
 				endcase
 			end
+		else if (Done && AVL_CS)
+			begin
+				Reg_unit[15][0] = Done;
+				Reg_unit[11:8] = MSG_DEC;
+			end
 	end
 	
 	
@@ -88,6 +95,11 @@ module avalon_aes_interface (
 			AVL_READDATA = Reg_unit[AVL_ADDR];
 
 	end
-
-
+	
+	AES aes(.*,
+			  .AES_START(Reg_unit[14][0]),
+			  .AES_DONE(Done),
+			  .AES_KEY(Reg_unit[3:0]),
+			  .AES_MSG_ENC(Reg_unit[7:4]),
+			  .AES_MSG_DEC(MSG_DEC));
 endmodule

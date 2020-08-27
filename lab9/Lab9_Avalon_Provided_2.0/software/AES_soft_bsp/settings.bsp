@@ -2,10 +2,10 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Aug 24, 2020 4:27:21 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1598257641386</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>2020-8-27 10:22:42</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1598494962029</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>E:\JuniorYearSpring\ECE385\lab\lab9\Lab9_Avalon_Provided_2.0\software\AES_soft_bsp</BspGeneratedLocation>
-        <BspSettingsFile>E:\JuniorYearSpring\ECE385\lab\lab9\Lab9_Avalon_Provided_2.0\software\AES_soft_bsp\settings.bsp</BspSettingsFile>
+        <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>..\..\lab9_soc.sopcinfo</SopcDesignFile>
         <JdiFile>default</JdiFile>
         <Cpu>nios2_gen2_0</Cpu>
@@ -14,7 +14,7 @@
                 <SettingName>hal.sys_clk_timer</SettingName>
                 <Identifier>ALT_SYS_CLK</Identifier>
                 <Type>UnquotedString</Type>
-                <Value>none</Value>
+                <Value>TIMER</Value>
                 <DefaultValue>none</DefaultValue>
                 <DestinationFile>system_h_define</DestinationFile>
                 <Description>Slave descriptor of the system clock timer device. This device provides a periodic interrupt ("tick") and is typically required for RTOS use. This setting defines the value of ALT_SYS_CLK in system.h.</Description>
@@ -915,6 +915,12 @@
                 <addressRange>0x00000030 - 0x00000037</addressRange>
                 <addressSpan>8</addressSpan>
                 <attributes>printable</attributes>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>TIMER</slaveDescriptor>
+                <addressRange>0x00000040 - 0x0000005F</addressRange>
+                <addressSpan>32</addressSpan>
+                <attributes>timer</attributes>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>AES</slaveDescriptor>

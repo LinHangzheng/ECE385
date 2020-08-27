@@ -270,11 +270,12 @@ void decrypt(unsigned int * msg_enc, unsigned int * msg_dec, unsigned int * key)
 {
 	// Implement this function
 	int i;
-
+	AES_PTR[14] = 0;
+	AES_PTR[15] = 0;
 	// set the AES_KEY and AES_MSG_EN
 	for (i=0; i<4; i++){
-		AES_PTR[i] = key[i];
-		AES_PTR[i+4] = msg_enc[i];
+		AES_PTR[i] = key[3-i];
+		AES_PTR[i+4] = msg_enc[3-i];
 	}
 
 	// set the AES_START to 1
@@ -282,15 +283,21 @@ void decrypt(unsigned int * msg_enc, unsigned int * msg_dec, unsigned int * key)
 
 	// wait for AES_DONE, this process will be
 	// implemented by hardware in hdl.
-	while (AES_PTR[15] == 0){}
+	while (AES_PTR[15] == 0){
+//		for (i=0;i<16;i++){
+//			printf("%08x",AES_PTR[i]);
+//		}
+//		printf("\n");
+	}
 
 	// set the AES_MSG_DE
 	for (i=0; i<4; i++){
-		msg_dec[i] = AES_PTR[i+8];
+		msg_dec[3-i] = AES_PTR[i+8];
 	}
 
 	// set the AES_START to 0
 	AES_PTR[14] = 0;
+	AES_PTR[15] = 0;
 
 }
 
@@ -445,6 +452,23 @@ int main()
 //	InvShiftRows(state);
 //	InvSubBytes(state);
 //	AddRoundKey(state,w);
+//Encrypted Message
+//daec3055df058e1c39e814ea76f6747e
+//Key
+//000102030405060708090a0b0c0d0e0f
+//Key Expansion
+//13111d7fe3944a17f307a78b4d2b30c5
+//Decrypted Message
+//ece298dcece298dcece298dcece298dc
 //
+//
+//Encrypted Message
+//439d619920ce415661019634f59fcf63
+//Key
+//3b280014beaac269d613a16bfdc2be03
+//Key Expansion
+//9915cfa2913edd62c645ddee2367395b
+//Decrypted Message
+//dbe429ca8610ea6275b100476d87a2c5
 //
 //}
