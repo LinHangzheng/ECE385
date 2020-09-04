@@ -1,0 +1,215 @@
+/*
+ * ECE385-HelperTools/PNG-To-Txt
+ * Author: Rishi Thakkar
+ *
+ */
+module monster2 (
+	input Clk, 
+	input logic monster2_exit,
+	input logic [9:0] DrawX, DrawY,
+	input logic [9:0] monster2_x,
+	input logic [9:0] monster2_y,
+	input logic [5:0] monster2_state,
+	output logic [7:0] monster2_data,
+	output logic is_monster2
+);
+	// screen size
+	parameter [9:0] SCREEN_WIDTH =  10'd480;
+   parameter [9:0] SCREEN_LENGTH = 10'd640;
+	parameter [9:0] MONSTER2_LENGTH = 10'd40;			//original size
+	parameter [9:0] MONSTER2_WIDTH =  10'd42;			//original size
+	parameter [9:0] MONSTER2_LENGTH_DOUBLE = 10'd160;			//double the size
+	parameter [9:0] MONSTER2_WIDTH_DOUBLE =  10'd168;		//double the size
+	parameter [9:0] CENTERX_DOUBLE =  10'd80;
+	parameter [9:0] CENTERY_DOUBLE =  10'd84;
+	parameter[3:0] RESHAPE_TIME = 8'd4;
+	parameter [9:0] CORNERX =  10'd0;
+	parameter [9:0] CORNERY =  10'd0;
+	//--------------------load memory-----------------//
+	logic [18:0] read_address;
+	logic [7:0] monster2_1_data;
+	logic [7:0] monster2_2_data;
+	logic [7:0] monster2_3_data;
+	logic [7:0] monster2_4_data;
+	logic [7:0] monster2_hit_data;
+	logic [7:0] monster2_dead1_data;
+	logic [7:0] monster2_dead2_data;
+	logic [7:0] data_in;
+	assign read_address = (CENTERX_DOUBLE-(monster2_x - DrawX))/RESHAPE_TIME + (CENTERY_DOUBLE-(monster2_y - DrawY))/RESHAPE_TIME*MONSTER2_LENGTH;
+	monster2_1_RAM monster2_1_RAM(.*);
+	monster2_2_RAM monster2_2_RAM(.*);
+	monster2_3_RAM monster2_3_RAM(.*);
+	monster2_4_RAM monster2_4_RAM(.*);
+	monster2_hit_RAM monster2_hit_RAM(.*);
+	monster2_dead1_RAM monster2_dead1_RAM(.*);
+	monster2_dead2_RAM monster2_dead2_RAM(.*);
+	
+	always_comb begin
+		is_monster2 = 1'b0;
+		monster2_data = data_in;
+	   if (monster2_exit == 1'b1 &&
+			 (DrawX >= monster2_x - (CENTERX_DOUBLE-CORNERX)||monster2_x < CENTERX_DOUBLE-CORNERX) && DrawX <= monster2_x + (CORNERX+MONSTER2_LENGTH_DOUBLE-CENTERX_DOUBLE) &&
+			 DrawY >= monster2_y - (CENTERY_DOUBLE-CORNERY) && DrawY <= monster2_y + (CORNERY+MONSTER2_WIDTH_DOUBLE-CENTERY_DOUBLE))
+		begin
+			is_monster2 = 1'b1;
+		end
+		unique case (monster2_state) 
+			6'd0: data_in = monster2_1_data;
+			6'd1: data_in = monster2_2_data;
+			6'd2: data_in = monster2_3_data;
+			6'd3: data_in = monster2_4_data;
+			6'd4: data_in = monster2_hit_data;
+			6'd5: data_in = monster2_dead1_data;
+			6'd6: data_in = monster2_dead2_data;
+			default: data_in = 8'b0;
+		endcase
+	end
+
+endmodule
+
+module  monster2_1_RAM
+(
+		input [18:0] read_address,
+		input Clk,
+
+		output logic [7:0] monster2_1_data
+);
+
+// mem has width of 4 bits and a total of 307200 addresses
+//logic [3:0] mem [0:307199];
+logic [7:0] mem [0:1679];
+initial begin
+	 $readmemh("sprite/monster2/monster2_1.txt", mem);
+end
+
+always_ff @ (posedge Clk) begin
+	monster2_1_data<= mem[read_address];
+end
+endmodule
+
+
+module  monster2_2_RAM
+(
+		input [18:0] read_address,
+		input Clk,
+
+		output logic [7:0] monster2_2_data
+);
+
+// mem has width of 4 bits and a total of 307200 addresses
+//logic [3:0] mem [0:307199];
+logic [7:0] mem [0:1679];
+initial begin
+	 $readmemh("sprite/monster2/monster2_2.txt", mem);
+end
+
+always_ff @ (posedge Clk) begin
+	monster2_2_data<= mem[read_address];
+end
+endmodule
+
+
+module  monster2_3_RAM
+(
+		input [18:0] read_address,
+		input Clk,
+
+		output logic [7:0] monster2_3_data
+);
+
+// mem has width of 4 bits and a total of 307200 addresses
+//logic [3:0] mem [0:307199];
+logic [7:0] mem [0:1679];
+initial begin
+	 $readmemh("sprite/monster2/monster2_3.txt", mem);
+end
+
+always_ff @ (posedge Clk) begin
+	monster2_3_data<= mem[read_address];
+end
+endmodule
+
+
+module  monster2_4_RAM
+(
+		input [18:0] read_address,
+		input Clk,
+
+		output logic [7:0] monster2_4_data
+);
+
+// mem has width of 4 bits and a total of 307200 addresses
+//logic [3:0] mem [0:307199];
+logic [7:0] mem [0:1679];
+initial begin
+	 $readmemh("sprite/monster2/monster2_4.txt", mem);
+end
+
+always_ff @ (posedge Clk) begin
+	monster2_4_data<= mem[read_address];
+end
+endmodule
+
+
+module  monster2_hit_RAM
+(
+		input [18:0] read_address,
+		input Clk,
+
+		output logic [7:0] monster2_hit_data
+);
+
+// mem has width of 4 bits and a total of 307200 addresses
+//logic [3:0] mem [0:307199];
+logic [7:0] mem [0:1679];
+initial begin
+	 $readmemh("sprite/monster2/monster2_hit.txt", mem);
+end
+
+always_ff @ (posedge Clk) begin
+	monster2_hit_data<= mem[read_address];
+end
+endmodule
+
+
+module  monster2_dead1_RAM
+(
+		input [18:0] read_address,
+		input Clk,
+
+		output logic [7:0] monster2_dead1_data
+);
+
+// mem has width of 4 bits and a total of 307200 addresses
+//logic [3:0] mem [0:307199];
+logic [7:0] mem [0:1679];
+initial begin
+	 $readmemh("sprite/monster2/monster2_1.txt", mem);
+end
+
+always_ff @ (posedge Clk) begin
+	monster2_dead1_data<= mem[read_address];
+end
+endmodule
+
+
+module  monster2_dead2_RAM
+(
+		input [18:0] read_address,
+		input Clk,
+
+		output logic [7:0] monster2_dead2_data
+);
+
+// mem has width of 4 bits and a total of 307200 addresses
+//logic [3:0] mem [0:307199];
+logic [7:0] mem [0:1679];
+initial begin
+	 $readmemh("sprite/monster2/monster2_dead2.txt", mem);
+end
+
+always_ff @ (posedge Clk) begin
+	monster2_dead2_data<= mem[read_address];
+end
+endmodule
+

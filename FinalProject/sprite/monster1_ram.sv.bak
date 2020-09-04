@@ -1,0 +1,132 @@
+/*
+ * ECE385-HelperTools/PNG-To-Txt
+ * Author: Rishi Thakkar
+ *
+ */
+module saber (
+	input Clk, 
+	input logic saber_exit,
+	input logic [9:0] DrawX, DrawY,
+	input logic [9:0] saber_x,
+	input logic [9:0] saber_y,
+	input logic [5:0] saber_state,
+	output logic [7:0] saber_data,
+	output logic is_saber
+);
+	// screen size
+	parameter [9:0] SCREEN_WIDTH =  10'd480;
+   parameter [9:0] SCREEN_LENGTH = 10'd640;
+	parameter [9:0] SABERS_WIDTH =  10'd234;
+	parameter [9:0] SABERS_LENGTH =  10'd256;
+	//--------------------load memory-----------------//
+	logic [18:0] read_address;
+	logic [9:0] CenterX;		// saber center in the collection graph
+	logic [9:0] CenterY;
+	logic [9:0] CornerX;		// the frame left up corner
+	logic [9:0] CornerY;
+	logic [9:0] FrameX;		// the frame size
+	logic [9:0] FrameY;
+	logic [5:0] state;
+	saber_RAM saber_RAM(.*);
+	
+	// use state as index to find the center of saber
+	logic [9:0] SaberStateCenterX[0:21];
+	logic [9:0] SaberStateCenterY[0:21];
+	logic [9:0] SaberStateCornerX[0:21];
+	logic [9:0] SaberStateCornerY[0:21];
+	logic [9:0] SaberStateFrameX[0:21];
+	logic [9:0] SaberStateFrameY[0:21];
+	
+	assign SaberStateCenterX = '{10'd23 ,10'd62 ,10'd100,10'd137,10'd175,
+										  10'd213,10'd28 ,10'd64 ,10'd103,10'd141,
+										  10'd178,10'd216,10'd25 ,10'd98 ,10'd160,
+										  10'd218,10'd46 ,10'd81 ,10'd121,10'd159,
+										  10'd196,10'd235};//TODO
+										 
+	assign SaberStateCenterY = '{10'd31 ,10'd31 ,10'd31 ,10'd31 ,10'd32 ,
+										  10'd31 ,10'd87 ,10'd87 ,10'd87 ,10'd87 ,
+										  10'd87 ,10'd87 ,10'd142,10'd142,10'd148,
+										  10'd146,10'd201,10'd201,10'd211,10'd212,
+										  10'd194,10'd193};//TODO
+	
+	assign SaberStateCornerX = '{10'd4  ,10'd45 ,10'd83 ,10'd121,10'd158,
+										  10'd196,10'd7  ,10'd45 ,10'd83 ,10'd121,
+										  10'd158,10'd196,10'd7  ,10'd44 ,10'd118,
+										  10'd180,10'd7  ,10'd65 ,10'd105,10'd142,
+										  10'd177,10'd218};//TODO
+
+	assign SaberStateCornerY = '{10'd0  ,10'd0  ,10'd0  ,10'd0  ,10'd0  ,
+										  10'd0  ,10'd55 ,10'd55 ,10'd55 ,10'd55 ,
+										  10'd55 ,10'd55 ,10'd109,10'd109,10'd109,
+										  10'd109,10'd163,10'd163,10'd163,10'd163,
+										  10'd163,10'd163};//TODO
+										
+	assign SaberStateFrameX = '{10'd39 ,10'd37 ,10'd38 ,10'd36 ,10'd37 ,
+										 10'd38 ,10'd37 ,10'd37 ,10'd37 ,10'd36 ,
+										 10'd37 ,10'd38 ,10'd36 ,10'd73 ,10'd61 ,
+										 10'd59 ,10'd57 ,10'd39 ,10'd36 ,10'd34 ,
+										 10'd40 ,10'd36};//TODO
+									
+	assign SaberStateFrameY = '{10'd53 ,10'd54 ,10'd54 ,10'd51 ,10'd53 ,
+										 10'd54 ,10'd53 ,10'd53 ,10'd53 ,10'd51 ,
+										 10'd53 ,10'd53 ,10'd53 ,10'd48 ,10'd53 ,
+										 10'd52 ,10'd62 ,10'd64 ,10'd70 ,10'd70 ,
+										 10'd54 ,10'd51};//TODO
+	
+	assign CenterX = SaberStateCenterX[state];
+	assign CenterY = SaberStateCenterY[state];
+	assign CornerX = SaberStateCornerX[state];
+	assign CornerY = SaberStateCornerY[state];
+	assign FrameX = SaberStateFrameX[state];
+	assign FrameY = SaberStateFrameY[state];
+	
+	always_comb begin
+	state = saber_state;
+	read_address = 19'b0;
+	if (saber_exit == 1'b0) 
+		is_saber = 1'b0;
+	if (saber_state >= 6'd22 && saber_state <= 6'd31)
+		state = saber_state - 6'd10;
+	if(saber_state <= 6'd21 &&
+	   DrawX >= saber_x - (CenterX-CornerX) && DrawX <= saber_x + (CornerX+FrameX-CenterX) &&
+	   DrawY >= saber_y - (CenterY-CornerY) && DrawY <= saber_y + (CornerY+FrameY-CenterY))
+		begin
+			is_saber = 1'b1;	// TODO
+			read_address = CenterX-(saber_x - DrawX) + (CenterY-(saber_y - DrawY))*SABERS_LENGTH;
+		end
+	else if (saber_state <= 6'd31 && saber_state >= 6'd22	&&
+	   DrawX >= saber_x - (CornerX+FrameX-CenterX) && DrawX <= saber_x + (CenterX-CornerX) &&
+	   DrawY >= saber_y - (CenterY-CornerY) && DrawY <= saber_y + (CornerY+FrameY-CenterY))
+		begin
+			is_saber = 1'b1;
+			read_address = CenterX+(saber_x - DrawX) + (CenterY-(saber_y - DrawY))*SABERS_LENGTH;
+		end
+	else begin
+			is_saber = 1'b0;
+	end
+	end
+
+endmodule
+
+module  saber_RAM
+(
+		input [18:0] read_address,
+		input Clk,
+
+		output logic [7:0] saber_data
+);
+
+// mem has width of 4 bits and a total of 307200 addresses
+//logic [3:0] mem [0:307199];
+logic [7:0] mem [0:59903];
+initial
+begin
+	 $readmemh("sprite/saber.txt", mem);
+end
+
+
+always_ff @ (posedge Clk) begin
+	saber_data<= mem[read_address];
+end
+
+endmodule

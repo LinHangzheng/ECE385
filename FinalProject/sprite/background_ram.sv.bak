@@ -1,0 +1,51 @@
+/*
+ * ECE385-HelperTools/PNG-To-Txt
+ * Author: Rishi Thakkar
+ *
+ */
+module background (
+	input Clk,
+	input logic [9:0] DrawX, DrawY,
+	output logic [3:0] background_color_idx,
+	output logic is_background
+)
+	// screen size
+	parameter [9:0] SCREEN_WIDTH =  10'd480;
+    parameter [9:0] SCREEN_LENGTH = 10'd640;
+
+	//--------------------load memory-----------------//
+	logic [18:0] read_address;
+	logic [3:0]	data_Out;
+	assign read_address = DrawX + DrawY*SCREEN_LENGTH;
+	background_RAM background_RAM(*.);
+
+	assign background_color_idx = data_Out;
+
+
+	assign is_background = 1'b1;	// TODO
+
+
+endmodule
+
+module  background_RAM
+(
+		input [18:0] read_address,
+		input Clk,
+
+		output logic [3:0] data_Out
+);
+
+// mem has width of 4 bits and a total of 307200 addresses
+logic [3:0] mem [0:307199];
+
+initial
+begin
+	 $readmemh("sprite/background.txt", mem);
+end
+
+
+always_ff @ (posedge Clk) begin
+	data_Out<= mem[read_address];
+end
+
+endmodule
