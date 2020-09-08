@@ -4,9 +4,9 @@
  *
  */
 module portrait2(
-	input Clk, portrait2_exit,
+	input Clk, portrait2_exist,
 	input logic [9:0] DrawX, DrawY,
-	output logic [7:0] portrait2_data,
+	output logic [3:0] portrait2_data,
 	output logic is_portrait2
 	);
 	// screen size
@@ -18,7 +18,7 @@ module portrait2(
 	always_comb begin
 		read_address = 19'b0;
 		is_portrait2 = 1'b0;
-		if (portrait2_exit && DrawX < PORTRAIT1_SIZE && DrawY > Y_START)begin
+		if (portrait2_exist && DrawX < PORTRAIT1_SIZE && DrawY > Y_START)begin
 			read_address = DrawX/2 + (DrawY-Y_START)/2*PORTRAIT1_SIZE/2;
 			is_portrait2 = 1'b1;
 		end
@@ -34,12 +34,12 @@ module  portrait2_RAM
 		input [18:0] read_address,
 		input Clk,
 
-		output logic [7:0] portrait2_data
+		output logic [3:0] portrait2_data
 );
 
 // mem has width of 4 bits and a total of 307200 addresses
 //logic [3:0] mem [0:307199];
-logic [7:0] mem [0:6399];
+logic [3:0] mem [0:6399];
 initial
 begin
 	 $readmemh("sprite/portrait2.txt", mem);

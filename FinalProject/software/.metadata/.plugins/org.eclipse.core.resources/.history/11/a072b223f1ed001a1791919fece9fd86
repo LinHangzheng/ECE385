@@ -1,0 +1,92 @@
+/*
+ * SnowMan_logic.c
+ *
+ *  Created on: 2020Äê9ÔÂ2ÈÕ
+ *      Author: cc
+ */
+
+#ifndef SNOWMAN_LOGIC_C_
+#define SNOWMAN_LOGIC_C_
+#include "saber_logic.h"
+#include <stdlib.h>
+
+#include "monster_logic.h"
+void monster_init(monster_t *monster, int exit, int speed, int fat, int HP, int ATK, int ATTACK_BIAS){
+	monster->exit = exit;
+	monster->x = SNOWMAN_INIT_X;
+	monster->y = SNOWMAN_INIT_Y;
+	monster->attack_x = monster->x;
+	monster->attack_y = monster->y + ATTACK_BIAS;
+	monster->vx = -speed;
+	monster->vy = 0;
+	monster->FAT = fat;
+	monster->HP = HP;
+	monster->ATK = ATK;
+	monster->state = WALK1;
+	monster->state_count = 0; 	// frame count for each state
+	monster->bleeding = 0;
+	monster->Dying = 0;
+	monster->dead_count = 0;
+	monster->hit_count = 0;
+}
+
+int monster_hit_check(monster_t *monster, saber_t *saber){
+	if (monster -> state <= WALK4 && saber->IsFighting && abs(monster->attack_y - saber-> y) < ATTACK_RANGEY &&
+			((position_x_diff >=0 && saber->FaceDirection ==RIGHT && position_x_diff-monster->FAT < ATTACK_RANGEX ) ||
+			(position_x_diff <=0 && saber->FaceDirection ==LEFT && -position_x_diff-monster->FAT < ATTACK_RANGEX))){
+		return TRUE;
+	}else{
+		return FALSE;
+	}
+}
+
+void monster_update(monster_t *monster, saber_t *saber){
+	if (monster-> exit ==0){
+		return;
+	}
+//	if (monster-> bleeding >0){
+//		monster->
+//	}
+	if (monster->state == DEAD2 && monster->dead_count++ == DEAD_COUNT){
+		monster->exit = 0;
+		return;
+	}
+	if (monster->HP <= 0 ){
+		monster->Dying =1;
+	}
+	if (monster->state <= WALK4){
+		monster-> x = (monster->x + monster->vx< LEFT_MOST)?LEFT_MOST:monster->x + monster->vx;
+	}
+	if (monster->state_count ++ > STATE_COUNT_MAX){
+		if (monster->state <=HIT && monster->Dying ==0){
+			// IF WALK4 OR HIT, RETURN BACK TO WALK1
+			monster->state = (monster->state >= WALK4)? WALK1:monster->state+1;
+		}else if (monster->Dying && monster->state <= HIT){
+			monster->state = DEAD1;
+		}
+		else if (monster->state == DEAD1){
+			monster->state = DEAD2;
+		}
+		monster->state_count=0;
+	}
+	int position_x_diff;
+	position_x_diff = monster->x - saber->x;
+	// check if is being attacked
+	if (monster -> state <= WALK4 && saber->IsFighting && abs(monster->attack_y - saber-> y) < ATTACK_RANGEY &&
+		((position_x_diff >=0 && saber->FaceDirection ==RIGHT && position_x_diff-monster->FAT < ATTACK_RANGEX ) ||
+		(position_x_diff <=0 && saber->FaceDirection ==LEFT && -position_x_diff-monster->FAT < ATTACK_RANGEX))){
+		monster->state = HIT;
+		monster->HP = monster->HP - saber->ATK;
+		if (saber->FaceDirection == RIGHT){
+			monster->x = monster ->x + 20;
+		}else{
+			monster->x = monster ->x - 20;
+		}
+		printf("monster HP:%x\n",monster->HP);
+	}
+}
+
+
+
+
+#endif /* SNOWMAN_LOGIC_C_ */

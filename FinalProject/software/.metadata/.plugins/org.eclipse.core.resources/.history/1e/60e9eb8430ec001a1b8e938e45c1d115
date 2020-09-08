@@ -1,0 +1,16 @@
+/*
+ * usb_kb.h
+ *
+ *  Created on: 2020Äê9ÔÂ1ÈÕ
+ *      Author: cc
+ */
+
+#ifndef USB_KB_H_
+#define USB_KB_H_
+
+int usb_init(void);
+int get_keycode(void);
+
+
+
+#endif /* USB_KB_H_ */

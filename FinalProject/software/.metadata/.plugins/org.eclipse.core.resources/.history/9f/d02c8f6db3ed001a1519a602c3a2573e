@@ -1,0 +1,54 @@
+/*
+ * SnowMan_logic.h
+ *
+ *  Created on: 2020Äê9ÔÂ2ÈÕ
+ *      Author: cc
+ */
+#include "saber_logic.h"
+#ifndef SNOWMAN_LOGIC_H_
+#define SNOWMAN_LOGIC_H_
+
+
+#define UP_MOST 170
+#define LEFT_MOST 33
+#define RIGHT_MOST 607
+#define DOWN_MOST 280
+#define SNOWMAN_INIT_X 600
+#define SNOWMAN_INIT_Y 200
+#define VY_MOST 3
+#define VX_MOST 4
+#define STATE_COUNT_MAX 3
+#define RIGHT 0
+#define LEFT 1
+#define DEAD_COUNT 100
+#define ATTACK_BIAS 40
+
+typedef struct snowman_t{
+	int exit;
+    int x,y;
+    int attack_x, attack_y; // the center for attack and beening attack
+    int vx,vy;
+    int FAT;			// half x size of snowman, used for attacking checking
+    int HP;
+    int ATK;
+    int state;
+    int state_count; 	// frame count for each state
+    int dead_count;		// count for disappear after snowman dead
+    int Dying;		// the snowman are dying
+}snowman_t;
+
+#define WALK_FRAME 6
+#define ATK_FRAME  4
+#define SKILL_FRAME 4
+#define POSE_FRAME  2
+
+enum snowman_state
+{WALK1 = 0, WALK2, WALK3, WALK4,
+ HIT,
+ DEAD1,DEAD2
+} snowman_state;
+
+void snowman_init(snowman_t *snowman);
+void snowman_update(snowman_t *snowman, saber_t *saber);
+
+#endif /* SNOWMAN_LOGIC_H_ */

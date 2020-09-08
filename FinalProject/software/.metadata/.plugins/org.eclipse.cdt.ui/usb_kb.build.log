@@ -1,0 +1,53 @@
+14:12:22 **** Incremental Build of configuration Nios II for project usb_kb ****
+make all 
+Info: Building ../usb_kb_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../usb_kb_bsp/
+[BSP build complete]
+Info: Compiling main.c to obj/default/main.o
+nios2-elf-gcc -xc -MP -MMD -c -I../usb_kb_bsp//HAL/inc -I../usb_kb_bsp/ -I../usb_kb_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/main.o main.c
+In file included from main.c:7:0:
+monster_logic.h:52:1: warning: no semicolon at end of struct or union
+ }monster_t;
+ ^
+main.c: In function 'round1':
+main.c:49:3: warning: implicit declaration of function 'key_event' [-Wimplicit-function-declaration]
+   key_event(game_start, saber, snowman, gingerbreadman);
+   ^
+main.c:50:3: warning: implicit declaration of function 'game_update' [-Wimplicit-function-declaration]
+   game_update(game_start, saber, snowman, gingerbreadman);
+   ^
+main.c: At top level:
+main.c:117:6: warning: conflicting types for 'key_event'
+ void key_event(int* game_start, saber_t* saber,monster_t* snowman, monster_t* gingerbreadman){
+      ^
+main.c:49:3: note: previous implicit declaration of 'key_event' was here
+   key_event(game_start, saber, snowman, gingerbreadman);
+   ^
+main.c:181:6: warning: conflicting types for 'game_update'
+ void game_update(int *game_start,saber_t *saber, monster_t *snowman, monster_t* gingerbreadman){
+      ^
+main.c:50:3: note: previous implicit declaration of 'game_update' was here
+   game_update(game_start, saber, snowman, gingerbreadman);
+   ^
+main.c: In function 'game_update':
+main.c:195:2: warning: implicit declaration of function 'gamefile_update' [-Wimplicit-function-declaration]
+  gamefile_update(game_start, saber, snowman, gingerbreadman);
+  ^
+main.c: At top level:
+main.c:202:6: warning: conflicting types for 'gamefile_update'
+ void gamefile_update(int *game_start, saber_t *saber, monster_t *snowman, monster_t* gingerbreadman){
+      ^
+main.c:195:2: note: previous implicit declaration of 'gamefile_update' was here
+  gamefile_update(game_start, saber, snowman, gingerbreadman);
+  ^
+Info: Linking usb_kb.elf
+nios2-elf-g++  -T'../usb_kb_bsp//linker.x' -msys-crt0='../usb_kb_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../usb_kb_bsp/   -Wl,-Map=usb_kb.map   -O0 -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o usb_kb.elf obj/default/io_handler.o obj/default/main.o obj/default/monster_logic.o obj/default/saber_logic.o obj/default/usb.o obj/default/usb_main.o -lm -msys-lib=m
+nios2-elf-insert usb_kb.elf --thread_model hal --cpu_name nios2_gen2_0 --qsys true --simulation_enabled false --id 0 --sidp 0xb0 --timestamp 1598975486 --stderr_dev jtag_uart_0 --stdin_dev jtag_uart_0 --stdout_dev jtag_uart_0 --sopc_system_name lab8_soc --quartus_project_dir "E:/JuniorYearSpring/ECE385/lab/FinalProject" --jdi E:/JuniorYearSpring/ECE385/lab/FinalProject/software/usb_kb_bsp/../../lab8.jdi --sopcinfo E:/JuniorYearSpring/ECE385/lab/FinalProject/software/usb_kb_bsp/../../lab8_soc.sopcinfo
+Info: (usb_kb.elf) 89 KBytes program size (code + initialized data).
+Info:              130976 KBytes free for stack + heap.
+Info: Creating usb_kb.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source usb_kb.elf >usb_kb.objdump
+[usb_kb build complete]
+
+14:12:25 Build Finished (took 2s.631ms)
+

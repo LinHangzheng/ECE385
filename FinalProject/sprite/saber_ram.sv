@@ -5,12 +5,12 @@
  */
 module saber (
 	input Clk, 
-	input logic saber_exit,
+	input logic saber_exist,
 	input logic [9:0] DrawX, DrawY,
 	input logic [9:0] saber_x,
 	input logic [9:0] saber_y,
 	input logic [5:0] saber_state,
-	output logic [7:0] saber_data,
+	output logic [3:0] saber_data,
 	output logic is_saber
 );
 	// screen size
@@ -84,7 +84,7 @@ module saber (
 		state = saber_state;
 		read_address = 19'b0;
 		is_saber = 1'b0;
-		if (saber_exit == 1'b1) begin
+		if (saber_exist == 1'b1) begin
 			if (saber_state >= 6'd22 && saber_state <= 6'd31)
 				state = saber_state - 6'd10;
 			if(saber_state <= 6'd21 &&
@@ -109,12 +109,12 @@ module  saber_RAM
 		input [18:0] read_address,
 		input Clk,
 
-		output logic [7:0] saber_data
+		output logic [3:0] saber_data
 );
 
 // mem has width of 4 bits and a total of 307200 addresses
 //logic [3:0] mem [0:307199];
-logic [7:0] mem [0:59903];
+logic [3:0] mem [0:59903];
 initial
 begin
 	 $readmemh("sprite/saber.txt", mem);

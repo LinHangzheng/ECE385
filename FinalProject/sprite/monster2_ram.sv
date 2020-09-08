@@ -5,12 +5,12 @@
  */
 module monster2 (
 	input Clk, 
-	input logic monster2_exit,
+	input logic monster2_exist,
 	input logic [9:0] DrawX, DrawY,
 	input logic [9:0] monster2_x,
 	input logic [9:0] monster2_y,
 	input logic [5:0] monster2_state,
-	output logic [7:0] monster2_data,
+	output logic [3:0] monster2_data,
 	output logic is_monster2
 );
 	// screen size
@@ -22,19 +22,23 @@ module monster2 (
 	parameter [9:0] MONSTER2_WIDTH_DOUBLE =  10'd252;		//double the size
 	parameter [9:0] CENTERX_DOUBLE =  10'd120;
 	parameter [9:0] CENTERY_DOUBLE =  10'd126;
-	parameter[3:0] RESHAPE_TIME = 8'd2;
+	parameter [3:0] RESHAPE_TIME = 8'd2;
 	parameter [9:0] CORNERX =  10'd0;
 	parameter [9:0] CORNERY =  10'd0;
 	//--------------------load memory-----------------//
 	logic [18:0] read_address;
-	logic [7:0] monster2_1_data;
-	logic [7:0] monster2_2_data;
-	logic [7:0] monster2_3_data;
-	logic [7:0] monster2_4_data;
-	logic [7:0] monster2_hit_data;
-	logic [7:0] monster2_dead1_data;
-	logic [7:0] monster2_dead2_data;
-	logic [7:0] data_in;
+	logic [3:0] monster2_1_data;
+	logic [3:0] monster2_2_data;
+	logic [3:0] monster2_3_data;
+	logic [3:0] monster2_4_data;
+	logic [3:0] monster2_hit_data;
+	logic [3:0] monster2_dead1_data;
+	logic [3:0] monster2_dead2_data;
+	logic [3:0] monster2_attack1_data;
+	logic [3:0] monster2_attack2_data;
+	logic [3:0] monster2_attack3_data;
+	logic [3:0] monster2_attack4_data;
+	logic [3:0] data_in;
 	assign read_address = (CENTERX_DOUBLE-(monster2_x - DrawX))/RESHAPE_TIME + (CENTERY_DOUBLE-(monster2_y - DrawY))/RESHAPE_TIME*MONSTER2_LENGTH;
 	monster2_1_RAM monster2_1_RAM(.*);
 	monster2_2_RAM monster2_2_RAM(.*);
@@ -43,11 +47,15 @@ module monster2 (
 	monster2_hit_RAM monster2_hit_RAM(.*);
 	monster2_dead1_RAM monster2_dead1_RAM(.*);
 	monster2_dead2_RAM monster2_dead2_RAM(.*);
+	monster2_attack1_RAM monster2_attack1_RAM(.*);
+	monster2_attack2_RAM monster2_attack2_RAM(.*);
+	monster2_attack3_RAM monster2_attack3_RAM(.*);
+	monster2_attack4_RAM monster2_attack4_RAM(.*);
 	
 	always_comb begin
 		is_monster2 = 1'b0;
 		monster2_data = data_in;
-	   if (monster2_exit == 1'b1 &&
+	   if (monster2_exist == 1'b1 &&
 			 (DrawX >= monster2_x - (CENTERX_DOUBLE-CORNERX)||monster2_x < CENTERX_DOUBLE-CORNERX) && DrawX <= monster2_x + (CORNERX+MONSTER2_LENGTH_DOUBLE-CENTERX_DOUBLE) &&
 			 DrawY >= monster2_y - (CENTERY_DOUBLE-CORNERY) && DrawY <= monster2_y + (CORNERY+MONSTER2_WIDTH_DOUBLE-CENTERY_DOUBLE))
 		begin
@@ -61,6 +69,10 @@ module monster2 (
 			6'd4: data_in = monster2_hit_data;
 			6'd5: data_in = monster2_dead1_data;
 			6'd6: data_in = monster2_dead2_data;
+			6'd7: data_in = monster2_attack1_data;
+			6'd8: data_in = monster2_attack2_data;
+			6'd9: data_in = monster2_attack3_data;
+			6'd10: data_in = monster2_attack4_data;
 			default: data_in = 8'b0;
 		endcase
 	end
@@ -72,12 +84,12 @@ module  monster2_1_RAM
 		input [18:0] read_address,
 		input Clk,
 
-		output logic [7:0] monster2_1_data
+		output logic [3:0] monster2_1_data
 );
 
 // mem has width of 4 bits and a total of 307200 addresses
 //logic [3:0] mem [0:307199];
-logic [7:0] mem [0:15119];
+logic [3:0] mem [0:15119];
 initial begin
 	 $readmemh("sprite/monster2/monster2_1.txt", mem);
 end
@@ -93,12 +105,12 @@ module  monster2_2_RAM
 		input [18:0] read_address,
 		input Clk,
 
-		output logic [7:0] monster2_2_data
+		output logic [3:0] monster2_2_data
 );
 
 // mem has width of 4 bits and a total of 307200 addresses
 //logic [3:0] mem [0:307199];
-logic [7:0] mem [0:15119];
+logic [3:0] mem [0:15119];
 initial begin
 	 $readmemh("sprite/monster2/monster2_2.txt", mem);
 end
@@ -114,12 +126,12 @@ module  monster2_3_RAM
 		input [18:0] read_address,
 		input Clk,
 
-		output logic [7:0] monster2_3_data
+		output logic [3:0] monster2_3_data
 );
 
 // mem has width of 4 bits and a total of 307200 addresses
 //logic [3:0] mem [0:307199];
-logic [7:0] mem [0:15119];
+logic [3:0] mem [0:15119];
 initial begin
 	 $readmemh("sprite/monster2/monster2_3.txt", mem);
 end
@@ -135,12 +147,12 @@ module  monster2_4_RAM
 		input [18:0] read_address,
 		input Clk,
 
-		output logic [7:0] monster2_4_data
+		output logic [3:0] monster2_4_data
 );
 
 // mem has width of 4 bits and a total of 307200 addresses
 //logic [3:0] mem [0:307199];
-logic [7:0] mem [0:15119];
+logic [3:0] mem [0:15119];
 initial begin
 	 $readmemh("sprite/monster2/monster2_4.txt", mem);
 end
@@ -156,12 +168,12 @@ module  monster2_hit_RAM
 		input [18:0] read_address,
 		input Clk,
 
-		output logic [7:0] monster2_hit_data
+		output logic [3:0] monster2_hit_data
 );
 
 // mem has width of 4 bits and a total of 307200 addresses
 //logic [3:0] mem [0:307199];
-logic [7:0] mem [0:15119];
+logic [3:0] mem [0:15119];
 initial begin
 	 $readmemh("sprite/monster2/monster2_hit.txt", mem);
 end
@@ -177,12 +189,12 @@ module  monster2_dead1_RAM
 		input [18:0] read_address,
 		input Clk,
 
-		output logic [7:0] monster2_dead1_data
+		output logic [3:0] monster2_dead1_data
 );
 
 // mem has width of 4 bits and a total of 307200 addresses
 //logic [3:0] mem [0:307199];
-logic [7:0] mem [0:15119];
+logic [3:0] mem [0:15119];
 initial begin
 	 $readmemh("sprite/monster2/monster2_1.txt", mem);
 end
@@ -198,12 +210,12 @@ module  monster2_dead2_RAM
 		input [18:0] read_address,
 		input Clk,
 
-		output logic [7:0] monster2_dead2_data
+		output logic [3:0] monster2_dead2_data
 );
 
 // mem has width of 4 bits and a total of 307200 addresses
 //logic [3:0] mem [0:307199];
-logic [7:0] mem [0:15119];
+logic [3:0] mem [0:15119];
 initial begin
 	 $readmemh("sprite/monster2/monster2_dead2.txt", mem);
 end
@@ -213,3 +225,86 @@ always_ff @ (posedge Clk) begin
 end
 endmodule
 
+
+module  monster2_attack1_RAM
+(
+		input [18:0] read_address,
+		input Clk,
+
+		output logic [3:0] monster2_attack1_data
+);
+
+// mem has width of 4 bits and a total of 307200 addresses
+//logic [3:0] mem [0:307199];
+logic [3:0] mem [0:15119];
+initial begin
+	 $readmemh("sprite/monster2/monster2_attack1.txt", mem);
+end
+
+always_ff @ (posedge Clk) begin
+	monster2_attack1_data<= mem[read_address];
+end
+endmodule
+
+
+module  monster2_attack2_RAM
+(
+		input [18:0] read_address,
+		input Clk,
+
+		output logic [3:0] monster2_attack2_data
+);
+
+// mem has width of 4 bits and a total of 307200 addresses
+//logic [3:0] mem [0:307199];
+logic [3:0] mem [0:15119];
+initial begin
+	 $readmemh("sprite/monster2/monster2_attack2.txt", mem);
+end
+
+always_ff @ (posedge Clk) begin
+	monster2_attack2_data<= mem[read_address];
+end
+endmodule
+
+
+module  monster2_attack3_RAM
+(
+		input [18:0] read_address,
+		input Clk,
+
+		output logic [3:0] monster2_attack3_data
+);
+
+// mem has width of 4 bits and a total of 307200 addresses
+//logic [3:0] mem [0:307199];
+logic [3:0] mem [0:15119];
+initial begin
+	 $readmemh("sprite/monster2/monster2_attack3.txt", mem);
+end
+
+always_ff @ (posedge Clk) begin
+	monster2_attack3_data<= mem[read_address];
+end
+endmodule
+
+
+module  monster2_attack4_RAM
+(
+		input [18:0] read_address,
+		input Clk,
+
+		output logic [3:0] monster2_attack4_data
+);
+
+// mem has width of 4 bits and a total of 307200 addresses
+//logic [3:0] mem [0:307199];
+logic [3:0] mem [0:15119];
+initial begin
+	 $readmemh("sprite/monster2/monster2_attack4.txt", mem);
+end
+
+always_ff @ (posedge Clk) begin
+	monster2_attack4_data<= mem[read_address];
+end
+endmodule

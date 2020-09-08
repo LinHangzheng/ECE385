@@ -1,0 +1,17 @@
+#define UP_MOST 33
+#define LEFT_MOST 33
+#define RIGHT_MOST 607
+#define DOWN_MOST 447
+#define VY_MOST 3
+#define VX_MOST 4
+typedef struct saber_t{
+    int x,y;
+    int vx,vy;
+    int HP;
+    int ATK;
+}saber_t;
+
+void press_w(player_t *player);
+void press_s(player_t *player);
+void press_a(player_t *player);
+void press_d(player_t *player);

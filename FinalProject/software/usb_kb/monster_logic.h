@@ -8,6 +8,7 @@
 #ifndef SNOWMAN_LOGIC_H_
 #define SNOWMAN_LOGIC_H_
 #include "saber_logic.h"
+#include <stdlib.h>
 #define TRUE 1
 #define FALSE 0
 #define UP_MOST 170
@@ -22,23 +23,32 @@
 #define RIGHT 0
 #define LEFT 1
 #define DEAD_COUNT 100
-
+#define SABER_FAT 10
+#define BLOOD_COUNT_MAX 1
+#define FIGHT_COUNT_MAX 5
+#define FIGHT_PROBABILITY 4
 
 typedef struct monster_t{
-	int exit;
+	int exist;
     int x,y;
     int attack_x, attack_y; // the center for attack and beening attack
     int vx,vy;
-    int attack_bias; 	// distance between center and the point for attack
+    int attack_biasx; 	// distance between center and the point for attack
+    int attack_biasy;
+    int attack_arange;
     int FAT;			// half x size of snowman, used for attack check
     int HP;
     int ATK;
     int state;
+    int blood_state;
+    int blood_count;
     int state_count; 	// frame count for each state
     int dead_count;		// count for disappear after snowman dead
     int hit_count;		// count for hit frame
     int Dying;		// the snowman are dying
     int bleeding;
+    int fight_count;
+    int fight_relax_time // after fight, the relax time
 }monster_t;
 
 #define WALK_FRAME 6
@@ -49,11 +59,17 @@ typedef struct monster_t{
 enum monster_state
 {WALK1 = 0, WALK2, WALK3, WALK4,
  HIT,
- DEAD1,DEAD2
+ DEAD1,DEAD2,
+ ATTACK1,ATTACK2,ATTACK3,ATTACK4
 } monster_state;
 
+enum blood_state
+{BLOOD1 = 0, BLOOD2, BLOOD3, SAFE
+} blood_state;
 
-void monster_init(monster_t *monster, int exit,  int speed, int fat, int HP, int ATK, int ATTACK_BIAS);
+void monster_init(monster_t *monster, int exist,  int speed, int fat, int HP, int ATK, int ATTACK_BIASX, int ATTACK_BIASY,int ATTACK_RANGE);
 void saber_be_attacked_check(saber_t *saber, monster_t *monster);
+void monster_hit_check(monster_t *monster, saber_t *saber);
+void monster_update(monster_t *monster, saber_t *saber);
 
 #endif /* SNOWMAN_LOGIC_H_ */

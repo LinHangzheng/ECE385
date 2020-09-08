@@ -1,0 +1,20 @@
+#include <stdio.h>
+#include "player_logic.h"
+
+void press_w(player_t *player){
+    if (player->vy > -VY_MOST){player->vy--;}
+}
+
+void press_s(player_t *player){
+    if (player->vy < VY_MOST){player->vy++;}
+}
+
+void press_a(player_t *player){
+    if (player->vx > -VX_MOST){player->vx--;}
+}
+
+void press_d(player_t *player){
+    if (player->vx < VX_MOST){player->vx++;}
+}
+
+

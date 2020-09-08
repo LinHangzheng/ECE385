@@ -1,0 +1,105 @@
+#include <stdio.h>
+#include "player_logic.h"
+
+void press_w(saber_t *saber){
+	char can_walk = 0;
+	if (saber->state <= WALK_LEFT6 ){
+		saber->state = (saber->state == WALK_LEFT6)? WALK_LEFT1:saber->state+1;
+		can_walk = 1;
+	}
+	else if(saber->state >= WALK_RIGHT1 && saber->state <= WALK_RIGHT6){
+		saber->state = (saber->state == WALK_RIGHT6)? WALK_RIGHT1:saber->state+1;
+		can_walk = 1;
+	}
+    if (can_walk == 1 && saber->vy > -VY_MOST){
+    	saber->vy--;
+    }
+}
+
+void press_s(saber_t *saber){
+	char can_walk = 0;
+	if (saber->state <= WALK_LEFT6 ){
+		saber->state = (saber->state == WALK_LEFT6)? WALK_LEFT1:saber->state+1;
+		can_walk = 1;
+	}
+	else if(saber->state >= WALK_RIGHT1 && saber->state <= WALK_RIGHT6){
+		saber->state = (saber->state == WALK_RIGHT6)? WALK_RIGHT1:saber->state+1;
+		can_walk = 1;
+	}
+    if (can_walk == 1 && saber->vy < VY_MOST){
+    	saber->vy++;
+    }
+}
+
+void press_a(saber_t *saber){
+	if (saber->state <= WALK_LEFT6 ){
+		saber->state = (saber->state == WALK_LEFT6)? WALK_LEFT1:saber->state+1;
+		if (saber->vx > -VX_MOST){
+			saber->vx--;
+		}
+	}
+	else if(saber->state >= WALK_LEFT1 && saber->state <= WALK_LEFT6){
+		saber->state = WALK_LEFT1;
+		if (saber->vx > -VX_MOST){
+			saber->vx--;
+		}
+		saber->FaceDirection = -1;
+	}
+}
+
+void press_d(saber_t *saber){
+	if (saber->state <= WALK_RIGHT6 ){
+		saber->state = WALK_RIGHT1;
+		if (saber->vx < VX_MOST){
+			saber->vx++;
+		}
+	}
+	else if(saber->state >= WALK_RIGHT1 && saber->state <= WALK_RIGHT6){
+		saber->state = (saber->state == WALK_RIGHT6)? WALK_RIGHT1:saber->state+1;
+		if (saber->vx < VX_MOST){
+			saber->vx++;
+		}
+	}
+}
+
+void press_j(saber_t *player){
+}
+
+
+void saber_init(saber_t *saber){
+	saber -> vx = 0;
+	saber -> vy = 0;
+	saber -> x = 50;
+	saber -> y = 240;
+	saber -> HP = 3;
+	saber -> ATK = 3;
+	saber -> state = 6;
+}
+
+void update_position(saber_t *saber){
+	saber -> x = saber ->x + saber->vx;
+	if (saber-> x < UP_MOST){
+		saber-> x = UP_MOST;
+	}
+	if (saber-> x > DOWN_MOST){
+		saber-> x = DOWN_MOST;
+	}
+
+	saber -> y = saber ->y + saber->vy;
+	if (saber-> y < UP_MOST){
+		saber-> y = UP_MOST;
+	}
+	if (saber-> y > DOWN_MOST){
+		saber-> y = DOWN_MOST;
+	}
+}
+
+void stop(saber_t *saber){
+	saber-> vx =0;
+	saber-> vy =0;
+	if saber -> state
+	saber
+}
+
+
+

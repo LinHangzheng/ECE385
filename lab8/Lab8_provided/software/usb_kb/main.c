@@ -31,7 +31,17 @@
 //                                Main function
 //
 //----------------------------------------------------------------------------------------//
-int main(void)
+alt_u16 intStat;
+alt_u16 usb_ctl_val;
+static alt_u16 ctl_reg = 0;
+static alt_u16 no_device = 0;
+alt_u16 fs_device = 0;
+int keycode = 0;
+alt_u8 toggle = 0;
+alt_u8 data_size;
+alt_u8 hot_plug_count;
+alt_u16 code;
+int usb_init(void)
 {
 	IO_init();
 
@@ -44,16 +54,7 @@ int main(void)
 		usleep(10*10000);
 	}*/
 
-	alt_u16 intStat;
-	alt_u16 usb_ctl_val;
-	static alt_u16 ctl_reg = 0;
-	static alt_u16 no_device = 0;
-	alt_u16 fs_device = 0;
-	int keycode = 0;
-	alt_u8 toggle = 0;
-	alt_u8 data_size;
-	alt_u8 hot_plug_count;
-	alt_u16 code;
+
 
 	printf("USB keyboard setup...\n\n");
 
@@ -459,16 +460,36 @@ int main(void)
 	{
 		usb_ctl_val = UsbGetRetryCnt();
 	}
-
+}
 	printf("---------------[ENUM PROCESS]:get descriptor (class 0x22) done!----------------\n");
 
 
 
 	//-----------------------------------get keycode value------------------------------------------------//
-	usleep(10000);
-	while(1)
+int get_keycode(void){
+	int keycode = 0;
+	toggle++;
+	IO_write(HPI_ADDR,0x0500); //the start address
+	//data phase IN-1
+	IO_write(HPI_DATA,0x051c); //500
+
+	IO_write(HPI_DATA,0x000f & data_size);//2 data length
+
+	IO_write(HPI_DATA,0x0291);//4 //endpoint 1
+	if(toggle%2)
 	{
-		toggle++;
+		IO_write(HPI_DATA,0x0001);//6 //data 1
+	}
+	else
+	{
+		IO_write(HPI_DATA,0x0041);//6 //data 1
+	}
+	IO_write(HPI_DATA,0x0013);//8
+	IO_write(HPI_DATA,0x0000);//a
+	UsbWrite(HUSB_SIE1_pCurrentTDPtr,0x0500); //HUSB_SIE1_pCurrentTDPtr
+	
+	while (!(IO_read(HPI_STATUS) & HPI_STATUS_SIE1msg_FLAG) )  //read sie1 msg register
+	{
 		IO_write(HPI_ADDR,0x0500); //the start address
 		//data phase IN-1
 		IO_write(HPI_DATA,0x051c); //500
@@ -485,79 +506,55 @@ int main(void)
 			IO_write(HPI_DATA,0x0041);//6 //data 1
 		}
 		IO_write(HPI_DATA,0x0013);//8
-		IO_write(HPI_DATA,0x0000);//a
+		IO_write(HPI_DATA,0x0000);//
 		UsbWrite(HUSB_SIE1_pCurrentTDPtr,0x0500); //HUSB_SIE1_pCurrentTDPtr
-		
-		while (!(IO_read(HPI_STATUS) & HPI_STATUS_SIE1msg_FLAG) )  //read sie1 msg register
-		{
-			IO_write(HPI_ADDR,0x0500); //the start address
-			//data phase IN-1
-			IO_write(HPI_DATA,0x051c); //500
-
-			IO_write(HPI_DATA,0x000f & data_size);//2 data length
-
-			IO_write(HPI_DATA,0x0291);//4 //endpoint 1
-			if(toggle%2)
-			{
-				IO_write(HPI_DATA,0x0001);//6 //data 1
-			}
-			else
-			{
-				IO_write(HPI_DATA,0x0041);//6 //data 1
-			}
-			IO_write(HPI_DATA,0x0013);//8
-			IO_write(HPI_DATA,0x0000);//
-			UsbWrite(HUSB_SIE1_pCurrentTDPtr,0x0500); //HUSB_SIE1_pCurrentTDPtr
-			usleep(10*1000);
-		}//end while
-
-		usb_ctl_val = UsbWaitTDListDone();
-
-		// The first two keycodes are stored in 0x051E. Other keycodes are in 
-		// subsequent addresses.
-		keycode = UsbRead(0x051e);
-		printf("\nfirst two keycode values are %04x\n",keycode);
-		// We only need the first keycode, which is at the lower byte of keycode.
-		// Send the keycode to hardware via PIO.
-		*keycode_base = keycode & 0xff; 
-
-		usleep(200);//usleep(5000);
-		usb_ctl_val = UsbRead(ctl_reg);
-
-		if(!(usb_ctl_val & no_device))
-		{
-			//USB hot plug routine
-			for(hot_plug_count = 0 ; hot_plug_count < 7 ; hot_plug_count++)
-			{
-				usleep(5*1000);
-				usb_ctl_val = UsbRead(ctl_reg);
-				if(usb_ctl_val & no_device) break;
-			}
-			if(!(usb_ctl_val & no_device))
-			{
-				printf("\n[INFO]: the keyboard has been removed!!! \n");
-				printf("[INFO]: please insert again!!! \n");
-			}
-		}
-
-		while (!(usb_ctl_val & no_device))
-		{
-
-			usb_ctl_val = UsbRead(ctl_reg);
-			usleep(5*1000);
-			usb_ctl_val = UsbRead(ctl_reg);
-			usleep(5*1000);
-			usb_ctl_val = UsbRead(ctl_reg);
-			usleep(5*1000);
-
-			if(usb_ctl_val & no_device)
-				goto USB_HOT_PLUG;
-
-			usleep(200);
-		}
-
+		usleep(10*1000);
 	}//end while
 
+	usb_ctl_val = UsbWaitTDListDone();
+
+	// The first two keycodes are stored in 0x051E. Other keycodes are in 
+	// subsequent addresses.
+	keycode = UsbRead(0x051e);
+	printf("\nfirst two keycode values are %04x\n",keycode);
+	// We only need the first keycode, which is at the lower byte of keycode.
+	// Send the keycode to hardware via PIO.
+	*keycode_base = keycode & 0xff; 
+
+	usleep(200);//usleep(5000);
+	usb_ctl_val = UsbRead(ctl_reg);
+
+	if(!(usb_ctl_val & no_device))
+	{
+		//USB hot plug routine
+		for(hot_plug_count = 0 ; hot_plug_count < 7 ; hot_plug_count++)
+		{
+			usleep(5*1000);
+			usb_ctl_val = UsbRead(ctl_reg);
+			if(usb_ctl_val & no_device) break;
+		}
+		if(!(usb_ctl_val & no_device))
+		{
+			printf("\n[INFO]: the keyboard has been removed!!! \n");
+			printf("[INFO]: please insert again!!! \n");
+		}
+	}
+
+	while (!(usb_ctl_val & no_device))
+	{
+
+		usb_ctl_val = UsbRead(ctl_reg);
+		usleep(5*1000);
+		usb_ctl_val = UsbRead(ctl_reg);
+		usleep(5*1000);
+		usb_ctl_val = UsbRead(ctl_reg);
+		usleep(5*1000);
+
+		if(usb_ctl_val & no_device)
+			goto USB_HOT_PLUG;
+
+		usleep(200);
+	}
 	return 0;
 }
 

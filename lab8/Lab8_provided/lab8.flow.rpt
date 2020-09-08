@@ -1,5 +1,5 @@
 Flow report for lab8
-Wed Aug 26 12:27:18 2020
+Thu Aug 27 14:05:47 2020
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -40,18 +40,18 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Wed Aug 26 12:27:12 2020       ;
+; Flow Status                        ; Successful - Thu Aug 27 14:05:40 2020       ;
 ; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                      ; lab8                                        ;
 ; Top-level Entity Name              ; lab8                                        ;
 ; Family                             ; Cyclone IV E                                ;
 ; Device                             ; EP4CE115F29C7                               ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 3,312 / 114,480 ( 3 % )                     ;
-;     Total combinational functions  ; 2,685 / 114,480 ( 2 % )                     ;
-;     Dedicated logic registers      ; 2,100 / 114,480 ( 2 % )                     ;
-; Total registers                    ; 2219                                        ;
-; Total pins                         ; 128 / 529 ( 24 % )                          ;
+; Total logic elements               ; 3,311 / 114,480 ( 3 % )                     ;
+;     Total combinational functions  ; 2,680 / 114,480 ( 2 % )                     ;
+;     Dedicated logic registers      ; 2,104 / 114,480 ( 2 % )                     ;
+; Total registers                    ; 2223                                        ;
+; Total pins                         ; 136 / 529 ( 26 % )                          ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 11,392 / 3,981,312 ( < 1 % )                ;
 ; Embedded Multiplier 9-bit elements ; 4 / 532 ( < 1 % )                           ;
@@ -64,7 +64,7 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 08/26/2020 12:25:34 ;
+; Start date & time ; 08/27/2020 14:03:16 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; lab8                ;
 +-------------------+---------------------+
@@ -75,7 +75,7 @@ refer to the applicable agreement for further details.
 +--------------------------------------+------------------------------------------------------------+---------------+-----------------+----------------+
 ; Assignment Name                      ; Value                                                      ; Default Value ; Entity Name     ; Section Id     ;
 +--------------------------------------+------------------------------------------------------------+---------------+-----------------+----------------+
-; COMPILER_SIGNATURE_ID                ; 1097926602789.159841593312896                              ; --            ; --              ; --             ;
+; COMPILER_SIGNATURE_ID                ; 1097926602789.159850819515228                              ; --            ; --              ; --             ;
 ; EDA_DESIGN_INSTANCE_NAME             ; NA                                                         ; --            ; --              ; testbench      ;
 ; EDA_NATIVELINK_SIMULATION_TEST_BENCH ; testbench                                                  ; --            ; --              ; eda_simulation ;
 ; EDA_OUTPUT_DATA_FORMAT               ; None                                                       ; --            ; --              ; eda_simulation ;
@@ -102,7 +102,7 @@ refer to the applicable agreement for further details.
 ; POWER_PRESET_COOLING_SOLUTION        ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW                      ; --            ; --              ; --             ;
 ; SLD_FILE                             ; lab8_soc/synthesis/lab8_soc.regmap                         ; --            ; --              ; --             ;
 ; SLD_FILE                             ; lab8_soc/synthesis/lab8_soc.debuginfo                      ; --            ; --              ; --             ;
-; SLD_INFO                             ; QSYS_NAME lab8_soc HAS_SOPCINFO 1 GENERATION_ID 1598359416 ; --            ; lab8_soc        ; --             ;
+; SLD_INFO                             ; QSYS_NAME lab8_soc HAS_SOPCINFO 1 GENERATION_ID 1598507524 ; --            ; lab8_soc        ; --             ;
 ; SOPCINFO_FILE                        ; lab8_soc/synthesis/../../lab8_soc.sopcinfo                 ; --            ; --              ; --             ;
 ; SYNTHESIS_ONLY_QIP                   ; On                                                         ; --            ; --              ; --             ;
 ; USE_SIGNALTAP_FILE                   ; stp1.stp                                                   ; --            ; --              ; --             ;
@@ -114,12 +114,12 @@ refer to the applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:52     ; 1.0                     ; 4963 MB             ; 00:01:18                           ;
-; Fitter               ; 00:00:24     ; 1.0                     ; 5760 MB             ; 00:00:38                           ;
-; Assembler            ; 00:00:04     ; 1.0                     ; 4709 MB             ; 00:00:04                           ;
-; Power Analyzer       ; 00:00:10     ; 1.0                     ; 4920 MB             ; 00:00:11                           ;
-; Timing Analyzer      ; 00:00:04     ; 1.1                     ; 4887 MB             ; 00:00:04                           ;
-; Total                ; 00:01:34     ; --                      ; --                  ; 00:02:15                           ;
+; Analysis & Synthesis ; 00:01:13     ; 1.0                     ; 4952 MB             ; 00:01:36                           ;
+; Fitter               ; 00:00:39     ; 1.0                     ; 5822 MB             ; 00:00:57                           ;
+; Assembler            ; 00:00:07     ; 1.0                     ; 4707 MB             ; 00:00:07                           ;
+; Power Analyzer       ; 00:00:16     ; 1.0                     ; 4919 MB             ; 00:00:16                           ;
+; Timing Analyzer      ; 00:00:06     ; 1.1                     ; 4887 MB             ; 00:00:06                           ;
+; Total                ; 00:02:21     ; --                      ; --                  ; 00:03:02                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

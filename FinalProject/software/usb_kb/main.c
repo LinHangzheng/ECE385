@@ -20,13 +20,14 @@
 #define RIGHT_END 637
 #define MAX_KEY 4 // allow four keys pressed in the same time
 
+
 volatile unsigned int *game_file =(unsigned int*) 0x00000100;
 
-
-
+int win,developer_mode;
 enum Key_event
 {PRESS_UP = 1, PRESS_DOWN, PRESS_LEFT, PRESS_RIGHT, PRESS_ATK, PRESS_SKILL
 }event;
+
 
 void frame_clock (double frame_time){
 	double time_to_switch = frame_time;
@@ -37,10 +38,74 @@ void frame_clock (double frame_time){
 	}
 }
 
-void game_init(saber_t *saber, monster_t *snowman, monster_t *gingerbreadman){
+
+void round1 (int *game_start, saber_t *saber, monster_t *snowman, monster_t *gingerbreadman){
 	saber_init(saber);
-	monster_init(snowman, 1, 2, 50, 20, 1, 20);
-	monster_init(gingerbreadman, 0, 2, 60, 20, 1, 50);
+	if (developer_mode){saber->Excalibur_remain = 30;}
+	monster_init(snowman, 1, 1, 30, 15, 1, -30, 20,40);
+	monster_init(gingerbreadman, 0, 1, 30, 25, 1, -20, 80,40);
+	while(*game_start == 1){
+		// use key code update saber state, vx and vy
+		key_event(game_start, saber, snowman, gingerbreadman);
+		game_update(game_start, saber, snowman, gingerbreadman);
+		if (snowman->exist == 0){
+			break;
+		}
+	}
+}
+
+void round2 (int *game_start, saber_t *saber, monster_t *snowman, monster_t *gingerbreadman){
+	monster_init(snowman, 1, 2, 30, 15, 1, -30, 20,40);
+	monster_init(gingerbreadman, 0, 2, 30, 25, 1, -20, 80,40);
+	while(*game_start == 1){
+		// use key code update saber state, vx and vy
+		key_event(game_start, saber, snowman, gingerbreadman);
+		game_update(game_start, saber, snowman, gingerbreadman);
+		if (snowman->exist == 0){
+			break;
+		}
+	}
+}
+
+
+void round3 (int *game_start, saber_t *saber, monster_t *snowman, monster_t *gingerbreadman){
+	monster_init(snowman, 0, 3, 30, 15, 1, -30, 20,40);
+	monster_init(gingerbreadman, 1, 2, 30, 25, 1, -20, 80,40);
+	while(*game_start == 1){
+		// use key code update saber state, vx and vy
+		key_event(game_start, saber, snowman, gingerbreadman);
+		game_update(game_start, saber, snowman, gingerbreadman);
+		if (gingerbreadman->exist == 0){
+			break;
+		}
+	}
+}
+
+
+void round4 (int *game_start, saber_t *saber, monster_t *snowman, monster_t *gingerbreadman){
+	monster_init(snowman, 0, 2, 30, 15, 1, -30, 20,40);
+	monster_init(gingerbreadman, 1, 3, 30, 25, 1, -20, 80,40);
+	while(*game_start == 1){
+		// use key code update saber state, vx and vy
+		key_event(game_start, saber, snowman, gingerbreadman);
+		game_update(game_start, saber, snowman, gingerbreadman);
+		if (gingerbreadman->exist == 0){
+			break;
+		}
+	}
+}
+
+void round5 (int *game_start, saber_t *saber, monster_t *snowman, monster_t *gingerbreadman){
+	monster_init(snowman, 1, 2, 30, 15, 1, -30, 20,40);
+	monster_init(gingerbreadman, 1, 3, 30, 25, 1, -20, 80,40);
+	while(*game_start == 1){
+		// use key code update saber state, vx and vy
+		key_event(game_start, saber, snowman, gingerbreadman);
+		game_update(game_start, saber, snowman, gingerbreadman);
+		if (gingerbreadman->exist == 0 && snowman->exist ==0){
+			break;
+		}
+	}
 }
 
 
@@ -95,7 +160,16 @@ void key_event(int* game_start, saber_t* saber,monster_t* snowman, monster_t* gi
 		}
 		if (cur_key == KEY_ESC){
 			*game_start = 0;
-			game_init(saber, snowman, gingerbreadman);
+			developer_mode = 0;
+			return;
+		}
+		if (cur_key == KEY_ESC){
+			*game_start = 0;
+			return;
+		}
+		if (cur_key == KEY_BACKSPACE){
+			*game_start = 0;
+			developer_mode = 1;
 			return;
 		}
 	}
@@ -104,29 +178,69 @@ void key_event(int* game_start, saber_t* saber,monster_t* snowman, monster_t* gi
 	if (walk_y == 0){saber->vy = 0;}
 }
 
+void game_update(int *game_start,saber_t *saber, monster_t *snowman, monster_t* gingerbreadman){
+	saber_be_attacked_check(saber,snowman);
+	saber_be_attacked_check(saber,gingerbreadman);
+
+	// update saber state and x, y
+	update(saber);
+
+	// use information for both snowman and saber to update snowman
+	monster_update(snowman, saber);
+
+	// use information for both gingerbreadman and saber to update snowman
+	monster_update(gingerbreadman, saber);
+
+	// send the information to the hardware
+	gamefile_update(game_start, saber, snowman, gingerbreadman);
+}
+
 /*
  * gamefile_update : use characters information to update the game file,
  * 					which will communicate with the hardware
  */
 void gamefile_update(int *game_start, saber_t *saber, monster_t *snowman, monster_t* gingerbreadman){
-	game_file[0] = saber->exit;
+	game_file[0] = saber->exist;
 	game_file[1] = saber->x;
 	game_file[2] = saber->y;
 	game_file[3] = saber->state;
 	game_file[4] = saber->HP > 2;
 
-	game_file[7] = snowman->exit;
+	game_file[7] = snowman->exist;
 	game_file[8] = snowman->x;
 	game_file[9] = snowman->y;
 	game_file[10] = snowman->state;
 
-	game_file[13] = gingerbreadman->exit;
+	game_file[13] = gingerbreadman->exist;
 	game_file[14] = gingerbreadman->x;
 	game_file[15] = gingerbreadman->y;
 	game_file[16] = gingerbreadman->state;
 
 	game_file[19] = *game_start;
 	game_file[20] = *game_start==0;
+	game_file[22] = saber->HP<=0;
+
+	game_file[24] = saber -> HP;
+	game_file[25] = *game_start;
+
+	game_file[26] = snowman->blood_state<=BLOOD3;
+	game_file[27] = gingerbreadman->blood_state<=BLOOD3;
+	game_file[28] = snowman->blood_state;
+	game_file[29] = gingerbreadman->blood_state;
+	game_file[30] = snowman->attack_x-20;
+	game_file[31] = snowman->attack_y;
+	game_file[32] = gingerbreadman->attack_x;
+	game_file[33] = gingerbreadman->attack_y;
+
+	game_file[35] = saber -> Excalibur_state < EXCALIBURNULL;
+	game_file[36] = (saber->FaceDirection==RIGHT)? saber->x+EXCALIBUR_LENGTH/2+EXCALIBUR_X_BIAS: saber->x-(EXCALIBUR_LENGTH/2+EXCALIBUR_X_BIAS);
+	game_file[37] = saber-> y+EXCALIBUR_Y_BIAS;
+	game_file[38] = saber->Excalibur_state;
+	game_file[39] = saber->FaceDirection == LEFT;
+	game_file[41] = win;
+
+	game_file[43] = saber->Excalibur_remain;
+	game_file[44] = *game_start;
 }
 
 
@@ -136,37 +250,36 @@ int main(){
 	monster_t snowman;
 	monster_t gingerbreadman;
 	usb_init();		// initialize usb
+	developer_mode = 0;
 	GAME_INITIAL:
+	win = 0;
 	while(game_start == 0){
 		key_event(&game_start, &saber, &snowman, &gingerbreadman);
 		gamefile_update(&game_start, &saber, &snowman, &gingerbreadman);
 	}
+
 	printf("game start\n");
-	game_init(&saber, &snowman, &gingerbreadman);
 	int frame_time = 0.2;
 	while (1){
 		// wait until next clock
 		frame_clock (frame_time);
-
-		// use key code update saber state, vx and vy
-		key_event(&game_start, &saber, &snowman, &gingerbreadman);
+		round1(&game_start, &saber, &snowman, &gingerbreadman);
 		if (game_start ==0){goto GAME_INITIAL;}
-		saber_be_attacked_check(&saber,&snowman);
-		saber_be_attacked_check(&saber,&gingerbreadman);
-
-		// update saber state and x, y
-		update(&saber);
-		// use information for both snowman and saber to update snowman
-		monster_update(&snowman, &saber);
-		if (snowman.exit == 0){
-			gingerbreadman.exit = 1;
+		round2(&game_start, &saber, &snowman, &gingerbreadman);
+		if (game_start ==0){goto GAME_INITIAL;}
+		round3(&game_start, &saber, &snowman, &gingerbreadman);
+		if (game_start ==0){goto GAME_INITIAL;}
+		round4(&game_start, &saber, &snowman, &gingerbreadman);
+		if (game_start ==0){goto GAME_INITIAL;}
+		round5(&game_start, &saber, &snowman, &gingerbreadman);
+		if (game_start ==0){goto GAME_INITIAL;}
+		//win
+		win = 1;
+		while(1){
+			key_event(&game_start, &saber, &snowman, &gingerbreadman);
+			gamefile_update(&game_start, &saber, &snowman, &gingerbreadman);
+			if (game_start ==0){goto GAME_INITIAL;}
 		}
-		// use information for both gingerbreadman and saber to update snowman
-		monster_update(&gingerbreadman, &saber);
-
-		// send the information to the hardware
-		gamefile_update(&game_start, &saber, &snowman, &gingerbreadman);
-
 //		printf("saber vx :%x\n", saber.vx);
 	}
 }

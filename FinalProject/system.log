@@ -1,0 +1,11 @@
+[System]
+Quartus Version(x32 Registry)=0
+Quartus Version(x64 Registry)=18.1
+Quartus Version(TERASIC_DOWNLOAD.DLL)=0
+OS=Win8
+QUARTUS_ROOTDIR=C:\intelFPGA_lite\18.1\quartus
+SOPC_KIT_NIOS2=C:\intelFPGA_lite\18.1\nios2eds
+QuartusBin64=C:\intelFPGA_lite\18.1\quartus\bin64
+QuartusBin32=
+QuartusBin=C:\intelFPGA_lite\18.1\quartus\bin64
+QSYS_ROOTDIR=C:\intelFPGA_lite\18.1\quartus\sopc_builder\bin

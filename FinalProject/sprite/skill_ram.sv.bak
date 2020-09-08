@@ -1,0 +1,243 @@
+/*
+ * ECE385-HelperTools/PNG-To-Txt
+ * Author: Rishi Thakkar
+ *
+ */
+module skill (
+	input Clk, 
+	input logic skillexist,
+	input logic faceleft,
+	input logic [9:0] DrawX, DrawY,
+	input logic [9:0] skillx,
+	input logic [9:0] skilly,
+	input logic [5:0] skillstate,
+	output logic [3:0] skilldata,
+	output logic is_skill
+);
+	// screen size
+	parameter [9:0] SCREEN_WIDTH =  10'd480;
+   parameter [9:0] SCREEN_LENGTH = 10'd640;
+	parameter [9:0] SKILLLENGTH = 10'd200;			//original size
+	parameter [9:0] SKILLWIDTH =  10'd91;			//original size
+	parameter [9:0] SKILLLENGTH_DOUBLE = 10'd400;			//double the size
+	parameter [9:0] SKILLWIDTH_DOUBLE =  10'd182;		//double the size
+	parameter [9:0] CENTERX_DOUBLE =  10'd200;
+	parameter [9:0] CENTERY_DOUBLE =  10'd91;
+	parameter[3:0] RESHAPE_TIME = 8'd2;
+	//--------------------load memory-----------------//
+	logic [18:0] read_address;
+	logic [3:0] skill1_data;
+	logic [3:0] skill2_data;
+	logic [3:0] skill3_data;
+	logic [3:0] skill4_data;
+	logic [3:0] skill5_data;
+	logic [3:0] skill6_data;
+	logic [3:0] skill7_data;
+	logic [3:0] skill8_data;
+	logic [3:0] data_in;
+	
+	skill1_RAM skill1_RAM(.*);
+	skill2_RAM skill2_RAM(.*);
+	skill3_RAM skill3_RAM(.*);
+	skill4_RAM skill4_RAM(.*);
+	skill5_RAM skill5_RAM(.*);
+	skill6_RAM skill6_RAM(.*);
+	skill7_RAM skill7_RAM(.*);
+	skill8_RAM skill8_RAM(.*);
+	
+	
+	always_comb begin
+		is_skill = 1'b1;
+		read_address = 19'b0;
+		skilldata = data_in;
+	   if (skillexist == 1'b1)begin
+			if (DrawX + CENTERX_DOUBLE >= skillx || skillx < CENTERX_DOUBLE) && DrawX <= skillx + SKILLLENGTH_DOUBLE &&
+				DrawY + CENTERY_DOUBLE >= skilly  && DrawY <= skilly +skillWIDTH_DOUBLE-CENTERY_DOUBLE)
+			begin
+				is_skill = 1'b1;
+				if (faceleft == 1'b1)
+					read_address = (CENTERX_DOUBLE-(skillx - DrawX))/RESHAPE_TIME + (CENTERY_DOUBLE-(skilly - DrawY))/RESHAPE_TIME*SKILLLENGTH;
+				else
+					read_address = (CENTERX_DOUBLE+(skillx - DrawX))/RESHAPE_TIME + (CENTERY_DOUBLE-(skilly - DrawY))/RESHAPE_TIME*SKILLLENGTH;
+			end
+			unique case (skillstate) 
+				6'd0: data_in = skill1_data;
+				6'd1: data_in = skill2_data;
+				6'd2: data_in = skill3_data;
+				6'd3: data_in = skill4_data;
+				6'd4: data_in = skill5_data;
+				6'd5: data_in = skill6_data;
+				6'd6: data_in = skill7_data;
+				6'd7: data_in = skill8_data;
+				default: data_in = 8'b0;
+			endcase
+	   end
+	end
+
+endmodule
+
+module  skill1_RAM
+(
+		input [18:0] read_address,
+		input Clk,
+
+		output logic [3:0] skill1_data
+);
+
+// mem has width of 4 bits and a total of 307200 addresses
+//logic [3:0] mem [0:307199];
+logic [3:0] mem [0:18199];
+initial begin
+	 $readmemh("sprite/skill/skill1.txt", mem);
+end
+
+always_ff @ (posedge Clk) begin
+	skill1_data<= mem[read_address];
+end
+endmodule
+
+
+module  skill2_RAM
+(
+		input [18:0] read_address,
+		input Clk,
+
+		output logic [3:0] skill2_data
+);
+
+// mem has width of 4 bits and a total of 307200 addresses
+//logic [3:0] mem [0:307199];
+logic [3:0] mem [0:18199];
+initial begin
+	 $readmemh("sprite/skill/skill2.txt", mem);
+end
+
+always_ff @ (posedge Clk) begin
+	skill2_data<= mem[read_address];
+end
+endmodule
+
+
+module  skill3_RAM
+(
+		input [18:0] read_address,
+		input Clk,
+
+		output logic [3:0] skill3_data
+);
+
+// mem has width of 4 bits and a total of 307200 addresses
+//logic [3:0] mem [0:307199];
+logic [3:0] mem [0:18199];
+initial begin
+	 $readmemh("sprite/skill/skill3.txt", mem);
+end
+
+always_ff @ (posedge Clk) begin
+	skill3_data<= mem[read_address];
+end
+endmodule
+
+
+module  skill4_RAM
+(
+		input [18:0] read_address,
+		input Clk,
+
+		output logic [3:0] skill4_data
+);
+
+// mem has width of 4 bits and a total of 307200 addresses
+//logic [3:0] mem [0:307199];
+logic [3:0] mem [0:18199];
+initial begin
+	 $readmemh("sprite/skill/skill4.txt", mem);
+end
+
+always_ff @ (posedge Clk) begin
+	skill4_data<= mem[read_address];
+end
+endmodule
+
+module  skill5_RAM
+(
+		input [18:0] read_address,
+		input Clk,
+
+		output logic [3:0] skill5_data
+);
+
+// mem has width of 4 bits and a total of 307200 addresses
+//logic [3:0] mem [0:307199];
+logic [3:0] mem [0:18199];
+initial begin
+	 $readmemh("sprite/skill/skill5.txt", mem);
+end
+
+always_ff @ (posedge Clk) begin
+	skill5_data<= mem[read_address];
+end
+endmodule
+
+module  skill6_RAM
+(
+		input [18:0] read_address,
+		input Clk,
+
+		output logic [3:0] skill6_data
+);
+
+// mem has width of 4 bits and a total of 307200 addresses
+//logic [3:0] mem [0:307199];
+logic [3:0] mem [0:18199];
+initial begin
+	 $readmemh("sprite/skill/skill6.txt", mem);
+end
+
+always_ff @ (posedge Clk) begin
+	skill6_data<= mem[read_address];
+end
+endmodule
+
+
+module  skill7_RAM
+(
+		input [18:0] read_address,
+		input Clk,
+
+		output logic [3:0] skill7_data
+);
+
+// mem has width of 4 bits and a total of 307200 addresses
+//logic [3:0] mem [0:307199];
+logic [3:0] mem [0:18199];
+initial begin
+	 $readmemh("sprite/skill/skill7.txt", mem);
+end
+
+always_ff @ (posedge Clk) begin
+	skill7_data<= mem[read_address];
+end
+endmodule
+
+
+
+module  skill8_RAM
+(
+		input [18:0] read_address,
+		input Clk,
+
+		output logic [3:0] skill8_data
+);
+
+// mem has width of 4 bits and a total of 307200 addresses
+//logic [3:0] mem [0:307199];
+logic [3:0] mem [0:18199];
+initial begin
+	 $readmemh("sprite/skill/skill8.txt", mem);
+end
+
+always_ff @ (posedge Clk) begin
+	skill8_data<= mem[read_address];
+end
+endmodule

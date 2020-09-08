@@ -65,65 +65,128 @@ module lab8( input               CLOCK_50,
  
 
     //------------home------------//
-	 logic [7:0]home_data;
-    logic is_home, home_exit;
+	logic [3:0]home_data;
+    logic is_home, home_exist;
 
     //------------background------------//
-	 logic [7:0]background_data;
-    logic is_background,background_exit;
+	logic [3:0]background_data;
+    logic is_background,background_exist;
+	 
+	 
+    //------------win------------//
+	logic [3:0]win_data;
+    logic is_win,win_exist;
+	 
+	 //------------Excalibur------------//
+	logic [3:0]Excalibur_data;
+	logic is_Excalibur,Excalibur_exist, faceleft;
+	logic [5:0]Excalibur_state;
+	logic [9:0]Excalibur_x,Excalibur_y;
+    //------------hp------------//
+	logic [3:0]HP_data;
+    logic [1:0]hp; //saber's health
+    logic is_HP, HP_exist;
 
+    //------------Excalibur_icon------------//
+	logic [3:0]Excalibur_icon_data;
+    logic [1:0]Excalibur_icon_number; //saber's health
+    logic is_Excalibur_icon, Excalibur_icon_exist;
+
+	 
+    //------------blood------------//
+	logic [3:0]blood1_data,blood2_data;
+    logic is_blood1, blood1_exist;
+	 logic is_blood2, blood2_exist;
+	 logic [1:0] blood1_state,blood2_state;
+	 logic [9:0] monster1_attackx, monster1_attacky;
+	 logic [9:0] monster2_attackx, monster2_attacky;	// define the blood position
+	 
     //------------saber------------//
-	 logic saber_exit;
-	 logic [9:0]saber_x,saber_y;
-	 logic [5:0]saber_state;
-    logic [7:0]saber_data;
+	logic saber_exist;
+	logic [9:0]saber_x,saber_y;
+	logic [5:0]saber_state;
+    logic [3:0]saber_data;
     logic is_saber;
-	 //------------monster1------------//
-	 logic monster1_exit;
-	 logic [9:0]monster1_x,monster1_y;
-	 logic [5:0]monster1_state;
-    logic [7:0]monster1_data;
+	//------------monster1------------//
+	logic monster1_exist;
+	logic [9:0]monster1_x,monster1_y;
+	logic [5:0]monster1_state;
+    logic [3:0]monster1_data;
     logic is_monster1;
 	 
-	 //------------monster2------------//
-	 logic monster2_exit;
-	 logic [9:0]monster2_x,monster2_y;
-	 logic [5:0]monster2_state;
-    logic [7:0]monster2_data;
+	//------------monster2------------//
+	logic monster2_exist;
+	logic [9:0]monster2_x,monster2_y;
+	logic [5:0]monster2_state;
+    logic [3:0]monster2_data;
     logic is_monster2;
 	 
-	 //------------portrait------------//
-	 logic is_portrait1,is_portrait2;
-	 logic saber_portrait;
-	 logic [7:0]portrait1_data,portrait2_data;
+	//------------portrait------------//
+	logic is_portrait1,is_portrait2;
+	logic saber_portrait;
+	logic [3:0]portrait1_data,portrait2_data;
 	
+    //------------gameover------------//
+	logic [3:0]gameover_data;
+    logic is_gameover,gameover_exist;
 //------------------- assign data -------------------//
-	 //------------home------------//
-	 assign home_exit = game_file[640];
+	//------------home------------//
+	assign home_exist = game_file[640];
 	 
-	 //------------background------------//
-	 assign background_exit = game_file[608];
+	//------------background------------//
+	assign background_exist = game_file[608];
+	
+	//------------win------------//
+	assign win_exist = game_file[1312];
+	
+	 //------------blood------------//
+    assign blood1_exist = game_file[832];
+	 assign blood2_exist = game_file[864];
+	 assign blood1_state= game_file[897:896];
+	 assign blood2_state= game_file[929:928];
+	 assign monster1_attackx = game_file[969:960];
+	 assign monster1_attacky = game_file[1001:992];
+	 assign monster2_attackx = game_file[1033:1024];
+	 assign monster2_attacky = game_file[1065:1056];
+	 
+	 
+	//------------gameover------------//
+	assign gameover_exist = game_file[704];
 
-	 //------------saber------------//
-	 assign saber_exit = game_file[0];
-	 assign saber_x = game_file[41:32];
-	 assign saber_y = game_file[73:64];
-	 assign saber_state = game_file[101:96];
-	 assign saber_portrait = game_file[128]; // 1 for portrait 1 and 0 for portrait 2
+    //------------hp------------//
+    assign hp = game_file[769:768]; //saber's health
+    assign HP_exist = game_file[800];
+	 
+    //------------Excalibur_icon------------//
+    assign Excalibur_icon_number = game_file[1377:1376]; //Excalibur_icon
+    assign Excalibur_icon_exist = game_file[1408];
+	
+    //------------saber------------//
+	assign saber_exist = game_file[0];
+	assign saber_x = game_file[41:32];
+	assign saber_y = game_file[73:64];
+	assign saber_state = game_file[101:96];
+	assign saber_portrait = game_file[128]; // 1 for portrait 1 and 0 for portrait 2
+	
+	//------------Excalibur------------//
+	assign Excalibur_exist = game_file[1120];
+	assign Excalibur_x = game_file[1161:1152];
+	assign Excalibur_y = game_file[1193:1184];
+	assign Excalibur_state = game_file[1221:1216];
+	assign faceleft = game_file[1248];
 
-	 //------------monster1------------//
-	 assign monster1_exit = game_file[224];
-	 assign monster1_x = game_file[265:256];
-	 assign monster1_y = game_file[297:288];
-	 assign monster1_state = game_file[325:320];
+	//------------monster1------------//
+	assign monster1_exist = game_file[224];
+	assign monster1_x = game_file[265:256];
+	assign monster1_y = game_file[297:288];
+	assign monster1_state = game_file[325:320];
+	//------------monster2------------//
+	assign monster2_exist = game_file[416];
+	assign monster2_x = game_file[457:448];
+	assign monster2_y = game_file[489:480];
+	assign monster2_state = game_file[517:512];
 	 
-	 	 //------------monster2------------//
-	 assign monster2_exit = game_file[416];
-	 assign monster2_x = game_file[457:448];
-	 assign monster2_y = game_file[489:480];
-	 assign monster2_state = game_file[517:512];
-	 
-	 logic [9:0] DrawX, DrawY;
+	logic [9:0] DrawX, DrawY;
 	 
     // Interface between NIOS II and EZ-OTG chip
     hpi_io_intf hpi_io_inst(
@@ -187,21 +250,55 @@ module lab8( input               CLOCK_50,
 														 .DrawY);
     
     home home( .Clk,
-				   .home_exit,
-				   .DrawX,
-				   .DrawY,
-				   .home_data, //output
-				   .is_home); 		 //output
+                .home_exist,
+                .DrawX,
+                .DrawY,
+                .home_data, //output
+                .is_home); 		 //output
 								  
     background background(.Clk,
-								  .background_exit,
-								  .DrawX,
-								  .DrawY,
-								  .background_data, //output
-								  .is_background); 		 //output
+                        .background_exist,
+                        .DrawX,
+                        .DrawY,
+                        .background_data, //output
+                        .is_background); 		 //output
+	
+	win win(	.Clk,
+				.win_exist,
+				.DrawX,
+				.DrawY,
+				.win_data, //output
+				.is_win); 		 //output
+
+    HP HP(.Clk,
+          .hp,
+          .HP_exist,
+          .DrawX,
+          .DrawY,
+          .HP_data, //output
+          .is_HP); 		 //output
+			 
+    Excalibur_icon Excalibur_icon(.Clk,
+											 .Excalibur_icon_number,
+											 .Excalibur_icon_exist,
+											 .DrawX,
+											 .DrawY,
+											 .Excalibur_icon_data, //output
+											 .is_Excalibur_icon); 		 //output
+								  
+								  
+								  								  
+    gameover gameover(.Clk,
+					  .gameover_exist,
+					  .DrawX,
+					  .DrawY,
+					  .gameover_data, //output
+					  .is_gameover);  //output
+
+
 
     saber saber (.Clk,
-					  .saber_exit(game_file[0]),
+					  .saber_exist(game_file[0]),
                  .DrawX, 
                  .DrawY,
 					  .saber_x,
@@ -210,22 +307,33 @@ module lab8( input               CLOCK_50,
                  .saber_data,	//output
                  .is_saber);  //output
 
-	 portrait1 portrait1(.Clk, 
-								.portrait1_exit(saber_portrait), //for test
-								.DrawX, 
-								.DrawY,
-								.portrait1_data,	//output
-								.is_portrait1);		//output
+	Excalibur Excalibur(.Clk, 
+					.Excalibur_exist,
+					.faceleft,
+					.DrawX, 
+					.DrawY,
+					.Excalibur_x,
+					.Excalibur_y,
+					.Excalibur_state,
+					.Excalibur_data,
+					.is_Excalibur);
+
+	portrait1 portrait1(.Clk, 
+                        .portrait1_exist(saber_portrait), //for test
+                        .DrawX, 
+                        .DrawY,
+                        .portrait1_data,	//output
+                        .is_portrait1);		//output
 	
 	 portrait2 portrait2(.Clk, 
-								.portrait2_exit(~saber_portrait), //for test
+								.portrait2_exist(~saber_portrait), //for test
 								.DrawX, 
 								.DrawY,
 								.portrait2_data,	//output
 								.is_portrait2);		//output
 		
 	 monster1 monster1(.Clk, 
-							 .monster1_exit,
+							 .monster1_exist,
 							 .DrawX, 
 							 .DrawY,
 							 .monster1_x,
@@ -235,7 +343,7 @@ module lab8( input               CLOCK_50,
 							 .is_monster1);
 
 	 monster2 monster2(.Clk, 
-							 .monster2_exit,
+							 .monster2_exist,
 							 .DrawX, 
 							 .DrawY,
 							 .monster2_x,
@@ -243,6 +351,22 @@ module lab8( input               CLOCK_50,
 							 .monster2_state,
 							 .monster2_data,
 							 .is_monster2);
+							 
+	 blood blood (.Clk, 
+					  .blood1_exist, 
+					  .blood2_exist,
+					  .monster1_attackx,
+					  .monster1_attacky,
+					  .monster2_attackx,
+					  .monster2_attacky,
+					  .blood1_state,
+					  .blood2_state,
+					  .DrawX, 
+					  .DrawY,
+					  .blood1_data,
+					  .blood2_data,
+					  .is_blood1, 
+					  .is_blood2);
 									
 //	 SaberFSM FSM (.Clk,
 //						.Reset(Reset_h),
@@ -251,33 +375,47 @@ module lab8( input               CLOCK_50,
 //						.saber_state);
 
     color_mapper color_instance(.is_home,
-										  .is_background,
-                                .is_saber,
-										  .is_portrait1,
-										  .is_portrait2,
-										  .is_monster1,
-										  .is_monster2,
-										  .home_data,
-                                .background_data,
-                                .saber_data,
-										  .portrait1_data,
-										  .portrait2_data,
-										  .monster1_data,
-										  .monster2_data,
-                                .DrawX,
-                                .DrawY,
-                                .VGA_R,
-                                .VGA_G,
-                                .VGA_B);
+								.is_background,
+								.is_win,
+								.is_blood1,
+								.is_blood2,
+								.is_gameover,
+                        .is_saber,
+								.is_Excalibur,
+                        .is_HP,
+								.is_Excalibur_icon,
+								.is_portrait1,
+								.is_portrait2,
+								.is_monster1,
+								.is_monster2,
+								.home_data,
+                        .background_data,
+								.win_data,
+								.blood1_data,
+								.blood2_data,
+                        .saber_data,
+								.Excalibur_data,
+                        .HP_data,
+								.Excalibur_icon_data,
+								.portrait1_data,
+								.portrait2_data,
+								.monster1_data,
+								.monster2_data,
+								.gameover_data,
+                        .DrawX,
+                        .DrawY,
+                        .VGA_R,
+                        .VGA_G,
+                        .VGA_B);
     
 	 
 
-    // Display keycode on hex display
-    HexDriver hex_inst_0 ({3'b000,is_home}, HEX0);
-    HexDriver hex_inst_1 ({3'b000,is_background}, HEX1);
-	 HexDriver hex_inst_2 (monster2_data[3:0], HEX2);
-	 HexDriver hex_inst_3 (monster2_data[7:4], HEX3);
-//	 HexDriver hex_inst_4 ({3'b000,monster1_exit}, HEX4);
+    // use for test
+    HexDriver hex_inst_0 ({3'b000,win_exist}, HEX0);
+//  HexDriver hex_inst_1 ({3'b000,Excalibur_state}, HEX1);
+//	 HexDriver hex_inst_2 ({2'b00,blood1_state}, HEX2);
+//	 HexDriver hex_inst_3 ({2'b00,blood2_state}, HEX3);
+//	 HexDriver hex_inst_4 ({3'b000,monster1_exist}, HEX4);
 //	 HexDriver hex_inst_5 ({2'b00,saber_state[5:4]}, HEX5);
 //	 HexDriver hex_inst_6 ({2'b00,saber_state[5:4]}, HEX6);
 	 

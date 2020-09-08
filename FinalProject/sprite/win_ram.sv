@@ -1,0 +1,52 @@
+/*
+ * ECE385-HelperTools/PNG-To-Txt
+ * Author: Rishi Thakkar
+ *
+ */
+module win (
+	input Clk, 
+	input logic win_exist,
+	input logic [9:0] DrawX, DrawY,
+	output logic [3:0] win_data,
+	output logic is_win
+);
+	// screen size
+	parameter [9:0] SCREEN_WIDTH =  10'd480;
+   parameter [9:0] SCREEN_LENGTH = 10'd640;
+	parameter [9:0] RESHAPE_LENGTH = 10'd160;
+	//--------------------load memory-----------------//
+	logic [18:0] read_address;
+	assign read_address = DrawX/4 + DrawY/4*RESHAPE_LENGTH;
+	win_RAM win_RAM(.*);
+
+
+	always_comb begin
+		is_win = 1'b0;
+		if (win_exist == 1'b1)
+			is_win = 1'b1;
+	end
+
+endmodule
+
+module  win_RAM
+(
+		input [18:0] read_address,
+		input Clk,
+
+		output logic [3:0] win_data
+);
+
+// mem has width of 4 bits and a total of 307200 addresses
+//logic [3:0] mem [0:307199];
+logic [3:0] mem [0:19199];
+initial
+begin
+	 $readmemh("sprite/win.txt", mem);
+end
+
+
+always_ff @ (posedge Clk) begin
+	win_data<= mem[read_address];
+end
+
+endmodule

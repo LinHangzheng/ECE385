@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include "player_logic.h"
+
+void press_w(saber_t *saber){
+    if (saber->vy > -VY_MOST){saber->vy--;}
+}
+
+void press_s(saber_t *saber){
+    if (saber->vy < VY_MOST){saber->vy++;}
+}
+
+void press_a(saber_t *saber){
+    if (saber->vx > -VX_MOST){saber->vx--;}
+}
+
+void press_d(saber_t *saber){
+    if (saber->vx < VX_MOST){saber->vx++;}
+}
+
+void saber_init(saber_t *saber){
+	saber -> vx = 0;
+
+}
+void press_j(player_t *player){
+	if
+}
+
+

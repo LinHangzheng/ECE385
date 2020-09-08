@@ -93,7 +93,7 @@ module  ball ( input         Clk,                // 50 MHz clock
 								Ball_Y_Motion_in = (~(Ball_Y_Step) + 1'b1);
 							end
 					
-					// key W, clear x directional motion and moving down
+					// key S, clear x directional motion and moving down
 					8'h16: begin
 								Ball_X_Motion_in = 10'h000;
 								Ball_Y_Motion_in = Ball_Y_Step;

@@ -1,0 +1,59 @@
+/*
+ * SnowMan_logic.c
+ *
+ *  Created on: 2020Äê9ÔÂ2ÈÕ
+ *      Author: cc
+ */
+
+#ifndef SNOWMAN_LOGIC_C_
+#define SNOWMAN_LOGIC_C_
+#include "SnowMan_logic.h"
+#include "saber_logic.h"
+#include <stdlib.h>
+void snowman_init(snowman_t *snowman){
+	snowman->exit = 1;
+	snowman->x = SNOWMAN_INIT_X;
+	snowman->y = SNOWMAN_INIT_Y;
+	snowman->vx = - 1;
+	snowman->vy = 0;
+	snowman->HP = 10;
+	snowman->ATK = 1;
+	snowman->state = WALK1;
+	snowman->state_count = 0; 	// frame count for each state
+	snowman->Deading = 0;
+}
+
+void snowman_update(snowman_t *snowman, saber_t *saber){
+	if (snowman->state == DEAD2){
+		snowman->exit = 0;
+	}
+	if (snowman->HP == 0 ){
+		snowman->Deading =1;
+	}
+	if (snowman->state <= WALK4){
+		snowman-> x = snowman->x + snowman->vx;
+	}
+	if (snowman->state_count ++ > STATE_COUNT_MAX){
+		snowman->state = ((snowman->state == HIT && snowman->Deading==0)|| snowman->state == WALK4)? WALK1:snowman->state+1;
+		snowman->state_count=0;
+	}
+	int position_x_diff;
+	position_x_diff = snowman->x - saber->x;
+	printf("snowman -> state <= WALK4: %x\n",snowman -> state <= WALK4 );
+	printf("saber->IsFighting: %x\n",saber->IsFighting);
+	printf("abs(snowman->y - saber-> y) < ATTACK_RANGEY: %x\n",abs(snowman->y - saber-> y) < ATTACK_RANGEY);
+	printf("(position_x_diff >=0:%x",position_x_diff >=0);
+	if (snowman -> state <= WALK4 && saber->IsFighting && abs(snowman->y - saber-> y) < ATTACK_RANGEY &&
+		((position_x_diff >=0 && saber->FaceDirection ==RIGHT && position_x_diff < ATTACK_RANGEX ) ||
+		(position_x_diff <=0 && saber->FaceDirection ==LEFT && -position_x_diff < ATTACK_RANGEX))){
+		snowman->state = HIT;
+		snowman->HP --;
+		snowman->x = snowman ->x -30;
+	}
+
+}
+
+
+
+
+#endif /* SNOWMAN_LOGIC_C_ */

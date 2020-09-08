@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include "system.h"
+#include "alt_types.h"
+#include <unistd.h>  // usleep
+#include "usb_kb.h"
+#include "io_handler.h"
+//#ifdef _WIN32
+//#include <Windows.h>
+//#else
+//#include <unistd.h>
+//#endif
+
+#define UP_END 0
+#define DOWN_END 479
+
+#define LEFT_END 0
+#define RIGHT_END 637
+
+
+volatile int* frame_clock = 0x00000100;
+
+
+
+enum Key_event
+{PRESS_UP = 1, PRESS_DOWN, PRESS_LEFT, PRESS_RIGHT, PRESS_ATK, PRESS_SKILL
+}event;
+int main(){
+	usb_init();		// initialize usb
+
+	while (1){
+		if (*frame_clock == 1){
+			key =
+		}
+
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

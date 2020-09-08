@@ -16,6 +16,7 @@
 module lab8( input               CLOCK_50,
              input        [3:0]  KEY,          //bit 0 is set up as Reset
              output logic [6:0]  HEX0, HEX1,
+				 output logic [7:0]  LEDG,
              // VGA Interface 
              output logic [7:0]  VGA_R,        //VGA Red
                                  VGA_G,        //VGA Green
@@ -48,10 +49,12 @@ module lab8( input               CLOCK_50,
     
     logic Reset_h, Clk;
     logic [7:0] keycode;
+	 logic [7:0] led;
     
     assign Clk = CLOCK_50;
     always_ff @ (posedge Clk) begin
         Reset_h <= ~(KEY[0]);        // The push buttons are active low
+		  LEDG <= led;
     end
     
     logic [1:0] hpi_addr;
@@ -140,7 +143,35 @@ module lab8( input               CLOCK_50,
     // Display keycode on hex display
     HexDriver hex_inst_0 (keycode[3:0], HEX0);
     HexDriver hex_inst_1 (keycode[7:4], HEX1);
-    
+	 
+	 
+	 always_comb
+    begin
+	   // default case
+	   led = 8'b0000;
+		case(keycode)
+	 // key A, clear y directional motion and moving left
+					8'h04: begin
+								led = 8'b0010;
+							end
+							
+					// key D, clear y directional motion and moving left
+					8'h07: begin
+								led = 8'b0001;
+							end
+					
+					// key W, clear x directional motion and moving up
+					8'h1a: begin
+								led = 8'b1000;
+							end
+					
+					// key S, clear x directional motion and moving down
+					8'h16: begin
+								led = 8'b0100;
+							end
+		endcase
+    end
+	 
     /**************************************************************************************
         ATTENTION! Please answer the following quesiton in your lab report! Points will be allocated for the answers!
         Hidden Question #1/2:

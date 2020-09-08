@@ -589,6 +589,12 @@ set_global_assignment -name ENABLE_SIGNALTAP ON
 set_global_assignment -name USE_SIGNALTAP_FILE stp1.stp
 set_global_assignment -name FLOW_ENABLE_POWER_ANALYZER ON
 set_global_assignment -name POWER_DEFAULT_INPUT_IO_TOGGLE_RATE "12.5 %"
+set_global_assignment -name SYSTEMVERILOG_FILE sprite/Excalibur_icon_ram.sv
+set_global_assignment -name SYSTEMVERILOG_FILE sprite/win_ram.sv
+set_global_assignment -name SYSTEMVERILOG_FILE sprite/Excalibur_ram.sv
+set_global_assignment -name SYSTEMVERILOG_FILE sprite/blood_ram.sv
+set_global_assignment -name SYSTEMVERILOG_FILE sprite/HP_ram.sv
+set_global_assignment -name SYSTEMVERILOG_FILE sprite/gameover_ram.sv
 set_global_assignment -name SYSTEMVERILOG_FILE sprite/home_ram.sv
 set_global_assignment -name SYSTEMVERILOG_FILE sprite/monster2_ram.sv
 set_global_assignment -name SYSTEMVERILOG_FILE sprite/monster1_ram.sv
