@@ -1,0 +1,47 @@
+JvmtiExport can_access_local_variables 0
+JvmtiExport can_hotswap_or_post_breakpoint 0
+JvmtiExport can_post_on_exceptions 0
+# 344 ciObject found
+ciMethod java/lang/Object <init> ()V 4097 1 105025 0 0
+ciMethod java/lang/Object getClass ()Ljava/lang/Class; 4097 1 512 0 -1
+ciMethod java/lang/String <init> ([CII)V 4097 1 6698 0 576
+ciMethod java/lang/String length ()I 4097 1 74191 0 64
+ciMethod java/lang/String charAt (I)C 4097 1 228198 0 -1
+ciMethod java/lang/String equals (Ljava/lang/Object;)Z 2905 32769 4282 0 -1
+ciMethod java/lang/String hashCode ()I 2705 32769 1199 0 -1
+ciMethod java/lang/System arraycopy (Ljava/lang/Object;ILjava/lang/Object;II)V 22529 1 2816 0 -1
+ciMethod java/lang/AbstractStringBuilder length ()I 11353 1 1419 0 0
+ciMethod java/lang/AbstractStringBuilder ensureCapacityInternal (I)V 4097 1 81221 0 608
+ciMethod java/lang/AbstractStringBuilder expandCapacity (I)V 4097 1 9236 0 -1
+ciMethod java/lang/AbstractStringBuilder setLength (I)V 2105 1 7754 0 0
+ciMethod java/lang/AbstractStringBuilder charAt (I)C 4097 1 20885 0 0
+ciMethod java/lang/AbstractStringBuilder substring (II)Ljava/lang/String; 2017 1 7644 0 0
+ciMethod java/lang/StringBuilder append (Ljava/lang/String;)Ljava/lang/StringBuilder; 4097 1 17538 0 -1
+ciMethod java/lang/StringBuilder append (C)Ljava/lang/StringBuilder; 2057 1 4671 0 -1
+ciMethod java/lang/StringBuilder toString ()Ljava/lang/String; 2953 1 7351 0 -1
+ciMethod java/lang/StringBuilder substring (II)Ljava/lang/String; 2009 1 7477 0 0
+ciMethod java/lang/StringBuilder charAt (I)C 4097 1 20722 0 0
+ciMethod java/lang/StringBuilder setLength (I)V 2057 1 7477 0 0
+ciMethod java/lang/StringBuilder length ()I 4097 1 22904 0 0
+ciMethod java/lang/Integer valueOf (I)Ljava/lang/Integer; 4097 1 570 0 0
+ciMethod java/lang/Integer <init> (I)V 2769 1 346 0 -1
+ciMethod java/util/List add (Ljava/lang/Object;)Z 0 0 1 0 -1
+ciMethod java/util/List add (ILjava/lang/Object;)V 0 0 1 0 -1
+ciMethod java/util/AbstractList <init> ()V 2057 1 6086 0 0
+ciMethod java/util/AbstractCollection <init> ()V 1465 1 6404 0 0
+ciMethod java/lang/Math max (II)I 4097 1 22010 0 -1
+ciMethod java/lang/Math min (II)I 4097 1 34111 0 -1
+ciMethod java/util/ArrayList <init> (I)V 1553 1 1466 0 0
+ciMethod java/util/ArrayList ensureCapacityInternal (I)V 1905 1 6228 0 0
+ciMethod java/util/ArrayList ensureExplicitCapacity (I)V 1905 1 6228 0 0
+ciMethod java/util/ArrayList grow (I)V 185 1 1721 0 0
+ciMethod java/util/ArrayList hugeCapacity (I)I 0 0 1 0 0
+ciMethod java/util/ArrayList add (Ljava/lang/Object;)Z 1905 1 6070 0 736
+ciMethod java/util/Arrays rangeCheck (III)V 2521 1 407 0 -1
+ciMethod java/util/Arrays fill ([CIIC)V 49 65 6 0 0
+ciMethod java/util/Arrays copyOf ([Ljava/lang/Object;I)[Ljava/lang/Object; 2417 1 1918 0 0
+ciMethod java/util/Arrays copyOf ([Ljava/lang/Object;ILjava/lang/Class;)[Ljava/lang/Object; 2585 1 2249 0 -1
+ciMethod java/util/Arrays copyOfRange ([CII)[C 4097 1 8124 0 512
+ciMethodData java/lang/String length ()I 2 76583 orig 144 152 11 148 91 0 0 0 0 136 58 150 23 0 0 0 0 168 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 0 0 57 73 9 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 4 0 1 0 0 0 0 0 255 255 255 255 0 0 0 0 0 0 0 0 0 0 0 0 data 0 oops 0
+ciMethodData java/lang/Object <init> ()V 2 105025 orig 144 152 11 148 91 0 0 0 0 112 4 150 23 0 0 0 0 168 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 0 0 9 194 12 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 3 0 3 0 0 0 0 0 0 0 255 255 255 255 0 0 0 0 0 0 0 0 0 0 0 0 data 0 oops 0
+ciMethodData java/lang/AbstractStringBuilder ensureCapacityInternal (I)V 2 81234 orig 144 152 11 148 91 0 0 0 0 176 198 156 23 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 0 0 137 218 9 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 4 0 1 0 80 0 0 0 255 255 255 255 0 0 0 0 7 0 7 0 0 0 0 0 data 10 0x70007 0x11785 0x50 0x23cc 0xc0005 0x0 0x1a35fd10 0x20e 0x1a35fc60 0x21be oops 2
