@@ -14,5 +14,9 @@ L: pose
 We modified the key control part so that our game can deal with 4 key presses simultaneously.(even though you may just need 3)
 
 ## How to win
-There are 5 rounds of fighting totally in Avalon. If you 
+There are 5 rounds of fighting in Avalon. If you kill all the monsters, you win the game.
+If you loses all health or let any monsters cross the brige, you lose the game.
 
+
+# How to run
+Pip all the codes in your computer and compile in the Quartus. 
