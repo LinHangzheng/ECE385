@@ -6,11 +6,11 @@ The final project has been completed.
 # Avalon
 Our final project is about 1st person 2.5-D game. You can control our hero(Saber) to fight with monsters.
 
--key control
- -WSAD: moving
- -J: normal attack
- -K: Excalibur
- -L: pose
+- key control
+  - WSAD: moving
+  - J: normal attack
+  - K: Excalibur
+  - L: pose
 We modified the key control part so that our game can deal with 4 key presses simultaneously.(even though you may just need 3)
 
 - How to win
