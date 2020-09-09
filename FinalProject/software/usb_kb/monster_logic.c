@@ -86,6 +86,7 @@ void saber_be_attacked_check(saber_t *saber, monster_t *monster){
 			saber->x = saber->x +40;
 		}
 		// if saber doesn't block the attack, she will be hurt
+
 		if (saber->state < POSE_LEFT1 || (saber->state >POSE_LEFT2 && saber->state <POSE_RIGHT1 )){
 			saber->injuring = 1;
 			saber-> HP = saber-> HP - monster-> ATK;

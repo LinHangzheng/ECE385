@@ -2826,6 +2826,8 @@ void saber_be_attacked_check(saber_t *saber, monster_t *monster){
 10001628:	e0bffe17 	ldw	r2,-8(fp)
 1000162c:	10c00115 	stw	r3,4(r2)
 		}
+		// if saber doesn't block the attack, she will be hurt
+
 		if (saber->state < POSE_LEFT1 || (saber->state >POSE_LEFT2 && saber->state <POSE_RIGHT1 )){
 10001630:	e0bffe17 	ldw	r2,-8(fp)
 10001634:	10800817 	ldw	r2,32(r2)
