@@ -171,12 +171,12 @@ module  color_mapper (  input logic Clk,
 		else if (is_blood2 == 1'b1 && blood2_color != 24'hFF00FF)begin
 			color = blood2_color;
 		end
-		else if (is_monster1 == 1'b1 && monster1_color!= 24'hFF00FF) begin
-			color = monster1_color;
-        end
 		else if (is_monster2 == 1'b1 && monster2_color!= 24'hFF00FF) begin
 			color = monster2_color;
-        end
+      end
+		else if (is_monster1 == 1'b1 && monster1_color!= 24'hFF00FF) begin
+			color = monster1_color;
+      end
 		else if (is_portrait1 == 1'b1 && portrait1_color!= 24'hFF00FF) begin
 			color = portrait1_color;
 		end

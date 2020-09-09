@@ -111,10 +111,11 @@ void press_k(saber_t *saber){
 }
 
 void press_l(saber_t *saber){
-	if (saber->state <= WALK_LEFT6){
+	if (saber->state <= WALK_LEFT6 ||(saber->state >= ATTACK_LEFT1 && saber->state <= ATTACK_LEFT4 )){
 		saber-> state = POSE_LEFT1;
 		saber-> state_count = 0;
-	}else if (saber->state >= WALK_RIGHT1 &&saber->state <= WALK_RIGHT6){
+	}else if ((saber->state >= WALK_RIGHT1 &&saber->state <= WALK_RIGHT6) ||
+			(saber->state >= ATTACK_RIGHT1 && saber->state <= ATTACK_RIGHT4)){
 		saber-> state = POSE_RIGHT1;
 		saber-> state_count = 0;
 	}
