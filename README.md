@@ -10,7 +10,7 @@ Our final project is about 1st person 2.5-D game. You can control our hero(Saber
   - WSAD: moving
   - J: normal attack
   - K: Excalibur
-  - L: pose
+  - L: Block
   - ENTER: start the game
   - ESC: Restart the game
   - BACKSPACE: Restart the game and set the game to developer mode
