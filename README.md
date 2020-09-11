@@ -18,8 +18,8 @@ Our final project is about 1st person 2.5-D game. You can control our hero(Saber
 We modified the key control part so that our game can deal with 4 key presses simultaneously.(even though you may just need 3)
 
 - How to win
-  - There are 5 rounds of fighting in Avalon. If you kill all the monsters, you win the game.
-  - If you loses all health or let any monsters cross the bridge, you lose the game.
+  - There are 5 rounds of fighting in Avalon. If saber kills all the monsters, you win the game.
+  - If saber loses all health or let any monsters cross the bridge, you lose the game.
 
 - Monsters
   - All the monsters will appear at the right most of the bridge and walk left. 
