@@ -4,6 +4,7 @@ If you are from the same course, please don't copy our code, we will not be held
 
 The final project has been completed.
 # Avalon
+<img src ="https://github.com/LinHangzheng/ECE385/raw/master/FinalProject/image/images/start.jpg" width = "500" alt = "home"/>
 <img src ="https://github.com/LinHangzheng/ECE385/raw/master/FinalProject/image/images/home.jpg" width = "350" alt = "home"/>
 Our final project is about 1st person 2.5-D game. You can control our hero(Saber) to fight with monsters.
 
