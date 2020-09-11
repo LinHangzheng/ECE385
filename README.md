@@ -4,7 +4,6 @@ If you are from the same course, please don't copy our code, we will not be held
 
 The final project has been completed.
 # Avalon
-<img src ="https://github.com/LinHangzheng/ECE385/raw/master/FinalProject/image/images/start.png" width = "500" alt = "start"/>
 <img src ="https://github.com/LinHangzheng/ECE385/raw/master/FinalProject/image/images/home.jpg" width = "350" alt = "home"/>
 Our final project is about 1st person 2.5-D game. You can control our hero(Saber) to fight with monsters.
 
@@ -39,6 +38,7 @@ We modified the key control part so that our game can deal with 4 key presses si
 - Connect your DE2-115 with keyboard and VGA
 - Compile the C code in eclipse and run the code
 - Then you will see the home of the game on the screen
+<img src ="https://github.com/LinHangzheng/ECE385/raw/master/FinalProject/image/images/start.png" width = "500" alt = "start"/>
 
 
 
