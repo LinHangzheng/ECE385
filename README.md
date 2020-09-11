@@ -5,7 +5,7 @@ If you are from the same course, please don't copy our code, we will not be held
 The final project has been completed.
 # Avalon
 <img src ="https://github.com/LinHangzheng/ECE385/raw/master/FinalProject/image/images/home.jpg" width = "350" alt = "home"/>
-Our final project is about 1st person 2.5-D game. You can control our hero(Saber) to fight with monsters.
+In the final project, we create a first person 2.5D RPG game “Avalon” by using the DE2-115 board. All the hardware circuit are combined to load the image into the OCM and determine which color of each pixel should be shown on the monitor. The SOC code will do all the game logic, like the key control of the character “Saber” to let her move, attack, block, and use the skill. In addition, SOC will also determine whether each pattern exists on the screen and which frame should be shown on the screen. The data will transfer from SOC to hardware with our own IP core, which allows a totally 64 32-bits register file to be modified by C code and received by hardware.
 
 - key control
   - WSAD: moving
