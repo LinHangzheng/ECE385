@@ -11,10 +11,10 @@ In the final project, we create a first person 2.5D RPG game “Avalon” by usi
   - WSAD: moving
   - J: normal attack
   - K: Excalibur
-  - L: Block
+  - L: Block, and can also interrupt the attack animation
   - ENTER: start the game
   - ESC: Restart the game
-  - BACKSPACE: Restart the game and set the game to developer mode
+  - BACKSPACE: Restart the game and set the game to developer mode, which will decrease the game difficulty by allowing more skill times to use for the player.
 <img src ="https://github.com/LinHangzheng/ECE385/raw/master/FinalProject/image/images/attack.jpg" width = "350" alt = "attack"/>
 <img src ="https://github.com/LinHangzheng/ECE385/raw/master/FinalProject/image/images/Excalibur.jpg" width = "350" alt = "Excalibur"/>
 We modified the key control part so that our game can deal with 4 key presses simultaneously.(even though you may just need 3)
