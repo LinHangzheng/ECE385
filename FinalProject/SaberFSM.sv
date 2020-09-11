@@ -1,3 +1,5 @@
+// This module is only used for test, and will not be contained in the 
+// top level after every part of the project has been done.
 module SaberFSM(input        Clk,                // 50 MHz clock
                              Reset,              // Active-high reset signal
                              frame_clk,          // The clock indicating a new frame (~60Hz)

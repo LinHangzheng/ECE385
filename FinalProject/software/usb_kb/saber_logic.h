@@ -57,8 +57,8 @@ enum Saber_state
 enum Excalibur_state
 {EXCALIBUR1 = 0, EXCALIBUR2, EXCALIBUR3, EXCALIBUR4, EXCALIBUR5, EXCALIBUR6, EXCALIBUR7, EXCALIBUR8,
  EXCALIBURNULL
-
 }Excalibur_state;
+
 void press_w(saber_t *saber);
 void press_s(saber_t *saber);
 void press_a(saber_t *saber);
