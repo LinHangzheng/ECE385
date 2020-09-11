@@ -15,13 +15,14 @@ Our final project is about 1st person 2.5-D game. You can control our hero(Saber
   - ENTER: start the game
   - ESC: Restart the game
   - BACKSPACE: Restart the game and set the game to developer mode
-  
+<img src ="https://github.com/LinHangzheng/ECE385/raw/master/FinalProject/image/images/attack.jpg" width = "350" alt = "home"/>
+<img src ="https://github.com/LinHangzheng/ECE385/raw/master/FinalProject/image/images/Excalibur.jpg" width = "350" alt = "home"/>
 We modified the key control part so that our game can deal with 4 key presses simultaneously.(even though you may just need 3)
 
 - How to win
   - There are 5 rounds of fighting in Avalon. If saber kills all the monsters, you win the game.
   - If saber loses all health or let any monsters cross the bridge, you lose the game.
-
+<img src ="https://github.com/LinHangzheng/ECE385/raw/master/FinalProject/image/images/gameover.jpg" width = "350" alt = "home"/>
 - Monsters
   - All the monsters will appear at the right most of the bridge and walk left. 
   - When they touch saber, they will give damage to saber and push saber back
