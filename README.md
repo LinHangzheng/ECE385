@@ -33,7 +33,7 @@ We modified the key control part so that our game can deal with 4 key presses si
 <img src ="https://github.com/LinHangzheng/ECE385/raw/master/FinalProject/image/images/win.jpg" width = "350" alt = "home"/>
 
 # How to run
-- Pip all the codes in your computer and compile them in the Quartus, connect your computer to DE2-115 developer board.
+- Pull all the codes in your computer and compile them in the Quartus, connect your computer to DE2-115 developer board.
 - Press "Programmer" - "Start" in Quartus to transfer hardware data to DE2-115.
 - Connect your DE2-115 with keyboard and VGA
 - Compile the C code in eclipse and run the code
